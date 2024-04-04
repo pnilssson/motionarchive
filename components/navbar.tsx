@@ -7,8 +7,8 @@ export default async function Component() {
   const session = await getServerSession(authOptions);
   return (
     <div className="navbar bg-base-100">
-      {session ? (
-        <div className="navbar-start">
+      <div className="navbar-start">
+        {session ? (
           <div className="dropdown">
             <div
               tabIndex={0}
@@ -37,10 +37,12 @@ export default async function Component() {
               </li>
             </ul>
           </div>
-        </div>
-      ) : null}
+        ) : null}
+      </div>
       <div className="navbar-center">
-        <a className="btn btn-ghost btn-wide btn-sm">motion archive</a>
+        <Link href="/" className="btn btn-ghost btn-wide btn-sm">
+          motion archive
+        </Link>
       </div>
       <div className="navbar-end">
         <LoginBtn session={session}></LoginBtn>

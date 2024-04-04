@@ -6,8 +6,6 @@ export default withAuth(
   {
     callbacks: {
       authorized: ({ req, token }) => {
-        console.log(token)
-        console.log(req)
         if (
           req.nextUrl.pathname.startsWith('/archive') &&
           token === null

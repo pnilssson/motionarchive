@@ -1,9 +1,13 @@
 "use client";
 
-import { useSession, signIn, signOut } from "next-auth/react";
+import { signIn, signOut } from "next-auth/react";
+import { Session } from "next-auth";
 
-export default function Component() {
-  const { data: session } = useSession();
+interface ComponentProps {
+  session: Session | null;
+}
+
+export default function Component({ session }: ComponentProps) {
   if (session) {
     return (
       <button className="btn btn-sm" onClick={() => signOut()}>

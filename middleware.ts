@@ -1,7 +1,5 @@
 import { withAuth } from "next-auth/middleware"
 
-// middleware is applied to all routes, use conditionals to select
-
 export default withAuth(
   function middleware (req) {
   },
@@ -9,7 +7,7 @@ export default withAuth(
     callbacks: {
       authorized: ({ req, token }) => {
         if (
-          req.nextUrl.pathname.startsWith('/protected') &&
+          req.nextUrl.pathname.startsWith('/archive') &&
           token === null
         ) {
           return false

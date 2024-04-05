@@ -8,12 +8,16 @@ import clientPromise from "./lib/mongodb"
 export const authOptions: NextAuthOptions = {
     secret: process.env.NEXTAUTH_SECRET,
     adapter: MongoDBAdapter(clientPromise),
+    pages: {
+      signIn: '/auth/signin',
+      verifyRequest: '/auth/verify-request',
+    },
     providers: [
         EmailProvider({
           server: process.env.EMAIL_SERVER,
           from: process.env.EMAIL_FROM
         }),
-      ],
+      ]
 } satisfies NextAuthOptions
 
 // Use it in server contexts

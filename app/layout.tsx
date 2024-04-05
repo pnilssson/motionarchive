@@ -17,9 +17,9 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="en" data-theme="light">
-      <body className={inter.className}>
+      <body className={`${inter.className}`}>
         <Navbar></Navbar>
-        {children}
+        <div className="h-[calc(100vh-64px)]">{children}</div>
       </body>
     </html>
   );

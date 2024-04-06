@@ -1,4 +1,4 @@
-import collections from "@/lib/db";
+import collections from "@/lib/utils/db";
 
 export async function GET() {
     const workoutTypes = await collections.workoutTypes();

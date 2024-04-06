@@ -3,7 +3,7 @@ import type { NextAuthOptions } from "next-auth"
 import EmailProvider from "next-auth/providers/email"
 import { getServerSession } from "next-auth"
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter"
-import clientPromise from "./lib/mongoclient"
+import clientPromise from "./lib/utils/mongoclient"
 
 export const authOptions: NextAuthOptions = {
     secret: process.env.NEXTAUTH_SECRET,

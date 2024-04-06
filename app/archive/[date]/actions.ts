@@ -1,9 +1,9 @@
 'use server'
 
 import { authOptions } from "@/auth";
-import collections from "@/lib/db";
-import clientPromise from "@/lib/mongoclient";
-import { WorkoutRequest } from "@/types/workout";
+import collections from "@/lib/utils/db";
+import clientPromise from "@/lib/utils/mongoclient";
+import { WorkoutRequest } from "@/lib/types/workout";
 import { getServerSession } from "next-auth";
 import { redirect } from 'next/navigation'
 

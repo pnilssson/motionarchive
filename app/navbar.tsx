@@ -1,5 +1,5 @@
 import { authOptions } from "@/auth";
-import LoginBtn from "@/components/login-btn";
+import LoginBtn from "@/components/loginButton";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
 
@@ -30,7 +30,7 @@ export default async function Component() {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+              className="menu dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
               <li>
                 <Link href="/archive/dashboard">Dashboard</Link>
                 <Link href="/archive/calendar">Calendar</Link>
@@ -40,8 +40,8 @@ export default async function Component() {
         ) : null}
       </div>
       <div className="navbar-center">
-        <Link href="/" className="btn btn-ghost btn-wide btn-sm">
-          motion archive
+        <Link href="/" className="">
+          Motion Archive
         </Link>
       </div>
       <div className="navbar-end">

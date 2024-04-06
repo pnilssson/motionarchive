@@ -11,6 +11,5 @@ export default async function Layout({
   if (!session) {
     redirect("/api/auth/signin");
   }
-  console.log(session);
   return <div className="container mx-auto p-4">{children}</div>;
 }

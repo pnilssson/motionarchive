@@ -18,9 +18,16 @@ const config: Config = {
   daisyui: {
     themes: [
       {
-        light: {
+        ingenium: {
           ...require("daisyui/src/theming/themes")["light"],
-          primary: "#5030E5",
+          "primary": "#a78bfa",
+          "secondary": "#2dd4bf",
+          "accent": "#00a600",
+          "neutral": "#111827",
+          "info": "#7dd3fc",
+          "success": "#86efac",
+          "warning": "#f87171",
+          "error": "#fda4af",
         },
       },
     ],

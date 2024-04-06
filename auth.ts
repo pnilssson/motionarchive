@@ -17,7 +17,13 @@ export const authOptions: NextAuthOptions = {
           server: process.env.EMAIL_SERVER,
           from: process.env.EMAIL_FROM
         }),
-      ]
+      ],
+      callbacks: {
+        async session({ session, user }) {
+          session.user.userId = user.id;
+          return session
+        }
+      }
 } satisfies NextAuthOptions
 
 // Use it in server contexts

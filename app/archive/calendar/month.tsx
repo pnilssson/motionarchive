@@ -18,9 +18,9 @@ export default function Month({ date }: MonthProps) {
   }, [date]);
 
   return (
-    <div className="grid grid-cols-7">
+    <div className="grid grid-cols-7 gap-2">
       {days.map((day, i) => (
-        <div key={day} className="bg-gray-50 p-4">
+        <div key={day} className="bg-gray-100 p-4 rounded-md">
           <Day day={i + 1} month={date.getMonth()} year={date.getFullYear()} />
         </div>
       ))}

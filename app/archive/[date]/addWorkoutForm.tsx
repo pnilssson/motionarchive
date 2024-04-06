@@ -3,18 +3,17 @@
 import { WorkoutTypeResponse } from "@/lib/types/workoutType";
 import addWorkout from "./actions";
 import collections from "@/lib/utils/db";
+import { cache } from "react";
 
 interface ComponentProps {
   date: Date;
 }
 
-async function getTypes() {
+const getTypes = cache(async () => {
   const workoutTypes = await collections.workoutTypes();
-
   const data = await workoutTypes.find({}).toArray();
-
   return JSON.parse(JSON.stringify(data));
-}
+});
 
 export default async function Component({ date }: ComponentProps) {
   const workoutTypes = await getTypes();

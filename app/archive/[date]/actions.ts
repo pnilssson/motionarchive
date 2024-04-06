@@ -1,8 +1,9 @@
 'use server'
 
-import { WorkoutRequest } from "@/app/types/workout";
 import { authOptions } from "@/auth";
-import clientPromise from "@/lib/mongodb";
+import collections from "@/lib/db";
+import clientPromise from "@/lib/mongoclient";
+import { WorkoutRequest } from "@/types/workout";
 import { getServerSession } from "next-auth";
 import { redirect } from 'next/navigation'
 
@@ -17,9 +18,8 @@ export default async function addWorkout(formData: FormData) {
         date: formData.get('date') as unknown as Date,
     } as WorkoutRequest;
 
-    const client = await clientPromise;
-    const db = client.db("motionarchive");
-    await db.collection("workout").insertOne(request);
+    const workouts = await collections.workout();
+    await workouts.insertOne(request);
     
     redirect('/archive/calendar');
 }

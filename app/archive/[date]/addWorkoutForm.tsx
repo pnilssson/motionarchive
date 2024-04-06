@@ -1,10 +1,20 @@
+"use server";
+
+import { WorkoutTypeResponse } from "@/types/workoutType";
 import addWorkout from "./actions";
 
 interface ComponentProps {
   date: Date;
 }
 
-export default function Component({ date }: ComponentProps) {
+async function getTypes() {
+  const res = await fetch(process.env.VERCEL_URL + "/api/workout-types");
+  return res.json();
+}
+
+export default async function Component({ date }: ComponentProps) {
+  const { data: workoutTypes } = await getTypes();
+
   function formatDateLocal(date: Date): string {
     const year = date.getFullYear();
     const month = (date.getMonth() + 1).toString().padStart(2, "0");
@@ -20,6 +30,7 @@ export default function Component({ date }: ComponentProps) {
             <span className="label-text font-bold">Date</span>
           </div>
           <input
+            required
             type="date"
             name="date"
             defaultValue={formatDateLocal(date)}
@@ -31,6 +42,7 @@ export default function Component({ date }: ComponentProps) {
             <span className="label-text font-bold">Time</span>
           </div>
           <input
+            required
             type="number"
             name="time"
             placeholder="Time"
@@ -41,12 +53,10 @@ export default function Component({ date }: ComponentProps) {
           <div className="label">
             <span className="label-text font-bold">Type</span>
           </div>
-          <select className="select select-bordered" name="type">
-            <option>Star Wars</option>
-            <option>Harry Potter</option>
-            <option>Lord of the Rings</option>
-            <option>Planet of the Apes</option>
-            <option>Star Trek</option>
+          <select required name="type" className="select select-bordered">
+            {workoutTypes.map((type: WorkoutTypeResponse) => (
+              <option key={type._id}>{type.name}</option>
+            ))}
           </select>
         </label>
         <label className="form-control w-full">

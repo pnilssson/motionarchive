@@ -1,0 +1,214 @@
+[
+  {
+    "name": "Running",
+    "subcategory": "Conditioning"
+  },
+  {
+    "name": "Rowing",
+    "subcategory": "Conditioning"
+  },
+  {
+    "name": "Biking",
+    "subcategory": "Conditioning"
+  },
+  {
+    "name": "Skiing",
+    "subcategory": "Conditioning"
+  },
+  {
+    "name": "Strength Training",
+    "subcategory": "Strength"
+  },
+  {
+    "name": "Weightlifting",
+    "subcategory": "Strength"
+  },
+  {
+    "name": "Soccer",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Basketball",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Cricket",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Field Hockey",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Tennis",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Volleyball",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Table Tennis",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Baseball",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Softball",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Golf",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "American Football",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Rugby",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Ice Hockey",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Lacrosse",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Boxing",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Martial Arts",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Swimming",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Track and Field",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Gymnastics",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Cycling",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Wrestling",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Ski Jumping",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Snowboarding",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Speed Skating",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Figure Skating",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Diving",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Surfing",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Sailing",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Canoeing",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Kayaking",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Rowing",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Archery",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Shooting",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Fishing",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Hiking",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Mountaineering",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Climbing",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Camping",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Ski Touring",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Skateboarding",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "BMX",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Parkour",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Yoga",
+    "subcategory": "Flexibility"
+  },
+  {
+    "name": "Pilates",
+    "subcategory": "Flexibility"
+  },
+  {
+    "name": "Stretching",
+    "subcategory": "Flexibility"
+  },
+  {
+    "name": "Tai Chi",
+    "subcategory": "Flexibility"
+  },
+  {
+    "name": "Dance",
+    "subcategory": "Sport"
+  }
+]

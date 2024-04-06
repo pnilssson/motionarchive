@@ -1,10 +1,10 @@
 import addWorkout from "./actions";
 
-interface AddWorkoutFormProps {
+interface ComponentProps {
   date: Date;
 }
 
-export default function AddWorkoutForm({ date }: AddWorkoutFormProps) {
+export default function Component({ date }: ComponentProps) {
   function formatDateLocal(date: Date): string {
     const year = date.getFullYear();
     const month = (date.getMonth() + 1).toString().padStart(2, "0");
@@ -15,7 +15,7 @@ export default function AddWorkoutForm({ date }: AddWorkoutFormProps) {
   return (
     <div>
       <form action={addWorkout}>
-        <label className="form-control w-full">
+        <label className="form-control w-full hidden">
           <div className="label">
             <span className="label-text font-bold">Date</span>
           </div>

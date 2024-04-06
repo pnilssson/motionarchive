@@ -28,7 +28,7 @@ export default function Day({ day, month, year }: MonthProps) {
         <div className="flex justify-between items-baseline">
           <div>{day}</div>
           <div className="tooltip" data-tip="Add workout">
-            <Link href={`workout/add/${getDateParameter()}`}>
+            <Link href={`${getDateParameter()}`}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -48,7 +48,7 @@ export default function Day({ day, month, year }: MonthProps) {
       </div>
       <div className="flex md:hidden min-h-16">
         <Link
-          href={`workout/add/${getDateParameter()}`}
+          href={`${getDateParameter()}`}
           className="flex justify-between items-baseline">
           <div>{day}</div>
         </Link>

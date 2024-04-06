@@ -1,5 +1,6 @@
 "use server";
 import AddWorkoutForm from "./addWorkoutForm";
+import DailyOverview from "./dailyOverview";
 
 interface PageProps {
   params: {
@@ -18,16 +19,25 @@ export default async function Page({ params }: PageProps) {
 
   return (
     <div>
-      <h1 className="text-4xl font-bold mb-6">Add workout</h1>
-      <h3 className="text-xl">
+      <h1 className="text-4xl font-bold mb-6">
         {date.toLocaleDateString(undefined, {
           weekday: "long",
           year: "numeric",
           month: "long",
           day: "numeric",
         })}
-      </h3>
-      <AddWorkoutForm date={date} />
+      </h1>
+      <div className="">
+        <div className="flex flex-col md:flex-row gap-4">
+          <div className="md:w-2/3">
+            <DailyOverview />
+          </div>
+          <div className="md:w-1/3">
+            <h3 className="text-xl">Add workout</h3>
+            <AddWorkoutForm date={date} />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

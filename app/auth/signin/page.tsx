@@ -6,8 +6,13 @@ import { useState } from "react";
 export default function SignIn() {
   const [email, setEmail] = useState("");
   return (
-    <div className="flex flex-col items-center h-full pt-thirtyprocent">
-      <label className="input input-sm input-bordered flex items-center gap-2 w-80">
+    <div className="flex flex-col items-center h-full">
+      <div className="h-1/4"></div>
+      <h1 className="text-4xl font-bold  mb-4">Sign in</h1>
+      <h3 className="mb-4 text-center">
+        We will send you a sign-in link to your email address.
+      </h3>
+      <label className="input input-bordered flex items-center gap-2 w-80">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 16 16"
@@ -30,7 +35,7 @@ export default function SignIn() {
         onClick={() =>
           signIn("email", { email: email, callbackUrl: "/archive/dashboard" })
         }
-        className="btn btn-sm mt-4 w-80">
+        className="btn btn-primary mt-4 w-80">
         Sign in with Email
       </button>
     </div>

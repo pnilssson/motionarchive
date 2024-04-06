@@ -2,13 +2,14 @@
 
 import { WorkoutTypeResponse } from "@/types/workoutType";
 import addWorkout from "./actions";
+import { BASE_URL } from "@/lib/url";
 
 interface ComponentProps {
   date: Date;
 }
 
 async function getTypes() {
-  const res = await fetch(process.env.VERCEL_URL + "/api/workout-types");
+  const res = await fetch(BASE_URL + "/api/workout-types");
   return res.json();
 }
 

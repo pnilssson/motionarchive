@@ -2,21 +2,22 @@
 
 import { WorkoutTypeResponse } from "@/lib/types/workoutType";
 import addWorkout from "./actions";
-import getUrl from "@/lib/utils/url";
+import collections from "@/lib/utils/db";
 
 interface ComponentProps {
   date: Date;
 }
 
 async function getTypes() {
-  console.log(getUrl("/api/workout-types"));
-  const res = await fetch(getUrl("/api/workout-types"));
-  console.log("RESPONSE:", res);
-  return res.json();
+  const workoutTypes = await collections.workoutTypes();
+
+  const data = await workoutTypes.find({}).toArray();
+
+  return JSON.parse(JSON.stringify(data));
 }
 
 export default async function Component({ date }: ComponentProps) {
-  const { data: workoutTypes } = await getTypes();
+  const workoutTypes = await getTypes();
 
   function formatDateLocal(date: Date): string {
     const year = date.getFullYear();

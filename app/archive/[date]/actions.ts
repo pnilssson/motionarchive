@@ -2,7 +2,6 @@
 
 import { authOptions } from "@/auth";
 import collections from "@/lib/utils/db";
-import clientPromise from "@/lib/utils/mongoclient";
 import { WorkoutRequest } from "@/lib/types/workout";
 import { getServerSession } from "next-auth";
 import { redirect } from 'next/navigation'

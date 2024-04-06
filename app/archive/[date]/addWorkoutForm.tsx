@@ -11,6 +11,7 @@ interface ComponentProps {
 async function getTypes() {
   console.log(getUrl("/api/workout-types"));
   const res = await fetch(getUrl("/api/workout-types"));
+  console.log("RESPONSE:", res);
   return res.json();
 }
 

@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 const Calendar = dynamic(() => import("./calendar"), { ssr: false });
 
 export default function Page() {
-  console.log(process.env.NEXT_PUBLIC_URL);
+  console.log(process.env.NEXT_PUBLIC_VERCEL_URL);
   console.log(process.env.NODE_ENV);
   return (
     <div>

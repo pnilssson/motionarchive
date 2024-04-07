@@ -1,3 +1,4 @@
+import { cache } from "react";
 import clientPromise from "./mongoclient";
 
 async function getDb() {
@@ -16,4 +17,11 @@ const collections = {
     }
 };
 
+const getTypes = cache(async () => {
+    const workoutTypes = await collections.workoutTypes();
+    const data = await workoutTypes.find({}).toArray();
+    return JSON.parse(JSON.stringify(data));
+  });
+
 export default collections;
+export { getTypes };

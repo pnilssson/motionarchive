@@ -4,9 +4,8 @@ import { authOptions } from "@/auth";
 import collections from "@/lib/utils/db";
 import { WorkoutRequest } from "@/lib/types/workout";
 import { getServerSession } from "next-auth";
-import { redirect } from 'next/navigation'
 
-export default async function addWorkout(formData: FormData) {
+async function addWorkout(formData: FormData) {
     const session = await getServerSession(authOptions);
 
     const request = {
@@ -19,6 +18,6 @@ export default async function addWorkout(formData: FormData) {
 
     const workouts = await collections.workout();
     await workouts.insertOne(request);
-    
-    redirect('/archive/calendar');
 }
+
+export { addWorkout }

@@ -1,5 +1,7 @@
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { WorkoutTypesContext } from "./calendar";
+import AddWorkoutDialog from "@/components/addWorkoutDialog";
 
 interface MonthProps {
   day: number;
@@ -9,6 +11,7 @@ interface MonthProps {
 
 export default function Day({ day, month, year }: MonthProps) {
   const [today, setToday] = useState(new Date(year, month, day));
+  const workoutTypes = useContext(WorkoutTypesContext);
 
   useEffect(() => {
     setToday(new Date(year, month, day));
@@ -28,28 +31,12 @@ export default function Day({ day, month, year }: MonthProps) {
         <div className="flex justify-between items-baseline">
           <div>{day}</div>
           <div className="tooltip" data-tip="Add workout">
-            <Link href={`${getDateParameter()}`}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={2}
-                stroke="currentColor"
-                className="w-4 h-4">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12 4.5v15m7.5-7.5h-15"
-                />
-              </svg>
-            </Link>
+            <AddWorkoutDialog date={today} workoutTypes={workoutTypes} />
           </div>
         </div>
       </div>
-      <div className="flex md:hidden min-h-16">
-        <Link
-          href={`${getDateParameter()}`}
-          className="flex justify-between items-baseline">
+      <div className="flex justify-center md:hidden">
+        <Link href={`${getDateParameter()}`} className="flex">
           <div>{day}</div>
         </Link>
       </div>

@@ -1,23 +1,14 @@
-"use server";
+"use client";
 
+import { addWorkout } from "@/app/actions";
 import { WorkoutTypeResponse } from "@/lib/types/workoutType";
-import addWorkout from "./actions";
-import collections from "@/lib/utils/db";
-import { cache } from "react";
 
 interface ComponentProps {
   date: Date;
+  workoutTypes: WorkoutTypeResponse[];
 }
 
-const getTypes = cache(async () => {
-  const workoutTypes = await collections.workoutTypes();
-  const data = await workoutTypes.find({}).toArray();
-  return JSON.parse(JSON.stringify(data));
-});
-
-export default async function Component({ date }: ComponentProps) {
-  const workoutTypes = await getTypes();
-
+export default function Component({ date, workoutTypes }: ComponentProps) {
   function formatDateLocal(date: Date): string {
     const year = date.getFullYear();
     const month = (date.getMonth() + 1).toString().padStart(2, "0");

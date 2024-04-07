@@ -1,12 +1,13 @@
-import dynamic from "next/dynamic";
+import { getTypes } from "@/lib/utils/db";
+import Calendar from "./calendar";
 
-const Calendar = dynamic(() => import("./calendar"), { ssr: false });
+export default async function Page() {
+  const workoutTypes = await getTypes();
 
-export default function Page() {
   return (
     <div>
       <h1 className="text-4xl font-bold">Calendar</h1>
-      <Calendar />
+      <Calendar workoutTypes={workoutTypes} />
     </div>
   );
 }

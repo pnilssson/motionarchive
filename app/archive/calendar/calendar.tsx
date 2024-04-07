@@ -1,9 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { createContext, useState } from "react";
 import Month from "./month";
+import { WorkoutTypeResponse } from "@/lib/types/workoutType";
 
-export default function Calendar() {
+export const WorkoutTypesContext = createContext<WorkoutTypeResponse[]>([]);
+
+interface ComponentProps {
+  workoutTypes: WorkoutTypeResponse[];
+}
+
+export default function Component({ workoutTypes }: ComponentProps) {
   const [date, setDate] = useState(new Date());
   const [monthName, setMonthName] = useState(
     date.toLocaleString(undefined, { month: "long" })
@@ -40,7 +47,7 @@ export default function Calendar() {
   };
 
   return (
-    <div>
+    <>
       <div className="flex items-baseline my-6">
         <div className="tooltip" data-tip="Previous month">
           <button onClick={handlePrevMonth}>
@@ -78,7 +85,9 @@ export default function Calendar() {
           </button>
         </div>
       </div>
-      <Month date={date} /> {/* Pass the first date of the month as a prop */}
-    </div>
+      <WorkoutTypesContext.Provider value={workoutTypes}>
+        <Month date={date} />
+      </WorkoutTypesContext.Provider>
+    </>
   );
 }

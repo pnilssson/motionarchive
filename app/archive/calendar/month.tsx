@@ -36,7 +36,6 @@ export default function Month({ date }: MonthProps) {
   const isWeekend = (day: any) => {
     if (day === null) return false;
     const weekday = (firstDayOfWeek + day) % 7;
-    console.log(weekday);
     return weekday === 6 || weekday === 0; // Sunday (0) or Saturday (6)
   };
 

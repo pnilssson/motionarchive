@@ -7,7 +7,6 @@ interface MonthProps {
 
 export default function Month({ date }: MonthProps) {
   let days: any[] = [];
-  let firstDayOfWeek = 0;
   setDays();
 
   function setDays() {
@@ -17,8 +16,6 @@ export default function Month({ date }: MonthProps) {
       0
     ).getDate();
     const firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
-    // Remove 1 to make Monday the first day of the week
-    const offset = firstDayOfMonth.getDay() - 1;
 
     // Generate an array of days in the month
     const daysArray = Array.from(
@@ -27,26 +24,27 @@ export default function Month({ date }: MonthProps) {
     );
 
     // Add empty days to the beginning of the array based on the offset
-    days = [...Array(offset).fill(null), ...daysArray];
+    // Remove 1 to make Monday the first day of the week
+    days = [...Array(firstDayOfMonth.getDay() - 1).fill(null), ...daysArray];
   }
 
   function isWeekend(day: number): boolean {
-    const dayOfWeek = new Date(
-      date.getFullYear(),
-      date.getMonth(),
-      day
-    ).getDay();
+    const dayOfWeek = getDayOfWeek(day).getDay();
     return dayOfWeek === 0 || dayOfWeek === 6;
   }
 
   function isToday(day: number): boolean {
     const today = new Date();
-    const dayOfWeek = new Date(date.getFullYear(), date.getMonth(), day);
+    const dayOfWeek = getDayOfWeek(day);
     return (
       dayOfWeek.getDate() === today.getDate() &&
       dayOfWeek.getMonth() === today.getMonth() &&
       dayOfWeek.getFullYear() === today.getFullYear()
     );
+  }
+
+  function getDayOfWeek(day: number): Date {
+    return new Date(date.getFullYear(), date.getMonth(), day);
   }
 
   return (

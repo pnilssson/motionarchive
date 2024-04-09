@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import Day from "./day";
 import clsx from "clsx";
 
@@ -7,10 +6,11 @@ interface MonthProps {
 }
 
 export default function Month({ date }: MonthProps) {
-  const [days, setDays] = useState<number[]>([]);
-  const [firstDayOfWeek, setFirstDayOfWeek] = useState<number>(0);
+  let days: any[] = [];
+  let firstDayOfWeek = 0;
+  setDays();
 
-  useEffect(() => {
+  function setDays() {
     const daysInMonth = new Date(
       date.getFullYear(),
       date.getMonth() + 1,
@@ -18,9 +18,7 @@ export default function Month({ date }: MonthProps) {
     ).getDate();
     const firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
     // Remove 1 to make Monday the first day of the week
-    let offset = firstDayOfMonth.getDay() - 1;
-
-    setFirstDayOfWeek(offset);
+    const offset = firstDayOfMonth.getDay() - 1;
 
     // Generate an array of days in the month
     const daysArray = Array.from(
@@ -29,15 +27,27 @@ export default function Month({ date }: MonthProps) {
     );
 
     // Add empty days to the beginning of the array based on the offset
-    const shiftedDays = [...Array(offset).fill(null), ...daysArray];
-    setDays(shiftedDays);
-  }, [date]);
+    days = [...Array(offset).fill(null), ...daysArray];
+  }
 
-  const isWeekend = (day: any) => {
-    if (day === null) return false;
-    const weekday = (firstDayOfWeek + day) % 7;
-    return weekday === 6 || weekday === 0; // Sunday (0) or Saturday (6)
-  };
+  function isWeekend(day: number): boolean {
+    const dayOfWeek = new Date(
+      date.getFullYear(),
+      date.getMonth(),
+      day
+    ).getDay();
+    return dayOfWeek === 0 || dayOfWeek === 6;
+  }
+
+  function isToday(day: number): boolean {
+    const today = new Date();
+    const dayOfWeek = new Date(date.getFullYear(), date.getMonth(), day);
+    return (
+      dayOfWeek.getDate() === today.getDate() &&
+      dayOfWeek.getMonth() === today.getMonth() &&
+      dayOfWeek.getFullYear() === today.getFullYear()
+    );
+  }
 
   return (
     <div className="grid grid-cols-7 gap-2">
@@ -58,7 +68,9 @@ export default function Month({ date }: MonthProps) {
             },
             {
               "bg-gray-100": !isWeekend(day),
-            }
+            },
+            { "bg-blue-200": isToday(day) },
+            { "bg-transparent": day === null }
           )}>
           {day && (
             <Day day={day} month={date.getMonth()} year={date.getFullYear()} />

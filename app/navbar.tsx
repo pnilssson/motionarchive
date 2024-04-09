@@ -1,9 +1,10 @@
 import { authOptions } from "@/auth";
-import LoginBtn from "@/components/loginButton";
+import LoginBtn from "@/lib/components/loginButton";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
 
 export default async function Component() {
+  const today = new Date();
   const session = await getServerSession(authOptions);
   return (
     <div className="navbar bg-base-100">
@@ -33,7 +34,12 @@ export default async function Component() {
               className="menu dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
               <li>
                 <Link href="/archive/dashboard">Dashboard</Link>
-                <Link href="/archive/calendar">Calendar</Link>
+                <Link
+                  href={`/archive/calendar/${today.getFullYear()}/${
+                    today.getMonth() + 1
+                  }`}>
+                  Calendar
+                </Link>
               </li>
             </ul>
           </div>

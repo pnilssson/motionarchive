@@ -1,8 +1,7 @@
-"use server";
-
-import AddWorkoutForm from "../../../components/addWorkoutForm";
-import DailyOverview from "./dailyOverview";
+import { createDateFromString } from "@/lib/utils/date";
+import DailyOverview from "./daily-overview";
 import { getTypes } from "@/lib/utils/db";
+import AddWorkoutDialog from "@/lib/components/add-workout-dialog";
 
 interface PageProps {
   params: {
@@ -12,35 +11,39 @@ interface PageProps {
 
 export default async function Page({ params }: PageProps) {
   const workoutTypes = await getTypes();
-  const date = createDateFromString();
-
-  function createDateFromString(): Date {
-    const day = parseInt(params.date.substring(0, 2));
-    const month = parseInt(params.date.substring(2, 4)) - 1;
-    const year = parseInt(params.date.substring(4, 8));
-    return new Date(year, month, day);
-  }
+  const date = createDateFromString(params.date);
 
   return (
     <div>
-      <h1 className="text-4xl font-bold mb-6">
+      <div className="flex flex-row justify-between">
+        <h1 className="text-4xl font-bold mb-6">Overview</h1>
+
+        <div className="hidden md:block">
+          <AddWorkoutDialog
+            date={date}
+            workoutTypes={workoutTypes}
+            buttonStyle="button"
+          />
+        </div>
+      </div>
+      <h1 className="text-xl mb-6">
         {date.toLocaleDateString(undefined, {
-          weekday: "long",
+          weekday: "short",
           year: "numeric",
           month: "long",
           day: "numeric",
         })}
       </h1>
+
       <div className="">
-        <div className="flex flex-col md:flex-row gap-4">
-          <div className="md:w-2/3">
-            <DailyOverview />
-          </div>
-          <div className="md:w-1/3">
-            <h3 className="text-xl">Add workout</h3>
-            <AddWorkoutForm date={date} workoutTypes={workoutTypes} />
-          </div>
-        </div>
+        <DailyOverview />
+      </div>
+      <div className="md:hidden absolute bottom-0 left-1/2 -translate-y-1/2 -translate-x-1/2">
+        <AddWorkoutDialog
+          date={date}
+          workoutTypes={workoutTypes}
+          buttonStyle="button"
+        />
       </div>
     </div>
   );

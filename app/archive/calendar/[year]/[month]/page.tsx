@@ -1,13 +1,13 @@
-import Calendar from "./calendar";
+import Calendar from './calendar';
 
-interface PageProps {
+export default async function Page({
+  params,
+}: {
   params: {
     year: string;
     month: string;
   };
-}
-
-export default async function Page({ params }: PageProps) {
+}) {
   const date = new Date(parseInt(params.year), parseInt(params.month) - 1, 1);
 
   return (

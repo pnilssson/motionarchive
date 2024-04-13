@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic';
 import DailyOverview from './daily-overview';
 import { getTypes } from '@/app/db/queries';
 import AddWorkoutForm from '@/app/components/add-workout-form';

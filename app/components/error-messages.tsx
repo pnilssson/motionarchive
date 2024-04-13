@@ -5,8 +5,9 @@ export default function Component({
   errors,
 }: {
   name: string;
-  errors: ZodIssue[];
+  errors: ZodIssue[] | undefined;
 }) {
+  if (!errors) return null;
   if (errors?.length === 0) return null;
 
   const issues = errors

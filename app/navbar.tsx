@@ -1,11 +1,10 @@
-import { authOptions } from '@/app/auth';
 import LoginButton from '@/app/components/login-button';
-import { getServerSession } from 'next-auth';
 import Link from 'next/link';
+import { auth } from './auth';
 
 export default async function Component() {
   const today = new Date();
-  const session = await getServerSession(authOptions);
+  const session = await auth();
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">

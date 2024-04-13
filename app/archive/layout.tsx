@@ -1,5 +1,4 @@
-import { authOptions } from '@/app/auth';
-import { getServerSession } from 'next-auth';
+import { auth } from '@/app/auth';
 import { redirect } from 'next/navigation';
 
 export default async function Layout({
@@ -7,7 +6,7 @@ export default async function Layout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await getServerSession(authOptions);
+  const session = await auth();
   if (!session) {
     redirect('/api/auth/signin');
   }

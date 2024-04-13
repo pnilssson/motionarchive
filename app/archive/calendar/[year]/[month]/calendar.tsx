@@ -1,12 +1,14 @@
-import Month from "./month";
-import Link from "next/link";
+import Month from './month';
+import Link from 'next/link';
 
-interface ComponentProps {
+export default async function Calendar({
+  date,
+  showModal,
+}: {
   date: Date;
-}
-
-export default function Component({ date }: ComponentProps) {
-  var monthName = date.toLocaleString(undefined, { month: "long" });
+  showModal: boolean;
+}) {
+  var monthName = date.toLocaleString(undefined, { month: 'long' });
   var month = date.getMonth() + 1;
   var year = date.getFullYear();
 
@@ -41,7 +43,8 @@ export default function Component({ date }: ComponentProps) {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="w-4 h-4">
+              className="w-4 h-4"
+            >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -59,7 +62,8 @@ export default function Component({ date }: ComponentProps) {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="w-4 h-4">
+              className="w-4 h-4"
+            >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"

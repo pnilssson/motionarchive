@@ -1,13 +1,9 @@
 import dynamic from 'next/dynamic';
 import DailyOverview from './daily-overview';
 import { getTypes } from '@/app/db/queries';
-const AddWorkoutDialog = dynamic(
-  () => import('@/app/components/add-workout-dialog'),
-  {
-    ssr: false,
-  }
-);
-
+import AddWorkoutForm from '@/app/components/add-workout-form';
+import Link from 'next/link';
+import MobileDesktopSwitch from '@/app/components/mobile-desktop-switch';
 interface PageProps {
   params: {
     year: string;
@@ -29,13 +25,7 @@ export default async function Page({ params }: PageProps) {
       <div className="flex flex-row justify-between">
         <h1 className="text-4xl font-bold mb-6">Overview</h1>
 
-        <div className="hidden md:block">
-          <AddWorkoutDialog
-            date={date}
-            workoutTypes={workoutTypes}
-            buttonStyle="button"
-          />
-        </div>
+        <Link href={''} className="hidden md:block"></Link>
       </div>
       <h1 className="text-xl mb-6">
         {date.toLocaleDateString(undefined, {
@@ -46,15 +36,19 @@ export default async function Page({ params }: PageProps) {
         })}
       </h1>
 
-      <div className="">
-        <DailyOverview />
-      </div>
-      <div className="md:hidden absolute bottom-0 left-1/2 -translate-y-1/2 -translate-x-1/2">
-        <AddWorkoutDialog
-          date={date}
-          workoutTypes={workoutTypes}
-          buttonStyle="button"
-        />
+      <div className="flex flex-col md:flex-row">
+        <div className="md:w-2/3">
+          <MobileDesktopSwitch
+            mobile={<AddWorkoutForm date={date} workoutTypes={workoutTypes} />}
+            desktop={<DailyOverview />}
+          />
+        </div>
+        <div className="md:w-1/3">
+          <MobileDesktopSwitch
+            mobile={<DailyOverview />}
+            desktop={<AddWorkoutForm date={date} workoutTypes={workoutTypes} />}
+          />
+        </div>
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-export default function SignIn() {
+export default async function SignIn() {
   return (
     <div className="flex flex-col items-center h-full">
       <div className="h-1/4"></div>

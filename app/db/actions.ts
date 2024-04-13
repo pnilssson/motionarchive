@@ -1,11 +1,19 @@
 'use server'
 
 import { z } from 'zod'
-import { authOptions } from "@/app/auth";
-import collections from "@/app/db/queries";
-import { getServerSession } from "next-auth";
 import { revalidatePath } from 'next/cache';
-import { redirect } from 'next/navigation';
+import { Session } from 'next-auth';
+import { auth } from '../auth';
+import collections from './db';
+
+async function getSession(): Promise<Session> {
+    let session = await auth();
+    if (!session || !session.user) {
+      throw new Error('Unauthorized');
+    }
+  
+    return session;
+  }
 
 const schema = z.object({
     userId: z.string(),
@@ -18,7 +26,7 @@ const schema = z.object({
   })
 
 async function addWorkout(_: any, formData: FormData) {
-    const session = await getServerSession(authOptions);
+    const session = await getSession();
 
     const request = {
         userId: session?.user?.userId,
@@ -38,8 +46,10 @@ async function addWorkout(_: any, formData: FormData) {
 
     const workouts = await collections.workout();
     await workouts.insertOne(validatedRequest.data);
-    revalidatePath('/');
-    redirect(`/archive/calendar/${validatedRequest.data.date.getFullYear()}/${validatedRequest.data.date.getMonth()}/${validatedRequest.data.date.getDate()}`)
+    revalidatePath('/archive/calendar');
+    return {
+        errors: [],
+    }
 }
 
 export { addWorkout }

@@ -1,32 +1,26 @@
-import type { GetServerSidePropsContext, NextApiRequest, NextApiResponse } from "next"
-import type { NextAuthOptions } from "next-auth"
-import EmailProvider from "next-auth/providers/email"
-import { getServerSession } from "next-auth"
-import { MongoDBAdapter } from "@next-auth/mongodb-adapter"
-import clientPromise from "./db/client"
+import { MongoDBAdapter } from '@next-auth/mongodb-adapter';
+import NextAuth from 'next-auth';
+import Resend from "next-auth/providers/resend"
+import clientPromise from './db/client';
 
-export const authOptions: NextAuthOptions = {
-    secret: process.env.NEXTAUTH_SECRET,
-    adapter: MongoDBAdapter(clientPromise),
-    pages: {
-      signIn: '/auth/signin',
-      verifyRequest: '/auth/verify-request',
-    },
-    providers: [
-        EmailProvider({
-          server: process.env.EMAIL_SERVER,
-          from: process.env.EMAIL_FROM
-        }),
-      ],
-      callbacks: {
-        async session({ session, user }) {
-          session.user.userId = user.id;
-          return session
-        }
-      }
-} satisfies NextAuthOptions
-
-// Use it in server contexts
-export function auth(...args: [GetServerSidePropsContext["req"], GetServerSidePropsContext["res"]] | [NextApiRequest, NextApiResponse] | []) {
-  return getServerSession(...args, authOptions)
-}
+export const {
+  handlers: { GET, POST },
+  auth,
+} = NextAuth({
+  adapter: MongoDBAdapter(clientPromise),
+  providers: [
+    Resend({
+      from: process.env.EMAIL_FROM,
+    }),
+  ],
+  pages: {
+    signIn: '/auth/signin',
+    verifyRequest: '/auth/verify-request',
+  },
+  callbacks: {
+    async session({ session, user }) {
+      session.user.userId = user.id;
+      return session
+    }
+  }
+});

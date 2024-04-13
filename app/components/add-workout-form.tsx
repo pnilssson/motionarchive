@@ -14,10 +14,12 @@ export default function Component({
   date: Date;
   workoutTypes: WorkoutTypeResponse[];
 }) {
-  const [state, formAction] = useFormState(addWorkout, { errors: [] });
+  const [state, action] = useFormState(addWorkout, {
+    errors: [],
+  });
 
   return (
-    <form action={formAction}>
+    <form action={action}>
       <label className="form-control w-full hidden">
         <div className="label">
           <span className="label-text font-bold">Date</span>
@@ -41,7 +43,7 @@ export default function Component({
           className="input input-bordered w-full"
         />
       </label>
-      <ErrorMessages name="time" errors={state.errors} />
+      <ErrorMessages name="time" errors={state && state.errors} />
       <label className="form-control w-full">
         <div className="label">
           <span className="label-text font-bold">Type</span>
@@ -52,7 +54,7 @@ export default function Component({
           ))}
         </select>
       </label>
-      <ErrorMessages name="type" errors={state.errors} />
+      <ErrorMessages name="type" errors={state && state.errors} />
       <label className="form-control w-full">
         <div className="label">
           <span className="label-text font-bold">Description</span>
@@ -63,7 +65,7 @@ export default function Component({
           className="textarea textarea-bordered w-full"
         ></textarea>
       </label>
-      <ErrorMessages name="description" errors={state.errors} />
+      <ErrorMessages name="description" errors={state && state.errors} />
       <SubmitButton />
     </form>
   );

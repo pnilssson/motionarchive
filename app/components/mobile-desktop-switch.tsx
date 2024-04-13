@@ -1,3 +1,7 @@
+'use client';
+
+import useScreenSize from '../hooks/useScreenSize';
+
 export default function Component({
   desktop,
   mobile,
@@ -5,10 +9,6 @@ export default function Component({
   desktop: React.ReactNode;
   mobile: React.ReactNode;
 }) {
-  return (
-    <>
-      <div className="hidden md:block">{desktop}</div>
-      <div className="md:hidden">{mobile}</div>
-    </>
-  );
+  const screenSize = useScreenSize();
+  return <>{screenSize.width < 768 ? mobile : desktop}</>;
 }

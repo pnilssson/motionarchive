@@ -1,7 +1,7 @@
-import { authOptions } from "@/auth";
-import LoginBtn from "@/lib/components/loginButton";
-import { getServerSession } from "next-auth";
-import Link from "next/link";
+import { authOptions } from '@/app/auth';
+import LoginButton from '@/app/components/login-button';
+import { getServerSession } from 'next-auth';
+import Link from 'next/link';
 
 export default async function Component() {
   const today = new Date();
@@ -14,13 +14,15 @@ export default async function Component() {
             <div
               tabIndex={0}
               role="button"
-              className="btn btn-ghost btn-circle">
+              className="btn btn-ghost btn-circle"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke="currentColor">
+                stroke="currentColor"
+              >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -31,13 +33,15 @@ export default async function Component() {
             </div>
             <ul
               tabIndex={0}
-              className="menu dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+              className="menu dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+            >
               <li>
                 <Link href="/archive/dashboard">Dashboard</Link>
                 <Link
                   href={`/archive/calendar/${today.getFullYear()}/${
                     today.getMonth() + 1
-                  }`}>
+                  }`}
+                >
                   Calendar
                 </Link>
               </li>
@@ -51,7 +55,7 @@ export default async function Component() {
         </Link>
       </div>
       <div className="navbar-end">
-        <LoginBtn session={session}></LoginBtn>
+        <LoginButton session={session}></LoginButton>
       </div>
     </div>
   );

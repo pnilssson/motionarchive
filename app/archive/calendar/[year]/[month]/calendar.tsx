@@ -13,8 +13,8 @@ export default function Component({ date }: ComponentProps) {
   function getPreviousMonthDateParameter() {
     let newMonth = month - 1;
     let newYear = year;
-    if (newMonth < 0) {
-      newMonth = 11;
+    if (newMonth < 1) {
+      newMonth = 12;
       newYear -= 1;
     }
     return `${newYear}/${newMonth}`;
@@ -23,8 +23,8 @@ export default function Component({ date }: ComponentProps) {
   function getNextMonthDateParameter() {
     let newMonth = month + 1;
     let newYear = year;
-    if (newMonth > 11) {
-      newMonth = 0;
+    if (newMonth > 12) {
+      newMonth = 1;
       newYear += 1;
     }
     return `${newYear}/${newMonth}`;

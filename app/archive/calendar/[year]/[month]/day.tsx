@@ -1,10 +1,11 @@
-import Link from "next/link";
-import { getDateParameter } from "@/lib/utils/date";
-import { getTypes } from "@/lib/utils/db";
-import dynamic from "next/dynamic";
+import Link from 'next/link';
+import { getTypes } from '@/app/db/queries';
+import dynamic from 'next/dynamic';
+import { getMonthAndDayLink } from '@/app/lib/utils';
+import MobileDesktopSwitch from '@/app/components/mobile-desktop-switch';
 
 const AddWorkoutDialog = dynamic(
-  () => import("@/lib/components/add-workout-dialog"),
+  () => import('@/app/components/add-workout-dialog'),
   {
     ssr: false,
   }
@@ -21,26 +22,30 @@ export default async function Day({ day, month, year }: MonthProps) {
   const workoutTypes = await getTypes();
 
   return (
-    <>
-      <Link href={`/archive/${getDateParameter(today)}`}>
-        <div className="hidden md:block min-h-16">
-          <div className="flex justify-between items-baseline">
-            <div>{day}</div>
-            <div className="tooltip" data-tip="Add workout">
-              <AddWorkoutDialog
-                date={today}
-                workoutTypes={workoutTypes}
-                buttonStyle="plus"
-              />
+    <MobileDesktopSwitch
+      desktop={
+        <Link href={getMonthAndDayLink(month, day)}>
+          <div className=" p-4">
+            <div className="flex justify-between items-baseline min-h-16">
+              <div>{day}</div>
+              <div className="tooltip" data-tip="Add workout">
+                <AddWorkoutDialog
+                  date={today}
+                  workoutTypes={workoutTypes}
+                  buttonStyle="plus"
+                />
+              </div>
             </div>
           </div>
-        </div>
-      </Link>
-      <div className="flex justify-center md:hidden">
-        <Link href={`/archive/${getDateParameter(today)}`} className="flex">
-          <div>{day}</div>
         </Link>
-      </div>
-    </>
+      }
+      mobile={
+        <div className="flex justify-center">
+          <Link href={getMonthAndDayLink(month, day)} className="flex">
+            <div className="p-2">{day}</div>
+          </Link>
+        </div>
+      }
+    />
   );
 }

@@ -1,17 +1,28 @@
-import { createDateFromString } from "@/lib/utils/date";
-import DailyOverview from "./daily-overview";
-import { getTypes } from "@/lib/utils/db";
-import AddWorkoutDialog from "@/lib/components/add-workout-dialog";
+import dynamic from 'next/dynamic';
+import DailyOverview from './daily-overview';
+import { getTypes } from '@/app/db/queries';
+const AddWorkoutDialog = dynamic(
+  () => import('@/app/components/add-workout-dialog'),
+  {
+    ssr: false,
+  }
+);
 
 interface PageProps {
   params: {
-    date: string;
+    year: string;
+    month: string;
+    day: string;
   };
 }
 
 export default async function Page({ params }: PageProps) {
   const workoutTypes = await getTypes();
-  const date = createDateFromString(params.date);
+  const date = new Date(
+    parseInt(params.year),
+    parseInt(params.month) - 1,
+    parseInt(params.day)
+  );
 
   return (
     <div>
@@ -28,10 +39,10 @@ export default async function Page({ params }: PageProps) {
       </div>
       <h1 className="text-xl mb-6">
         {date.toLocaleDateString(undefined, {
-          weekday: "short",
-          year: "numeric",
-          month: "long",
-          day: "numeric",
+          weekday: 'short',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
         })}
       </h1>
 

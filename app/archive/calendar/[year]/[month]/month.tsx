@@ -16,6 +16,14 @@ export default function Month({ date }: MonthProps) {
       0
     ).getDate();
     const firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
+    let offset = firstDayOfMonth.getDay(); // Get the day of the week for the first day
+
+    // Adjust the offset so Monday becomes the first day of the week
+    if (offset === 0) {
+      offset = 6; // Sunday
+    } else {
+      offset -= 1; // Shift other days by one position
+    }
 
     // Generate an array of days in the month
     const daysArray = Array.from(
@@ -24,8 +32,7 @@ export default function Month({ date }: MonthProps) {
     );
 
     // Add empty days to the beginning of the array based on the offset
-    // Remove 1 to make Monday the first day of the week
-    days = [...Array(firstDayOfMonth.getDay() - 1).fill(null), ...daysArray];
+    days = [...Array(offset).fill(null), ...daysArray];
   }
 
   function isWeekend(day: number): boolean {
@@ -60,12 +67,12 @@ export default function Month({ date }: MonthProps) {
         <div
           key={i}
           className={clsx(
-            " p-4 rounded-md",
+            "rounded-md",
             {
-              "bg-red-200": isWeekend(day),
+              "bg-red-200": isWeekend(day) && !isToday(day),
             },
             {
-              "bg-gray-100": !isWeekend(day),
+              "bg-gray-100": !isWeekend(day) && !isToday(day),
             },
             { "bg-blue-200": isToday(day) },
             { "bg-transparent": day === null }

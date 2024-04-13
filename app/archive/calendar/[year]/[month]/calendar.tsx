@@ -1,8 +1,14 @@
 import clsx from 'clsx';
 import Link from 'next/link';
-import MobileDesktopSwitch from '@/app/components/mobile-desktop-switch';
 import DesktopDay from './desktop-day';
 import MobileDay from './mobile-day';
+import dynamic from 'next/dynamic';
+const MobileDesktopSwitch = dynamic(
+  () => import('@/app/components/mobile-desktop-switch'),
+  {
+    ssr: false,
+  }
+);
 
 export default async function Calendar({ date }: { date: Date }) {
   var monthName = date.toLocaleString(undefined, { month: 'long' });

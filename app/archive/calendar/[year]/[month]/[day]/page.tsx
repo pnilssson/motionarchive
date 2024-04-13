@@ -2,16 +2,23 @@ import DailyOverview from './daily-overview';
 import { getTypes } from '@/app/db/queries';
 import AddWorkoutForm from '@/app/components/add-workout-form';
 import Link from 'next/link';
-import MobileDesktopSwitch from '@/app/components/mobile-desktop-switch';
-interface PageProps {
+import dynamic from 'next/dynamic';
+const MobileDesktopSwitch = dynamic(
+  () => import('@/app/components/mobile-desktop-switch'),
+  {
+    ssr: false,
+  }
+);
+
+export default async function Page({
+  params,
+}: {
   params: {
     year: string;
     month: string;
     day: string;
   };
-}
-
-export default async function Page({ params }: PageProps) {
+}) {
   const workoutTypes = await getTypes();
   const date = new Date(
     parseInt(params.year),

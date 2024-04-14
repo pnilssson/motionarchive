@@ -29,7 +29,7 @@ export default async function Page({
   return (
     <div>
       <div className="flex flex-row justify-between">
-        <h1 className="text-4xl font-bold mb-6">Overview</h1>
+        <h1 className="text-2xl md:text-4xl font-bold mb-6">Overview</h1>
 
         <Link href={''} className="hidden md:block"></Link>
       </div>

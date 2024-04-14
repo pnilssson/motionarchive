@@ -1,12 +1,9 @@
 import { MongoDBAdapter } from '@next-auth/mongodb-adapter';
-import NextAuth from 'next-auth';
+import NextAuth, { NextAuthConfig } from 'next-auth';
 import Resend from "next-auth/providers/resend"
 import clientPromise from './db/client';
 
-export const {
-  handlers: { GET, POST },
-  auth,
-} = NextAuth({
+export const config = {
   adapter: MongoDBAdapter(clientPromise),
   providers: [
     Resend({
@@ -23,4 +20,6 @@ export const {
       return session
     }
   }
-});
+} satisfies NextAuthConfig
+ 
+export const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth(config)

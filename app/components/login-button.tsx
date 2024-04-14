@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { signIn, signOut } from "next-auth/react";
-import { Session } from "next-auth";
+import { signIn, signOut } from 'next-auth/react';
+import { Session } from 'next-auth';
 
 interface ComponentProps {
   session: Session | null;
@@ -18,7 +18,8 @@ export default function Component({ session }: ComponentProps) {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-4 h-4">
+            className="w-4 h-4"
+          >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -38,7 +39,8 @@ export default function Component({ session }: ComponentProps) {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-4 h-4">
+          className="w-4 h-4"
+        >
           <path
             strokeLinecap="round"
             strokeLinejoin="round"

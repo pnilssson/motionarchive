@@ -17,9 +17,10 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="en" data-theme="ingenium">
-      <body className={`${inter.className}`}>
-        <Navbar></Navbar>
-        <div className="h-[calc(100vh-64px)]">{children}</div>
+      <body className={`${inter.className} antialiased container mx-auto`}>
+        <Navbar>
+          <div className="h-[calc(100vh-64px)]">{children}</div>
+        </Navbar>
       </body>
     </html>
   );

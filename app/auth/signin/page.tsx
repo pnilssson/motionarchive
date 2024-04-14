@@ -8,7 +8,7 @@ export default function SignIn() {
   return (
     <div className="flex flex-col items-center h-full">
       <div className="h-1/4"></div>
-      <h1 className="text-4xl font-bold  mb-4">Sign in</h1>
+      <h1 className="text-2xl md:text-4xl font-bold  mb-4">Sign in</h1>
       <h3 className="mb-4 text-center">
         We will send you a sign-in link to your email address.
       </h3>
@@ -34,7 +34,10 @@ export default function SignIn() {
       </label>
       <button
         onClick={() =>
-          signIn('email', { email: email, callbackUrl: '/archive/dashboard' })
+          signIn('resend', {
+            email: email,
+            callbackUrl: '/archive/dashboard',
+          })
         }
         className="btn btn-primary mt-4 w-80"
       >

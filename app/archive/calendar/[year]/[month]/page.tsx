@@ -1,3 +1,4 @@
+import { Box, Text } from '@radix-ui/themes';
 import Calendar from './calendar';
 
 export default async function Page({
@@ -11,9 +12,11 @@ export default async function Page({
   const date = new Date(parseInt(params.year), parseInt(params.month) - 1, 1);
 
   return (
-    <div>
-      <h1 className="text-2xl md:text-4xl  font-bold mb-6">Calendar</h1>
+    <Box>
+      <Text size={{ initial: '6', md: '8' }} weight={'bold'} mb={'4'} as="div">
+        Calendar
+      </Text>
       <Calendar date={date} />
-    </div>
+    </Box>
   );
 }

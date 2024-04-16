@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { getMonthAndDayLink } from '@/app/lib/utils';
+import { Box, Flex } from '@radix-ui/themes';
 
 export default function DesktopDay({
   day,
@@ -10,11 +11,11 @@ export default function DesktopDay({
 }) {
   return (
     <Link href={getMonthAndDayLink(month, day)}>
-      <div className=" p-4">
-        <div className="flex min-h-16">
-          <div>{day}</div>
-        </div>
-      </div>
+      <Box p={'4'}>
+        <Flex className="min-h-14">
+          <Box>{day}</Box>
+        </Flex>
+      </Box>
     </Link>
   );
 }

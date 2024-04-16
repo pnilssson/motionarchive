@@ -27,7 +27,7 @@ const schema = z.object({
 
 async function addWorkout(_: any, formData: FormData) {
     const session = await getSession();
-
+    
     const request = {
         userId: session?.user?.userId,
         type: formData.get('type'),

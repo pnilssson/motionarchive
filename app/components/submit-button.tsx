@@ -1,15 +1,18 @@
-"use client";
+'use client';
 
-import { useFormStatus } from "react-dom";
+import { PaperPlaneIcon } from '@radix-ui/react-icons';
+import { Button, Flex, Spinner } from '@radix-ui/themes';
+import { useFormStatus } from 'react-dom';
 
 export default function Page() {
   const { pending } = useFormStatus();
   return (
-    <button
-      type="submit"
-      className="btn btn-primary w-full mt-4 float-right"
-      aria-disabled={pending}>
-      {pending ? <span className="loading loading-spinner"></span> : "Save"}
-    </button>
+    <Flex width="100%" justify="end">
+      <Button type="submit" aria-disabled={pending}>
+        <Spinner loading={pending}>
+          <PaperPlaneIcon /> Save
+        </Spinner>
+      </Button>
+    </Flex>
   );
 }

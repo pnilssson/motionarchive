@@ -1,11 +1,21 @@
+import { Box, Flex, Text } from '@radix-ui/themes';
+
 export default async function SignIn() {
   return (
-    <div className="flex flex-col items-center h-full text-center px-4">
-      <div className="h-1/4"></div>
-      <h1 className="text-2xl md:text-4xl font-bold mb-4">
+    <Flex
+      align="center"
+      height="100%"
+      direction="column"
+      px="4"
+      className="text-center"
+    >
+      <Box className="h-1/4"></Box>
+      <Text size={{ initial: '6', md: '8' }} weight="bold" mb="4" as="div">
         Please check your email
-      </h1>
-      <h3>We have sent a sign-in link to your email address.</h3>
-    </div>
+      </Text>
+      <Text size="3" as="div">
+        We have sent a sign-in link to your email address.
+      </Text>
+    </Flex>
   );
 }

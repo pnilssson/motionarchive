@@ -4,6 +4,7 @@ import DesktopDay from './desktop-day';
 import MobileDay from './mobile-day';
 import dynamic from 'next/dynamic';
 import { getWorkouts } from '@/app/db/queries';
+import { Flex, Tooltip, Text, Grid, Box } from '@radix-ui/themes';
 const MobileDesktopSwitch = dynamic(
   () => import('@/app/components/mobile-desktop-switch'),
   {
@@ -85,29 +86,32 @@ export default async function Calendar({ date }: { date: Date }) {
 
   return (
     <>
-      <div className="flex items-baseline mb-6">
-        <div className="tooltip" data-tip="Previous month">
+      <Flex align={'center'} mb={'5'}>
+        <Tooltip content="Previous month">
           <Link href={`/archive/calendar/${getPreviousMonthDateParameter()}`}>
             {leftArrow()}
           </Link>
-        </div>
-        <h3 className="text-xl px-4">{`${monthName} ${year}`}</h3>
-        <div className="tooltip" data-tip="Next month">
+        </Tooltip>
+        <Text
+          size={{ initial: '3', md: '5' }}
+          mx={'3'}
+        >{`${monthName} ${year}`}</Text>
+        <Tooltip content="Next month">
           <Link href={`/archive/calendar/${getNextMonthDateParameter()}`}>
             {rightArrow()}
           </Link>
-        </div>
-      </div>
-      <div className="grid grid-cols-7 gap-2">
-        <p>Mon</p>
-        <p>Tue</p>
-        <p>Wed</p>
-        <p>Thu</p>
-        <p>Fri</p>
-        <p>Sat</p>
-        <p>Sun</p>
+        </Tooltip>
+      </Flex>
+      <Grid columns={'7'} gap={'2'}>
+        <Text>Mon</Text>
+        <Text>Tue</Text>
+        <Text>Wed</Text>
+        <Text>Thu</Text>
+        <Text>Fri</Text>
+        <Text>Sat</Text>
+        <Text>Sun</Text>
         {days.map((day, i) => (
-          <div
+          <Box
             key={i}
             className={clsx(
               'rounded-md',
@@ -127,9 +131,9 @@ export default async function Calendar({ date }: { date: Date }) {
                 mobile={<MobileDay day={day} month={date.getMonth()} />}
               />
             ) : null}
-          </div>
+          </Box>
         ))}
-      </div>
+      </Grid>
     </>
   );
 }

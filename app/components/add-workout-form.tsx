@@ -24,7 +24,6 @@ export default function Component({
   date: Date;
   workoutTypes: WorkoutTypeResponse[];
 }) {
-  const [type, setType] = useState(workoutTypes[0].name);
   const [state, action] = useFormState(addWorkout, {
     errors: [],
   });
@@ -50,7 +49,7 @@ export default function Component({
           </Box>
 
           <Box mb="2">
-            <Text as="div" size="2" weight="bold" mb="1">
+            <Text as="div" size="2" weight="bold" mb="2">
               Time
             </Text>
             <TextField.Root
@@ -59,24 +58,22 @@ export default function Component({
               type="number"
               name="time"
               placeholder="Time"
-            >
-              <TextField.Slot></TextField.Slot>
-            </TextField.Root>
+            ></TextField.Root>
           </Box>
           <ErrorMessages name="time" errors={state && state.errors} />
 
           <Box mb="4">
-            <Text as="div" size="2" weight="bold" mb="1">
+            <Text as="div" size="2" weight="bold" mb="2">
               Type
             </Text>
             <Select.Root
               size="3"
-              defaultValue={type}
-              onValueChange={setType}
+              required
+              defaultValue={workoutTypes[0].name}
               name="type"
             >
               <Select.Trigger />
-              <Select.Content>
+              <Select.Content position="popper">
                 {workoutTypes.map((type: WorkoutTypeResponse) => (
                   <Select.Item key={type._id} value={type.name}>
                     {type.name}
@@ -84,19 +81,15 @@ export default function Component({
                 ))}
               </Select.Content>
             </Select.Root>
-            <VisuallyHidden>
-              <TextField.Root size="3" type="text" name="type" value={type}>
-                <TextField.Slot></TextField.Slot>
-              </TextField.Root>
-            </VisuallyHidden>
           </Box>
           <ErrorMessages name="type" errors={state && state.errors} />
 
           <Box mb="4">
-            <Text as="div" size="2" weight="bold" mb="1">
+            <Text as="div" size="2" weight="bold" mb="2">
               Description
             </Text>
             <TextArea
+              size="3"
               resize="vertical"
               placeholder="Description"
               name="description"

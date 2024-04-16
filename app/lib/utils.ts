@@ -28,4 +28,4 @@ function dateToDateInput(date: Date): string {
     return `${year}-${month}-${day}`;
   }
 
-export { getMonthAndDayLink, getDayLink, getUrl,dateToDateInput }
+export { getMonthAndDayLink, getDayLink, getUrl, dateToDateInput }

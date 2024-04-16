@@ -3,6 +3,7 @@ import Link from 'next/link';
 import DesktopDay from './desktop-day';
 import MobileDay from './mobile-day';
 import dynamic from 'next/dynamic';
+import { getWorkouts } from '@/app/db/queries';
 const MobileDesktopSwitch = dynamic(
   () => import('@/app/components/mobile-desktop-switch'),
   {
@@ -11,6 +12,7 @@ const MobileDesktopSwitch = dynamic(
 );
 
 export default async function Calendar({ date }: { date: Date }) {
+  const workouts = await getWorkouts(date);
   var monthName = date.toLocaleString(undefined, { month: 'long' });
   var month = date.getMonth() + 1;
   var year = date.getFullYear();

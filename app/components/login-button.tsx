@@ -13,7 +13,7 @@ export default function Component({ session }: ComponentProps) {
   if (session) {
     return (
       <Tooltip content="Sign out">
-        <Button onClick={() => signOut()} color="gray" variant="soft">
+        <Button onClick={() => signOut()} variant="soft">
           <ExitIcon />
         </Button>
       </Tooltip>
@@ -21,7 +21,7 @@ export default function Component({ session }: ComponentProps) {
   }
   return (
     <Tooltip content="Sign in">
-      <Button onClick={() => signIn()}>
+      <Button onClick={() => signIn()} variant="soft">
         <EnterIcon />
       </Button>
     </Tooltip>

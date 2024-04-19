@@ -13,3 +13,5 @@
     --cursor-slider-thumb-active: grabbing;
     --cursor-switch: pointer;
   }
+
+  @import "@radix-ui/themes/styles.css";

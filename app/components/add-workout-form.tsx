@@ -9,13 +9,14 @@ import { dateToDateInput } from '@/app/lib/utils';
 import {
   Box,
   Card,
+  Flex,
   Select,
   Text,
   TextArea,
   TextField,
   VisuallyHidden,
 } from '@radix-ui/themes';
-import { useState } from 'react';
+import { AddWorkoutActionResponse } from '../types/workout';
 
 export default function Component({
   date,
@@ -24,9 +25,15 @@ export default function Component({
   date: Date;
   workoutTypes: WorkoutTypeResponse[];
 }) {
-  const [state, action] = useFormState(addWorkout, {
-    errors: [],
-  });
+  const [state, action] = useFormState(
+    (state: AddWorkoutActionResponse, formData: any) => {
+      return addWorkout(state, formData);
+    },
+    {
+      success: false,
+      errors: [],
+    }
+  );
 
   return (
     <Card>
@@ -56,13 +63,13 @@ export default function Component({
               size="3"
               required
               type="number"
-              name="time"
               placeholder="Time"
+              name="time"
             ></TextField.Root>
           </Box>
           <ErrorMessages name="time" errors={state && state.errors} />
 
-          <Box mb="4">
+          <Flex mb="4" direction="column">
             <Text as="div" size="2" weight="bold" mb="2">
               Type
             </Text>
@@ -73,7 +80,7 @@ export default function Component({
               name="type"
             >
               <Select.Trigger />
-              <Select.Content position="popper">
+              <Select.Content position="popper" style={{ maxHeight: 200 }}>
                 {workoutTypes.map((type: WorkoutTypeResponse) => (
                   <Select.Item key={type._id} value={type.name}>
                     {type.name}
@@ -81,7 +88,7 @@ export default function Component({
                 ))}
               </Select.Content>
             </Select.Root>
-          </Box>
+          </Flex>
           <ErrorMessages name="type" errors={state && state.errors} />
 
           <Box mb="4">

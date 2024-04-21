@@ -2,23 +2,21 @@
 
 import LoginButton from '@/app/components/login-button';
 import Link from 'next/link';
-import { useRef } from 'react';
 import { Session } from 'next-auth';
-import { Box, Button, DropdownMenu, Flex, TabNav } from '@radix-ui/themes';
+import { Button, DropdownMenu, Flex, TabNav } from '@radix-ui/themes';
 import { usePathname } from 'next/navigation';
-import MobileDesktopSwitch from './components/mobile-desktop-switch';
 import { HamburgerMenuIcon } from '@radix-ui/react-icons';
+import dynamic from 'next/dynamic';
+const MobileDesktopSwitch = dynamic(
+  () => import('@/app/components/mobile-desktop-switch'),
+  {
+    ssr: false,
+  }
+);
 
 export function Navbar({ session }: { session: Session | null }) {
   const today = new Date();
-  const checkboxRef = useRef<HTMLInputElement>(null);
   const pathname = usePathname();
-
-  const handleCheckboxClick = () => {
-    if (checkboxRef.current) {
-      checkboxRef.current.click();
-    }
-  };
 
   return (
     <>

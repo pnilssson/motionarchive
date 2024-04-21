@@ -5,6 +5,7 @@ import MobileDay from './mobile-day';
 import dynamic from 'next/dynamic';
 import { getWorkouts } from '@/app/db/queries';
 import { Flex, Tooltip, Text, Grid, Box } from '@radix-ui/themes';
+import { WorkoutResponse } from '@/app/types/workout';
 const MobileDesktopSwitch = dynamic(
   () => import('@/app/components/mobile-desktop-switch'),
   {
@@ -46,21 +47,21 @@ export default async function Calendar({ date }: { date: Date }) {
   }
 
   function isWeekend(day: number): boolean {
-    const dayOfWeek = getDayOfWeek(day).getDay();
+    const dayOfWeek = getDateOfDay(day).getDay();
     return dayOfWeek === 0 || dayOfWeek === 6;
   }
 
   function isToday(day: number): boolean {
     const today = new Date();
-    const dayOfWeek = getDayOfWeek(day);
+    const dateOfDay = getDateOfDay(day);
     return (
-      dayOfWeek.getDate() === today.getDate() &&
-      dayOfWeek.getMonth() === today.getMonth() &&
-      dayOfWeek.getFullYear() === today.getFullYear()
+      dateOfDay.getDate() === today.getDate() &&
+      dateOfDay.getMonth() === today.getMonth() &&
+      dateOfDay.getFullYear() === today.getFullYear()
     );
   }
 
-  function getDayOfWeek(day: number): Date {
+  function getDateOfDay(day: number): Date {
     return new Date(date.getFullYear(), date.getMonth(), day);
   }
 
@@ -82,6 +83,18 @@ export default async function Calendar({ date }: { date: Date }) {
       newYear += 1;
     }
     return `${newYear}/${newMonth}`;
+  }
+
+  function getWorkoutByDay(day: number) {
+    const dateOfDay = getDateOfDay(day);
+    const workoutsOfDay = workouts.filter((workout: WorkoutResponse) => {
+      return (
+        workout.date.getDate() === dateOfDay.getDate() &&
+        workout.date.getMonth() === dateOfDay.getMonth() &&
+        workout.date.getFullYear() === dateOfDay.getFullYear()
+      );
+    });
+    return workoutsOfDay;
   }
 
   return (
@@ -127,7 +140,13 @@ export default async function Calendar({ date }: { date: Date }) {
           >
             {day ? (
               <MobileDesktopSwitch
-                desktop={<DesktopDay day={day} month={date.getMonth()} />}
+                desktop={
+                  <DesktopDay
+                    day={day}
+                    month={date.getMonth()}
+                    workouts={getWorkoutByDay(day)}
+                  />
+                }
                 mobile={<MobileDay day={day} month={date.getMonth()} />}
               />
             ) : null}

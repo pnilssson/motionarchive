@@ -4,6 +4,7 @@ import AddWorkoutForm from '@/app/components/add-workout-form';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import { Box, Flex, Grid, Text } from '@radix-ui/themes';
+import AddWorkoutDialog from '@/app/components/add-workout-dialog';
 const MobileDesktopSwitch = dynamic(
   () => import('@/app/components/mobile-desktop-switch'),
   {

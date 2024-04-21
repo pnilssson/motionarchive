@@ -17,8 +17,10 @@ export default function Component({
     })
     .map((item) => item.message);
 
+  if (issues.length === 0) return null;
+
   return (
-    <Box m="2">
+    <Box mb="2">
       {issues.map((error, index) => (
         <Text color="red" key={index}>
           {error}

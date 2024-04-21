@@ -41,6 +41,7 @@ export default function SignIn() {
         </TextField.Root>
       </Box>
       <Button
+        className="w-80"
         size="3"
         onClick={() => {
           setLoading(true);

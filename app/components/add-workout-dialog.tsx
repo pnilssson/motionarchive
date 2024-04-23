@@ -71,9 +71,7 @@ export default function Page({
                   defaultValue={dateToDateInput(date)}
                   type="date"
                   name="date"
-                >
-                  <TextField.Slot></TextField.Slot>
-                </TextField.Root>
+                ></TextField.Root>
               </VisuallyHidden>
             </Box>
 
@@ -128,7 +126,7 @@ export default function Page({
 
           <Flex gap="3" mt="4" justify="end">
             <Dialog.Close>
-              <Button variant="soft" color="gray" size="3">
+              <Button variant="soft" color="gray" size="2">
                 Cancel
               </Button>
             </Dialog.Close>

@@ -49,9 +49,7 @@ export default function Component({
                 type="date"
                 name="date"
                 defaultValue={dateToDateInput(date)}
-              >
-                <TextField.Slot></TextField.Slot>
-              </TextField.Root>
+              ></TextField.Root>
             </VisuallyHidden>
           </Box>
 

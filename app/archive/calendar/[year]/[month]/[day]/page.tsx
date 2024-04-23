@@ -1,16 +1,8 @@
-import DailyOverview from './daily-overview';
-import { getTypes } from '@/app/db/queries';
-import AddWorkoutForm from '@/app/components/add-workout-form';
-import Link from 'next/link';
+import { getTypes, getWorkoutsForDay } from '@/app/db/queries';
 import dynamic from 'next/dynamic';
-import { Box, Flex, Grid, Text } from '@radix-ui/themes';
+import { Box, Card, Flex, Grid, Text } from '@radix-ui/themes';
 import AddWorkoutDialog from '@/app/components/add-workout-dialog';
-const MobileDesktopSwitch = dynamic(
-  () => import('@/app/components/mobile-desktop-switch'),
-  {
-    ssr: false,
-  }
-);
+import { WorkoutResponse } from '@/app/types/workout';
 
 export default async function Page({
   params,
@@ -21,18 +13,19 @@ export default async function Page({
     day: string;
   };
 }) {
-  const workoutTypes = await getTypes();
   const date = new Date(
     parseInt(params.year),
     parseInt(params.month) - 1,
     parseInt(params.day)
   );
+  const workoutTypes = await getTypes();
+  const workouts = await getWorkoutsForDay(date);
 
   return (
     <>
       <Flex justify={'between'}>
         <h1 className="text-2xl md:text-4xl font-bold mb-6">Overview</h1>
-        <Link href={''} className="hidden md:block"></Link>
+        <AddWorkoutDialog date={date} workoutTypes={workoutTypes} />
       </Flex>
       <Box mb="4">
         {' '}
@@ -45,15 +38,26 @@ export default async function Page({
           })}
         </Text>
       </Box>
-      <Grid columns={{ initial: '1', md: '2' }} gap="3" width="auto">
-        <MobileDesktopSwitch
-          mobile={<AddWorkoutForm date={date} workoutTypes={workoutTypes} />}
-          desktop={<DailyOverview />}
-        />
-        <MobileDesktopSwitch
-          mobile={<DailyOverview />}
-          desktop={<AddWorkoutForm date={date} workoutTypes={workoutTypes} />}
-        />
+      <Grid columns={{ initial: '1', md: '4' }} gap="2" width="auto">
+        {workouts.length > 0 ? (
+          <>
+            {workouts.map((workout: WorkoutResponse) => (
+              <Card key={workout._id} variant="surface">
+                <Text as="div" size="2" weight="bold">
+                  {workout.type}
+                </Text>
+                <Text as="div" color="gray" size="2" weight="light">
+                  {workout.time} min
+                </Text>
+                {workout.description ? (
+                  <Text as="div" size="2">
+                    {workout.description}
+                  </Text>
+                ) : null}
+              </Card>
+            ))}
+          </>
+        ) : null}
       </Grid>
     </>
   );

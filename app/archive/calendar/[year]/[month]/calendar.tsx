@@ -3,7 +3,7 @@ import Link from 'next/link';
 import DesktopDay from './desktop-day';
 import MobileDay from './mobile-day';
 import dynamic from 'next/dynamic';
-import { getWorkouts } from '@/app/db/queries';
+import { getWorkoutsForMonth } from '@/app/db/queries';
 import { Flex, Tooltip, Text, Grid, Box } from '@radix-ui/themes';
 import { WorkoutResponse } from '@/app/types/workout';
 const MobileDesktopSwitch = dynamic(
@@ -14,7 +14,7 @@ const MobileDesktopSwitch = dynamic(
 );
 
 export default async function Calendar({ date }: { date: Date }) {
-  const workouts = await getWorkouts(date);
+  const workouts = await getWorkoutsForMonth(date);
   var monthName = date.toLocaleString(undefined, { month: 'long' });
   var month = date.getMonth() + 1;
   var year = date.getFullYear();
@@ -124,20 +124,7 @@ export default async function Calendar({ date }: { date: Date }) {
         <Text>Sat</Text>
         <Text>Sun</Text>
         {days.map((day, i) => (
-          <Box
-            key={i}
-            className={clsx(
-              'rounded-md',
-              {
-                'bg-red-200': isWeekend(day) && !isToday(day),
-              },
-              {
-                'bg-gray-100': !isWeekend(day) && !isToday(day),
-              },
-              { 'bg-blue-200': isToday(day) },
-              { 'bg-transparent': day === null }
-            )}
-          >
+          <Box key={i}>
             {day ? (
               <MobileDesktopSwitch
                 desktop={

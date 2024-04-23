@@ -19,10 +19,10 @@ export default async function RootLayout({
 }>) {
   const session = await auth();
   return (
-    <html lang="en" data-theme="ingenium">
+    <html lang="en">
       <body className={`${inter.className} antialiased`}>
         <Theme accentColor="violet">
-          <Container>
+          <Container className="background">
             <Navbar session={session} />
             <Box className="h-[calc(100vh-56px)]">{children}</Box>
           </Container>

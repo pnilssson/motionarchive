@@ -2,7 +2,7 @@
 
 import { signIn, signOut } from 'next-auth/react';
 import { Session } from 'next-auth';
-import { Button, Tooltip } from '@radix-ui/themes';
+import { IconButton, Tooltip } from '@radix-ui/themes';
 import { EnterIcon, ExitIcon } from '@radix-ui/react-icons';
 
 interface ComponentProps {
@@ -13,17 +13,17 @@ export default function Component({ session }: ComponentProps) {
   if (session) {
     return (
       <Tooltip content="Sign out">
-        <Button onClick={() => signOut()} variant="soft">
+        <IconButton onClick={() => signOut()} variant="soft">
           <ExitIcon />
-        </Button>
+        </IconButton>
       </Tooltip>
     );
   }
   return (
     <Tooltip content="Sign in">
-      <Button onClick={() => signIn()} variant="soft">
+      <IconButton onClick={() => signIn()} variant="soft">
         <EnterIcon />
-      </Button>
+      </IconButton>
     </Tooltip>
   );
 }

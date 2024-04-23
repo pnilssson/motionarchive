@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { getMonthAndDayLink } from '@/app/lib/utils';
-import { Box, Flex } from '@radix-ui/themes';
+import { Card, Flex } from '@radix-ui/themes';
 
 export default function MobileDay({
   day,
@@ -10,9 +10,11 @@ export default function MobileDay({
   month: number;
 }) {
   return (
-    <Flex justify={'center'}>
-      <Link href={getMonthAndDayLink(month, day)} className="flex">
-        <Box p={'2'}>{day}</Box>
+    <Flex>
+      <Link href={getMonthAndDayLink(month, day)} className="w-full">
+        <Card>
+          <Flex justify="center">{day}</Flex>
+        </Card>
       </Link>
     </Flex>
   );

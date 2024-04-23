@@ -8,10 +8,8 @@ export default function Page() {
   const { pending } = useFormStatus();
   return (
     <Flex justify="end">
-      <Button type="submit" aria-disabled={pending} size="3">
-        <Spinner loading={pending}>
-          <PaperPlaneIcon /> Save
-        </Spinner>
+      <Button type="submit" aria-disabled={pending} size="2">
+        <Spinner loading={pending}>Save</Spinner>
       </Button>
     </Flex>
   );

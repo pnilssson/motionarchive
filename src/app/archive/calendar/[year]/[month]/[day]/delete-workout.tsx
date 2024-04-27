@@ -13,6 +13,7 @@ export default function Component({ id }: { id: string }) {
     await deleteWorkout(id);
     router.refresh();
   }
+
   return (
     <ConfirmModal
       title="Delete Workout"

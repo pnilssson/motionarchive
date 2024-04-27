@@ -5,6 +5,7 @@ import {
   Button,
   Dialog,
   Flex,
+  IconButton,
   Select,
   Text,
   TextArea,
@@ -19,11 +20,14 @@ import SubmitButton from './submit-button';
 import { useFormState } from 'react-dom';
 import { addWorkout } from '../db/actions';
 import { AddWorkoutActionResponse } from '../types/workout';
+import { PlusIcon } from '@radix-ui/react-icons';
 
-export default function Page({
+export default function Component({
+  triggerType = 'button',
   date,
   workoutTypes,
 }: {
+  triggerType?: 'button' | 'plus';
   date: Date;
   workoutTypes: WorkoutTypeResponse[];
 }) {
@@ -42,16 +46,24 @@ export default function Page({
     if (state.success) {
       setOpen(false);
     }
-  }, [state.success]);
+  }, [state]);
 
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
-      <Dialog.Trigger>
-        <Button>Add workout</Button>
-      </Dialog.Trigger>
+      {triggerType === 'button' ? (
+        <Dialog.Trigger>
+          <Button>Add workout</Button>
+        </Dialog.Trigger>
+      ) : (
+        <Dialog.Trigger>
+          <IconButton size="1" variant="soft">
+            <PlusIcon />
+          </IconButton>
+        </Dialog.Trigger>
+      )}
 
       <Dialog.Content maxWidth="450px">
-        <Dialog.Title>Add workout</Dialog.Title>
+        <Dialog.Title mb="2">Add workout</Dialog.Title>
         <Dialog.Description size="2" mb="4">
           On{' '}
           {date.toLocaleDateString(undefined, {
@@ -63,7 +75,7 @@ export default function Page({
         </Dialog.Description>
         <form action={action}>
           <Flex direction="column">
-            <Box mb="4">
+            <Box>
               <VisuallyHidden>
                 <TextField.Root
                   size="3"

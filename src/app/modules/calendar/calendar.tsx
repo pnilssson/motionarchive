@@ -1,12 +1,14 @@
-import Link from 'next/link';
-import { getWorkoutsForMonth } from '@/src/db/queries';
-import { Flex, Tooltip, Text, Grid, Box } from '@radix-ui/themes';
+import { getTypes, getWorkoutsForMonth } from '@/src/db/queries';
+import { Text, Grid, Box } from '@radix-ui/themes';
 import { WorkoutResponse } from '@/src/types/workout';
-import DayCard from './day-card';
-import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
+import CalendarNavigation from '../../archive/calendar/[year]/[month]/calendar-navigation';
+import { DayCard } from './card/day-card';
+import { Day } from './card/day';
 
 export default async function Calendar({ date }: { date: Date }) {
   const workouts = await getWorkoutsForMonth(date);
+  const workoutTypes = await getTypes();
+
   var monthName = date.toLocaleString(undefined, { month: 'long' });
   var month = date.getMonth() + 1;
   var year = date.getFullYear();
@@ -42,26 +44,6 @@ export default async function Calendar({ date }: { date: Date }) {
     return new Date(date.getFullYear(), date.getMonth(), day);
   }
 
-  function getPreviousMonthDateParameter() {
-    let newMonth = month - 1;
-    let newYear = year;
-    if (newMonth < 1) {
-      newMonth = 12;
-      newYear -= 1;
-    }
-    return `${newYear}/${newMonth}`;
-  }
-
-  function getNextMonthDateParameter() {
-    let newMonth = month + 1;
-    let newYear = year;
-    if (newMonth > 12) {
-      newMonth = 1;
-      newYear += 1;
-    }
-    return `${newYear}/${newMonth}`;
-  }
-
   function getWorkoutByDay(day: number) {
     const dateOfDay = getDateOfDay(day);
     const workoutsOfDay = workouts.filter((workout: WorkoutResponse) => {
@@ -76,38 +58,24 @@ export default async function Calendar({ date }: { date: Date }) {
 
   return (
     <>
-      <Flex align={'center'} mb={'5'}>
-        <Tooltip content="Previous month">
-          <Link href={`/archive/calendar/${getPreviousMonthDateParameter()}`}>
-            <ChevronLeftIcon />
-          </Link>
-        </Tooltip>
-        <Text
-          size={{ initial: '3', md: '5' }}
-          mx={'3'}
-        >{`${monthName} ${year}`}</Text>
-        <Tooltip content="Next month">
-          <Link href={`/archive/calendar/${getNextMonthDateParameter()}`}>
-            <ChevronRightIcon />
-          </Link>
-        </Tooltip>
-      </Flex>
+      <CalendarNavigation monthName={monthName} month={month} year={year} />
       <Grid columns={'7'} gap={'2'}>
-        <Text>Mon</Text>
-        <Text>Tue</Text>
-        <Text>Wed</Text>
-        <Text>Thu</Text>
-        <Text>Fri</Text>
-        <Text>Sat</Text>
-        <Text>Sun</Text>
+        <Text weight="medium">Mon</Text>
+        <Text weight="medium">Tue</Text>
+        <Text weight="medium">Wed</Text>
+        <Text weight="medium">Thu</Text>
+        <Text weight="medium">Fri</Text>
+        <Text weight="medium">Sat</Text>
+        <Text weight="medium">Sun</Text>
         {days.map((day, i) => (
           <Box key={i}>
             {day ? (
-              <DayCard
+              <Day
                 day={day}
                 month={month}
                 date={date}
                 workouts={getWorkoutByDay(day)}
+                workoutTypes={workoutTypes}
               />
             ) : null}
           </Box>

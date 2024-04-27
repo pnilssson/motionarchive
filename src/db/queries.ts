@@ -5,7 +5,7 @@ import { WorkoutResponse } from '../types/workout';
 
 export const getTypes = cache(async () => {
   const workoutTypes = await collections.workoutTypes();
-  const data = await workoutTypes.find({}).toArray();
+  const data = await workoutTypes.find({}).sort({ name: 1 }).toArray();
   return JSON.parse(JSON.stringify(data));
 });
 
@@ -52,7 +52,7 @@ const mapWorkoutData = (data: any[]): WorkoutResponse[] => {
   return data.map(
     (workout: any) =>
       ({
-        _id: workout._id,
+        _id: workout._id.toString(),
         userId: workout.userId,
         createdAt: workout.createdAt,
         updatedAt: workout.updatedAt,

@@ -6,11 +6,12 @@ import collections from './db';
 import { AddWorkoutActionResponse, WorkoutRequest } from '../types/workout';
 import { getSession } from '../lib/server-utils';
 import { promises as fs } from 'fs';
+import { ObjectId } from 'mongodb';
 
 const schema = z.object({
   userId: z.string(),
-  createdAt: z.date(),
-  updatedAt: z.date(),
+  createdAt: z.coerce.date(),
+  updatedAt: z.coerce.date().nullable(),
   type: z.string({ required_error: 'Type is required.' }),
   time: z.coerce
     .number({ required_error: 'Time is required.' })
@@ -27,10 +28,12 @@ async function addWorkout(
 ): Promise<AddWorkoutActionResponse> {
   const session = await getSession();
 
+  const now = new Date();
+  console.log(now);
   const request = {
     userId: session?.user?.userId,
-    createdAt: Date.now(),
-    updatedAt: Date.now(),
+    createdAt: now.toISOString(),
+    updatedAt: null,
     type: formData.get('type'),
     time: formData.get('time'),
     description: formData.get('description'),
@@ -38,6 +41,7 @@ async function addWorkout(
   };
 
   const validatedRequest = schema.safeParse(request);
+  console.log(validatedRequest);
   if (!validatedRequest.success) {
     return {
       success: validatedRequest.success,
@@ -53,6 +57,15 @@ async function addWorkout(
     errors: [],
   };
 }
+
+export const deleteWorkout = async (workoutId: string) => {
+  const session = await getSession();
+  const workouts = await collections.workout();
+  await workouts.deleteOne({
+    _id: new ObjectId(workoutId),
+    userId: session.user.userId,
+  });
+};
 
 function getActivityType(activitiesData: any, id: string) {
   switch (id) {

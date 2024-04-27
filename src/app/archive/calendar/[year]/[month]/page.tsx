@@ -1,5 +1,5 @@
 import { Box, Text } from '@radix-ui/themes';
-import Calendar from './calendar';
+import Calendar from '../../../../modules/calendar/calendar';
 
 export default async function Page({
   params,

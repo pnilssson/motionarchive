@@ -1,7 +1,9 @@
 import { getTypes, getWorkoutsForDay } from '@/src/db/queries';
-import { Box, Card, Flex, Grid, Text } from '@radix-ui/themes';
+import { Box, Card, Flex, Grid, IconButton, Text } from '@radix-ui/themes';
 import AddWorkoutDialog from '@/src/components/add-workout-dialog';
 import { WorkoutResponse } from '@/src/types/workout';
+import { TrashIcon } from '@radix-ui/react-icons';
+import DeleteWorkout from './delete-workout';
 
 export default async function Page({
   params,
@@ -42,12 +44,16 @@ export default async function Page({
           <>
             {workouts.map((workout: WorkoutResponse) => (
               <Card key={workout._id} variant="surface">
-                <Text as="div" size="2" weight="bold">
-                  {workout.type}
-                </Text>
-                <Text as="div" color="gray" size="2" weight="light">
+                <Flex justify="between" align="center">
+                  <Text as="div" size="2" weight="bold">
+                    {workout.type}
+                  </Text>
+                  <DeleteWorkout id={workout._id} />
+                </Flex>
+                <Text as="div" size="2" mb="2">
                   {workout.time} min
                 </Text>
+
                 {workout.description ? (
                   <Text
                     as="div"

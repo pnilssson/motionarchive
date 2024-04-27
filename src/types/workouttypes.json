@@ -172,10 +172,6 @@
     "subcategory": "Sport"
   },
   {
-    "name": "Rowing",
-    "subcategory": "Sport"
-  },
-  {
     "name": "Archery",
     "subcategory": "Sport"
   },
@@ -221,19 +217,19 @@
   },
   {
     "name": "Yoga",
-    "subcategory": "Flexibility"
+    "subcategory": "Mobility"
   },
   {
     "name": "Pilates",
-    "subcategory": "Flexibility"
+    "subcategory": "Mobility"
   },
   {
     "name": "Stretching",
-    "subcategory": "Flexibility"
+    "subcategory": "Mobility"
   },
   {
     "name": "Tai Chi",
-    "subcategory": "Flexibility"
+    "subcategory": "Mobility"
   },
   {
     "name": "Dance",

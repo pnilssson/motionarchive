@@ -4,6 +4,7 @@ import './globals.css';
 import { Navbar } from './navbar';
 import { auth } from './auth';
 import { Box, Container, Theme } from '@radix-ui/themes';
+import Script from 'next/script';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -28,6 +29,11 @@ export default async function RootLayout({
           </Container>
         </Theme>
       </body>
+      <Script
+        id="cookieyes"
+        type="text/javascript"
+        src="https://cdn-cookieyes.com/client_data/10577b4edf41f96f02b72272/script.js"
+      ></Script>
     </html>
   );
 }

@@ -6,6 +6,7 @@ import { Button, DropdownMenu, Flex, TabNav } from '@radix-ui/themes';
 import { usePathname } from 'next/navigation';
 import { HamburgerMenuIcon } from '@radix-ui/react-icons';
 import dynamic from 'next/dynamic';
+import LoginButton from '../components/login-button';
 const MobileDesktopSwitch = dynamic(
   () => import('@/src/components/mobile-desktop-switch'),
   {

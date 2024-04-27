@@ -2,14 +2,14 @@
 
 import AddWorkoutDialog from '@/src/components/add-workout-dialog';
 import { getMonthAndDayLink } from '@/src/lib/utils';
-import { Box, Flex, Badge, Text } from '@radix-ui/themes';
+import { Box, Flex, Text, Avatar, Tooltip, Card } from '@radix-ui/themes';
 import { useRouter } from 'next/navigation';
-import { DayCard } from './day-card';
 import { WorkoutResponse } from '@/src/types/workout';
 import { WorkoutTypeResponse } from '@/src/types/workoutType';
 import { useRef } from 'react';
+import { DayCard } from './day-card';
 
-export default function DesktopCard({
+export default function Component({
   day,
   month,
   date,
@@ -49,13 +49,13 @@ export default function DesktopCard({
     );
     switch (workoutType?.subcategory) {
       case 'Strength':
-        return 'red';
+        return 'bg-red-100 hover:bg-red-200';
       case 'Conditioning':
-        return 'blue';
+        return 'bg-blue-100 hover:bg-blue-200';
       case 'Mobility':
-        return 'green';
+        return 'bg-green-100 hover:bg-green-200';
       case 'Sport':
-        return 'orange';
+        return 'bg-fuchsia-100 hover:bg-fuchsia-200';
       default:
         return 'gray';
     }
@@ -81,11 +81,17 @@ export default function DesktopCard({
         <Flex gap="1" className="flex-wrap">
           {workouts
             ? workouts.map((workout) => (
-                <Flex key={workout._id}>
-                  <Badge color={getBadgeColor(workout.type)}>
-                    {workout.type}
-                  </Badge>
-                </Flex>
+                <Box key={workout._id}>
+                  <Tooltip content={workout.type}>
+                    <Avatar
+                      size="2"
+                      radius="full"
+                      variant="soft"
+                      className={`${getBadgeColor(workout.type)}`}
+                      fallback={workout.type.substring(0, 1)}
+                    ></Avatar>
+                  </Tooltip>
+                </Box>
               ))
             : null}
         </Flex>

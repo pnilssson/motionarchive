@@ -1,14 +1,14 @@
 import { WorkoutResponse } from '@/src/types/workout';
 import dynamic from 'next/dynamic';
 import { WorkoutTypeResponse } from '@/src/types/workoutType';
-import { MobileCard } from './mobile-card';
+import DayMobile from './day-mobile';
 const MobileDesktopSwitch = dynamic(
   () => import('@/src/components/mobile-desktop-switch'),
   {
     ssr: false,
   }
 );
-const DesktopCard = dynamic(() => import('./desktop-card'), {
+const DayDesktop = dynamic(() => import('./day-desktop'), {
   ssr: false,
 });
 
@@ -25,16 +25,24 @@ export async function Day({
   workouts: WorkoutResponse[];
   workoutTypes: WorkoutTypeResponse[];
 }) {
+  function getDateOfDay(day: number): Date {
+    return new Date(date.getFullYear(), date.getMonth(), day);
+  }
   return (
     <MobileDesktopSwitch
       mobile={
-        <MobileCard day={day} month={month} date={date} workouts={workouts} />
-      }
-      desktop={
-        <DesktopCard
+        <DayMobile
           day={day}
           month={month}
-          date={date}
+          date={getDateOfDay(day)}
+          workouts={workouts}
+        />
+      }
+      desktop={
+        <DayDesktop
+          day={day}
+          month={month}
+          date={getDateOfDay(day)}
           workouts={workouts}
           workoutTypes={workoutTypes}
         />

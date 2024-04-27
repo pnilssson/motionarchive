@@ -16,11 +16,6 @@ export async function DayCard({
     return new Date(date.getFullYear(), date.getMonth(), day);
   }
 
-  function isWeekend(day: number): boolean {
-    const dayOfWeek = getDateOfDay(day).getDay();
-    return dayOfWeek === 0 || dayOfWeek === 6;
-  }
-
   function isToday(day: number): boolean {
     const today = new Date();
     const dateOfDay = getDateOfDay(day);
@@ -33,10 +28,7 @@ export async function DayCard({
   return (
     <Card
       className={clsx(classes && `${classes}`, {
-        'bg-red-200': isWeekend(day) && !isToday(day),
-        'bg-gray-100': !isWeekend(day) && !isToday(day),
-        'bg-blue-200': isToday(day),
-        'bg-transparent': day === null,
+        'bg-blue-400': isToday(day),
       })}
     >
       {children}

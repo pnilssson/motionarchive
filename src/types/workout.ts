@@ -4,6 +4,7 @@ export interface WorkoutResponse extends Audit {
   _id: string;
   userId: string;
   type: string;
+  subCategory: string;
   time: number;
   description: string;
   date: Date;

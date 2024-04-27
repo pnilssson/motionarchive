@@ -1,0 +1,18 @@
+{
+  "Activities": [
+    {
+      "_id": "145772",
+      "_type": "sport",
+      "_delete_id": "0",
+      "_intensity_factor": "19",
+      "__cdata": "Wrestling"
+    },
+    {
+      "_id": "188162",
+      "_type": "sport",
+      "_delete_id": "0",
+      "_intensity_factor": "6",
+      "__cdata": "Crosspass"
+    }
+  ]
+}

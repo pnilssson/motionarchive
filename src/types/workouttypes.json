@@ -4,6 +4,34 @@
     "subcategory": "Conditioning"
   },
   {
+    "name": "Cardio",
+    "subcategory": "Conditioning"
+  },
+  {
+    "name": "Badminton",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Padel",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Thai Boxing",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Walk",
+    "subcategory": "Conditioning"
+  },
+  {
+    "name": "Floorball",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Functional Fitness",
+    "subcategory": "Sport"
+  },
+  {
     "name": "Rowing",
     "subcategory": "Conditioning"
   },

@@ -15,34 +15,26 @@ const DayDesktop = dynamic(() => import('./day-desktop'), {
 export async function Day({
   day,
   month,
-  date,
+  year,
   workouts,
   workoutTypes,
 }: {
   day: number;
   month: number;
-  date: Date;
+  year: number;
   workouts: WorkoutResponse[];
   workoutTypes: WorkoutTypeResponse[];
 }) {
-  function getDateOfDay(day: number): Date {
-    return new Date(date.getFullYear(), date.getMonth(), day);
-  }
   return (
     <MobileDesktopSwitch
       mobile={
-        <DayMobile
-          day={day}
-          month={month}
-          date={getDateOfDay(day)}
-          workouts={workouts}
-        />
+        <DayMobile day={day} month={month} year={year} workouts={workouts} />
       }
       desktop={
         <DayDesktop
           day={day}
           month={month}
-          date={getDateOfDay(day)}
+          year={year}
           workouts={workouts}
           workoutTypes={workoutTypes}
         />

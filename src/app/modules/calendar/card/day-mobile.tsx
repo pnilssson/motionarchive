@@ -8,12 +8,12 @@ import { DayCard } from './day-card';
 export default function Component({
   day,
   month,
-  date,
+  year,
   workouts,
 }: {
   day: number;
   month: number;
-  date: Date;
+  year: number;
   workouts: WorkoutResponse[];
 }) {
   return (
@@ -21,7 +21,8 @@ export default function Component({
       <Link href={getMonthAndDayLink(month, day)} className="w-full">
         <DayCard
           day={day}
-          date={date}
+          month={month}
+          year={year}
           classes={workouts.length > 0 ? 'bg-violet-400' : ''}
         >
           <Flex justify="center">

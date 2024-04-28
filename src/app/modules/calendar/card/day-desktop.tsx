@@ -12,13 +12,13 @@ import { DayCard } from './day-card';
 export default function Component({
   day,
   month,
-  date,
+  year,
   workouts,
   workoutTypes,
 }: {
   day: number;
   month: number;
-  date: Date;
+  year: number;
   workouts: WorkoutResponse[];
   workoutTypes: WorkoutTypeResponse[];
 }) {
@@ -36,7 +36,6 @@ export default function Component({
       desktopCardRef.current &&
       e.target instanceof Node &&
       desktopCardRef.current.contains(e.target as Node);
-    console.log(isAddWorkoutButton);
 
     if (!isAddWorkoutButton && desktopCardButton) {
       router.push(getMonthAndDayLink(month, day));
@@ -67,12 +66,14 @@ export default function Component({
       onClick={handleCardClick}
       className="cursor-pointer"
     >
-      <DayCard day={day} date={date} classes="min-h-24 h-full">
+      <DayCard day={day} month={month} year={year} classes="min-h-24 h-full">
         <Flex justify="between" mb="2">
           <Text weight="medium">{day}</Text>
           <Box ref={addWorkoutButtonRef}>
             <AddWorkoutDialog
-              date={date}
+              day={day}
+              month={month}
+              year={year}
               workoutTypes={workoutTypes}
               triggerType="plus"
             />

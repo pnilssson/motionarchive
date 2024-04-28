@@ -9,57 +9,56 @@ export const getTypes = cache(async () => {
   return JSON.parse(JSON.stringify(data));
 });
 
-export const getWorkoutsForMonth = cache(async (date: Date) => {
-  const session = await getSession();
-  const workouts = await collections.workout();
-  const startDate = new Date(date.getFullYear(), date.getMonth(), 1);
-  const endDate = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-  const data = await workouts
-    .find({
-      date: { $gte: startDate, $lte: endDate },
-      userId: session.user.userId,
-    })
-    .toArray();
+export const getWorkoutsForMonth = cache(
+  async (year: number, month: number) => {
+    const session = await getSession();
+    const workouts = await collections.workout();
+    const data = await workouts
+      .find({
+        year: year,
+        month: month,
+        userId: session.user.userId,
+      })
+      .toArray();
 
-  const mappedData: WorkoutResponse[] = mapWorkoutData(data);
+    const mappedData: WorkoutResponse[] = mapWorkoutData(data);
 
-  return mappedData;
-});
+    return mappedData;
+  }
+);
 
-export const getWorkoutsForDay = cache(async (date: Date) => {
-  const session = await getSession();
-  const workouts = await collections.workout();
+export const getWorkoutsForDay = cache(
+  async (year: number, month: number, day: number) => {
+    const session = await getSession();
+    const workouts = await collections.workout();
 
-  const startOfDay = new Date(date);
-  startOfDay.setHours(0, 0, 0, 0);
+    const data = await workouts
+      .find({
+        year: year,
+        month: month,
+        day: day,
+        userId: session.user.userId,
+      })
+      .toArray();
 
-  const endOfDay = new Date(date);
-  endOfDay.setHours(23, 59, 59, 99);
+    const mappedData: WorkoutResponse[] = mapWorkoutData(data);
 
-  const data = await workouts
-    .find({
-      date: { $gte: startOfDay, $lte: endOfDay },
-      userId: session.user.userId,
-    })
-    .toArray();
-
-  const mappedData: WorkoutResponse[] = mapWorkoutData(data);
-
-  return mappedData;
-});
+    return mappedData;
+  }
+);
 
 const mapWorkoutData = (data: any[]): WorkoutResponse[] => {
   return data.map(
-    (workout: any) =>
+    (workout: WorkoutResponse) =>
       ({
         _id: workout._id.toString(),
         userId: workout.userId,
-        createdAt: workout.createdAt,
-        updatedAt: workout.updatedAt,
         type: workout.type,
         time: workout.time,
         description: workout.description,
-        date: new Date(workout.date),
+        year: workout.year,
+        month: workout.month,
+        day: workout.day,
       } as WorkoutResponse)
   );
 };

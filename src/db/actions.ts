@@ -7,11 +7,10 @@ import { AddWorkoutActionResponse, WorkoutRequest } from '../types/workout';
 import { getSession } from '../lib/server-utils';
 import { promises as fs } from 'fs';
 import { ObjectId } from 'mongodb';
+import { dateToDateInput } from '../lib/utils';
 
 const schema = z.object({
   userId: z.string(),
-  createdAt: z.coerce.date(),
-  updatedAt: z.coerce.date().nullable(),
   type: z.string({ required_error: 'Type is required.' }),
   time: z.coerce
     .number({ required_error: 'Time is required.' })
@@ -28,16 +27,12 @@ async function addWorkout(
 ): Promise<AddWorkoutActionResponse> {
   const session = await getSession();
 
-  const now = new Date();
-  console.log(now);
   const request = {
     userId: session?.user?.userId,
-    createdAt: now.toISOString(),
-    updatedAt: null,
     type: formData.get('type'),
     time: formData.get('time'),
     description: formData.get('description'),
-    date: formData.get('date'),
+    date: dateToDateInput(formData.get('date') as unknown as Date),
   };
 
   const validatedRequest = schema.safeParse(request);
@@ -139,14 +134,14 @@ async function importWorkouts() {
 
     const request: WorkoutRequest = {
       userId: session?.user?.userId,
-      createdAt: new Date(workout._created_at),
-      updatedAt: undefined,
       type: capitalizeFirstLetter(type),
       time: workout.Time,
       description: workout.Comment.replaceAll('&ouml;', 'ö')
         .replaceAll('&aring;', 'å')
         .replaceAll('&auml;', 'ä'),
-      date: new Date(workout._date),
+      year: new Date(workout._date).getFullYear(),
+      month: new Date(workout._date).getMonth() + 1,
+      day: new Date(workout._date).getDate(),
     };
     const workouts = await collections.workout();
     await workouts.insertOne(request);

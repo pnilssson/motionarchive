@@ -3,17 +3,19 @@ import clsx from 'clsx';
 
 export async function DayCard({
   day,
-  date,
+  month,
+  year,
   children,
   classes,
 }: {
   day: number;
-  date: Date;
+  month: number;
+  year: number;
   children: React.ReactNode;
   classes?: string;
 }) {
   function getDateOfDay(day: number): Date {
-    return new Date(date.getFullYear(), date.getMonth(), day);
+    return new Date(year, month, day);
   }
 
   function isToday(day: number): boolean {

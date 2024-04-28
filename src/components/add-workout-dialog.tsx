@@ -14,7 +14,6 @@ import {
 } from '@radix-ui/themes';
 import { WorkoutTypeResponse } from '../types/workoutType';
 import { useEffect, useState } from 'react';
-import { dateToDateInput } from '../lib/utils';
 import ErrorMessages from './error-messages';
 import SubmitButton from './submit-button';
 import { useFormState } from 'react-dom';
@@ -23,12 +22,16 @@ import { AddWorkoutActionResponse } from '../types/workout';
 import { PlusIcon } from '@radix-ui/react-icons';
 
 export default function Component({
+  day,
+  month,
+  year,
   triggerType = 'button',
-  date,
   workoutTypes,
 }: {
+  day: number;
+  month: number;
+  year: number;
   triggerType?: 'button' | 'plus';
-  date: Date;
   workoutTypes: WorkoutTypeResponse[];
 }) {
   const [state, action] = useFormState(
@@ -66,7 +69,7 @@ export default function Component({
         <Dialog.Title mb="2">Add workout</Dialog.Title>
         <Dialog.Description size="2" mb="4">
           On{' '}
-          {date.toLocaleDateString(undefined, {
+          {new Date(year, month, day).toLocaleDateString(undefined, {
             weekday: 'short',
             year: 'numeric',
             month: 'long',
@@ -80,7 +83,7 @@ export default function Component({
                 <TextField.Root
                   size="3"
                   required
-                  defaultValue={dateToDateInput(date)}
+                  defaultValue={`${year}-${month}-${day}`}
                   type="date"
                   name="date"
                 ></TextField.Root>

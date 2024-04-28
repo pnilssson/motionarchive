@@ -1,8 +1,7 @@
 import { getTypes, getWorkoutsForDay } from '@/src/db/queries';
-import { Box, Card, Flex, Grid, IconButton, Text } from '@radix-ui/themes';
+import { Box, Card, Flex, Grid, Text } from '@radix-ui/themes';
 import AddWorkoutDialog from '@/src/components/add-workout-dialog';
 import { WorkoutResponse } from '@/src/types/workout';
-import { TrashIcon } from '@radix-ui/react-icons';
 import DeleteWorkout from './delete-workout';
 
 export default async function Page({
@@ -14,24 +13,27 @@ export default async function Page({
     day: string;
   };
 }) {
-  const date = new Date(
-    parseInt(params.year),
-    parseInt(params.month) - 1,
-    parseInt(params.day)
-  );
+  const year = parseInt(params.year);
+  const month = parseInt(params.month);
+  const day = parseInt(params.day);
   const workoutTypes = await getTypes();
-  const workouts = await getWorkoutsForDay(date);
+  const workouts = await getWorkoutsForDay(year, month, day);
 
   return (
     <>
       <Flex justify={'between'}>
         <h1 className="text-2xl md:text-4xl font-bold mb-6">Overview</h1>
-        <AddWorkoutDialog date={date} workoutTypes={workoutTypes} />
+        <AddWorkoutDialog
+          day={day}
+          month={month}
+          year={year}
+          workoutTypes={workoutTypes}
+        />
       </Flex>
       <Box mb="4">
         {' '}
         <Text size={'5'}>
-          {date.toLocaleDateString(undefined, {
+          {new Date(year, month, day).toLocaleDateString(undefined, {
             weekday: 'short',
             year: 'numeric',
             month: 'long',

@@ -2,16 +2,21 @@ import { getTypes, getWorkoutsForMonth } from '@/src/db/queries';
 import { Text, Grid, Box } from '@radix-ui/themes';
 import { WorkoutResponse } from '@/src/types/workout';
 import CalendarNavigation from '../../archive/calendar/[year]/[month]/calendar-navigation';
-import { DayCard } from './card/day-card';
 import { Day } from './card/day';
+import Import from '@/src/components/import';
 
-export default async function Calendar({ date }: { date: Date }) {
-  const workouts = await getWorkoutsForMonth(date);
+export default async function Calendar({
+  year,
+  month,
+}: {
+  year: number;
+  month: number;
+}) {
+  const workouts = await getWorkoutsForMonth(year, month);
   const workoutTypes = await getTypes();
 
-  var monthName = date.toLocaleString(undefined, { month: 'long' });
-  var month = date.getMonth() + 1;
-  var year = date.getFullYear();
+  const date = new Date(year, month - 1, 1);
+  const monthName = date.toLocaleString(undefined, { month: 'long' });
   let days = setDays();
 
   function setDays() {
@@ -40,17 +45,10 @@ export default async function Calendar({ date }: { date: Date }) {
     return [...Array(offset).fill(null), ...daysArray];
   }
 
-  function getDateOfDay(day: number): Date {
-    return new Date(date.getFullYear(), date.getMonth(), day);
-  }
-
   function getWorkoutByDay(day: number) {
-    const dateOfDay = getDateOfDay(day);
     const workoutsOfDay = workouts.filter((workout: WorkoutResponse) => {
       return (
-        workout.date.getDate() === dateOfDay.getDate() &&
-        workout.date.getMonth() === dateOfDay.getMonth() &&
-        workout.date.getFullYear() === dateOfDay.getFullYear()
+        workout.day === day && workout.month === month && workout.year === year
       );
     });
     return workoutsOfDay;
@@ -59,6 +57,7 @@ export default async function Calendar({ date }: { date: Date }) {
   return (
     <>
       <CalendarNavigation monthName={monthName} month={month} year={year} />
+      <Import />
       <Grid columns={'7'} gap={'2'}>
         <Text weight="medium">Mon</Text>
         <Text weight="medium">Tue</Text>
@@ -73,7 +72,7 @@ export default async function Calendar({ date }: { date: Date }) {
               <Day
                 day={day}
                 month={month}
-                date={date}
+                year={year}
                 workouts={getWorkoutByDay(day)}
                 workoutTypes={workoutTypes}
               />

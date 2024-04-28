@@ -9,14 +9,12 @@ export default async function Page({
     month: string;
   };
 }) {
-  const date = new Date(parseInt(params.year), parseInt(params.month) - 1, 1);
-
   return (
     <Box>
       <Text size={{ initial: '6', md: '8' }} weight="bold" mb="4" as="div">
         Calendar
       </Text>
-      <Calendar date={date} />
+      <Calendar month={parseInt(params.month)} year={parseInt(params.year)} />
     </Box>
   );
 }

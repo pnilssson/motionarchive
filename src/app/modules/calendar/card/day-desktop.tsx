@@ -42,24 +42,6 @@ export default function Component({
     }
   }
 
-  function getBadgeColor(workoutTypeName: string): string {
-    const workoutType = workoutTypes.find(
-      (type) => type.name === workoutTypeName
-    );
-    switch (workoutType?.subcategory) {
-      case 'Strength':
-        return 'bg-red-100 hover:bg-red-200';
-      case 'Conditioning':
-        return 'bg-blue-100 hover:bg-blue-200';
-      case 'Mobility':
-        return 'bg-green-100 hover:bg-green-200';
-      case 'Sport':
-        return 'bg-fuchsia-100 hover:bg-fuchsia-200';
-      default:
-        return 'gray';
-    }
-  }
-
   return (
     <Box
       ref={desktopCardRef}
@@ -88,7 +70,6 @@ export default function Component({
                       size="2"
                       radius="full"
                       variant="soft"
-                      className={`${getBadgeColor(workout.type)}`}
                       fallback={workout.type.substring(0, 1)}
                     ></Avatar>
                   </Tooltip>

@@ -14,23 +14,19 @@ export async function DayCard({
   children: React.ReactNode;
   classes?: string;
 }) {
-  function getDateOfDay(day: number): Date {
-    return new Date(year, month, day);
-  }
-
-  function isToday(day: number): boolean {
+  function isToday(): boolean {
     const today = new Date();
-    const dateOfDay = getDateOfDay(day);
     return (
-      dateOfDay.getDate() === today.getDate() &&
-      dateOfDay.getMonth() === today.getMonth() &&
-      dateOfDay.getFullYear() === today.getFullYear()
+      day === today.getDate() &&
+      month === today.getMonth() + 1 &&
+      year === today.getFullYear()
     );
   }
+
   return (
     <Card
       className={clsx(classes && `${classes}`, {
-        'bg-blue-400': isToday(day),
+        'bg-blue-300': isToday(),
       })}
     >
       {children}

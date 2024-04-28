@@ -23,7 +23,7 @@ export default function Component({
           day={day}
           month={month}
           year={year}
-          classes={workouts.length > 0 ? 'bg-violet-400' : ''}
+          classes={workouts.length > 0 ? 'bg-violet-300' : ''}
         >
           <Flex justify="center">
             <Text weight="medium">{day}</Text>

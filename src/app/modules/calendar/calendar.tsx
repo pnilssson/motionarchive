@@ -3,7 +3,6 @@ import { Text, Grid, Box } from '@radix-ui/themes';
 import { WorkoutResponse } from '@/src/types/workout';
 import CalendarNavigation from '../../archive/calendar/[year]/[month]/calendar-navigation';
 import { Day } from './card/day';
-import Import from '@/src/components/import';
 
 export default async function Calendar({
   year,
@@ -57,7 +56,6 @@ export default async function Calendar({
   return (
     <>
       <CalendarNavigation monthName={monthName} month={month} year={year} />
-      <Import />
       <Grid columns={'7'} gap={'2'}>
         <Text weight="medium">Mon</Text>
         <Text weight="medium">Tue</Text>

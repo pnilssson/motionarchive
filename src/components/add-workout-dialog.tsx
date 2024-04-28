@@ -20,6 +20,7 @@ import { useFormState } from 'react-dom';
 import { addWorkout } from '../db/actions';
 import { AddWorkoutActionResponse } from '../types/workout';
 import { PlusIcon } from '@radix-ui/react-icons';
+import { dateToDateInput } from '../lib/utils';
 
 export default function Component({
   day,
@@ -83,9 +84,23 @@ export default function Component({
                 <TextField.Root
                   size="3"
                   required
-                  defaultValue={`${year}-${month}-${day}`}
-                  type="date"
-                  name="date"
+                  type="number"
+                  name="year"
+                  value={year}
+                ></TextField.Root>
+                <TextField.Root
+                  size="3"
+                  required
+                  type="number"
+                  name="month"
+                  value={month}
+                ></TextField.Root>
+                <TextField.Root
+                  size="3"
+                  required
+                  type="number"
+                  name="day"
+                  value={day}
                 ></TextField.Root>
               </VisuallyHidden>
             </Box>

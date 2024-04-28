@@ -2,7 +2,7 @@
 
 import AddWorkoutDialog from '@/src/components/add-workout-dialog';
 import { getMonthAndDayLink } from '@/src/lib/utils';
-import { Box, Flex, Text, Avatar, Tooltip, Card } from '@radix-ui/themes';
+import { Box, Flex, Text, Avatar, Tooltip } from '@radix-ui/themes';
 import { useRouter } from 'next/navigation';
 import { WorkoutResponse } from '@/src/types/workout';
 import { WorkoutTypeResponse } from '@/src/types/workoutType';
@@ -43,41 +43,43 @@ export default function Component({
   }
 
   return (
-    <Box
-      ref={desktopCardRef}
-      onClick={handleCardClick}
-      className="cursor-pointer"
-    >
-      <DayCard day={day} month={month} year={year} classes="min-h-24 h-full">
-        <Flex justify="between" mb="2">
-          <Text weight="medium">{day}</Text>
-          <Box ref={addWorkoutButtonRef}>
-            <AddWorkoutDialog
-              day={day}
-              month={month}
-              year={year}
-              workoutTypes={workoutTypes}
-              triggerType="plus"
-            />
-          </Box>
-        </Flex>
-        <Flex gap="1" className="flex-wrap">
-          {workouts
-            ? workouts.map((workout) => (
-                <Box key={workout._id}>
-                  <Tooltip content={workout.type}>
-                    <Avatar
-                      size="2"
-                      radius="full"
-                      variant="soft"
-                      fallback={workout.type.substring(0, 1)}
-                    ></Avatar>
-                  </Tooltip>
-                </Box>
-              ))
-            : null}
-        </Flex>
-      </DayCard>
-    </Box>
+    <>
+      <Box
+        ref={desktopCardRef}
+        onClick={handleCardClick}
+        className="cursor-pointer"
+      >
+        <DayCard day={day} month={month} year={year} classes="min-h-24 h-full">
+          <Flex justify="between" mb="2">
+            <Text weight="medium">{day}</Text>
+            <Box ref={addWorkoutButtonRef}>
+              <AddWorkoutDialog
+                day={day}
+                month={month}
+                year={year}
+                workoutTypes={workoutTypes}
+                triggerType="plus"
+              />
+            </Box>
+          </Flex>
+          <Flex gap="1" className="flex-wrap">
+            {workouts
+              ? workouts.map((workout) => (
+                  <Box key={workout._id}>
+                    <Tooltip content={workout.type}>
+                      <Avatar
+                        size="2"
+                        radius="full"
+                        variant="soft"
+                        fallback={workout.type.substring(0, 1)}
+                      ></Avatar>
+                    </Tooltip>
+                  </Box>
+                ))
+              : null}
+          </Flex>
+        </DayCard>
+      </Box>
+    </>
   );
 }

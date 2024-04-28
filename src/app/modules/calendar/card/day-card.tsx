@@ -26,7 +26,7 @@ export async function DayCard({
   return (
     <Card
       className={clsx(classes && `${classes}`, {
-        'bg-blue-300': isToday(),
+        'bg-blue-200': isToday(),
       })}
     >
       {children}

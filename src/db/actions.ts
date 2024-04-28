@@ -7,7 +7,6 @@ import { AddWorkoutActionResponse, WorkoutRequest } from '../types/workout';
 import { getSession } from '../lib/server-utils';
 import { promises as fs } from 'fs';
 import { ObjectId } from 'mongodb';
-import { dateToDateInput } from '../lib/utils';
 
 const schema = z.object({
   userId: z.string(),
@@ -18,7 +17,9 @@ const schema = z.object({
   description: z
     .string({ required_error: 'Description is required.' })
     .max(4000, { message: 'Description must be less than 4000 characters.' }),
-  date: z.coerce.date({ required_error: 'Date is required.' }),
+  year: z.coerce.number({ required_error: 'Date is required.' }),
+  month: z.coerce.number({ required_error: 'Date is required.' }),
+  day: z.coerce.number({ required_error: 'Date is required.' }),
 });
 
 async function addWorkout(
@@ -32,7 +33,9 @@ async function addWorkout(
     type: formData.get('type'),
     time: formData.get('time'),
     description: formData.get('description'),
-    date: dateToDateInput(formData.get('date') as unknown as Date),
+    year: formData.get('year'),
+    month: formData.get('month'),
+    day: formData.get('day'),
   };
 
   const validatedRequest = schema.safeParse(request);

@@ -8,7 +8,7 @@ export default async function Component() {
       <Flex py="6">
         <Text size="2">
           Created by{' '}
-          <Link href="https://pnilssson.dev" weight="medium">
+          <Link href="https://pnilssson.dev" weight="medium" target="_blank">
             Pär Nilsson
           </Link>
         </Text>

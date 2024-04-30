@@ -31,7 +31,7 @@ export default function Home() {
           <Card className="shadow-md max-w-[960px]">
             <Inset>
               <Image
-                src={'/calendar.jpg'}
+                src={'/calendar_example.jpg'}
                 alt="calendar"
                 width={1177}
                 height={718}

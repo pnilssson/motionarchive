@@ -1,9 +1,8 @@
 import { getMonthAndDayLink } from '@/src/lib/utils';
-import { WorkoutResponse } from '@/src/types/workout';
-import { Card, Flex, Text } from '@radix-ui/themes';
-import clsx from 'clsx';
+import { Flex, Text } from '@radix-ui/themes';
 import Link from 'next/link';
 import { DayCard } from './day-card';
+import { WorkoutResponse } from '@/src/types/types';
 
 export default function Component({
   day,

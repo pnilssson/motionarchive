@@ -43,7 +43,7 @@ function getActivityType(activitiesData: any, id: string) {
       return 'Functional Fitness';
   }
   const activity = activitiesData.Activities.find(
-    (activity: any) => activity._id === id
+    (activity: any) => activity._id === id,
   );
   if (activity && activity.__cdata) {
     if (activity.__cdata == 'cardiogym') {
@@ -58,11 +58,11 @@ export async function importWorkouts() {
 
   const workoutFile = await fs.readFile(
     process.cwd() + '/src/types/workouts.json',
-    'utf8'
+    'utf8',
   );
   const activitiesFile = await fs.readFile(
     process.cwd() + '/src/types/activities.json',
-    'utf8'
+    'utf8',
   );
   const workoutData = JSON.parse(workoutFile);
   const activitiesData = JSON.parse(activitiesFile);
@@ -99,11 +99,11 @@ export async function checkTypes() {
 
   workouts.forEach(async (workout: any) => {
     const typeExists = workoutTypes.some(
-      (type: any) => type.name === workout.type
+      (type: any) => type.name === workout.type,
     );
     if (!typeExists) {
       console.log(
-        `Workout type "${workout.type}" does not exist in workout_type collection.`
+        `Workout type "${workout.type}" does not exist in workout_type collection.`,
       );
     }
   });

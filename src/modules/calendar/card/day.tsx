@@ -5,7 +5,7 @@ const MobileDesktopSwitch = dynamic(
   () => import('@/src/components/mobile-desktop-switch'),
   {
     ssr: false,
-  }
+  },
 );
 const DayDesktop = dynamic(() => import('./day-desktop'), {
   ssr: false,

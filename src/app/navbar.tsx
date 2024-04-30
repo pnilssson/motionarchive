@@ -11,7 +11,7 @@ const MobileDesktopSwitch = dynamic(
   () => import('@/src/components/mobile-desktop-switch'),
   {
     ssr: false,
-  }
+  },
 );
 
 export function Navbar({ session }: { session: Session | null }) {

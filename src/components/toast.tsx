@@ -13,7 +13,7 @@ export function showSuccessToast(message: string) {
     {
       duration: 3000,
       position: 'bottom-right',
-    }
+    },
   );
 }
 
@@ -28,6 +28,6 @@ export function showErrorToast(message: string) {
     {
       duration: 3000,
       position: 'bottom-right',
-    }
+    },
   );
 }

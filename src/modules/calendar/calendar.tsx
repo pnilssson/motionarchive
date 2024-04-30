@@ -22,7 +22,7 @@ export default async function Calendar({
     const daysInMonth = new Date(
       date.getFullYear(),
       date.getMonth() + 1,
-      0
+      0,
     ).getDate();
     const firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
     let offset = firstDayOfMonth.getDay(); // Get the day of the week for the first day
@@ -37,7 +37,7 @@ export default async function Calendar({
     // Generate an array of days in the month
     const daysArray = Array.from(
       { length: daysInMonth },
-      (_, index) => index + 1
+      (_, index) => index + 1,
     );
 
     // Add empty days to the beginning of the array based on the offset

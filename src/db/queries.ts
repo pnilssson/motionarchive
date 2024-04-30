@@ -24,7 +24,7 @@ export const getWorkoutsForMonth = cache(
     const mappedData: WorkoutResponse[] = mapWorkoutData(data);
 
     return mappedData;
-  }
+  },
 );
 
 export const getWorkoutsForDay = cache(
@@ -44,7 +44,7 @@ export const getWorkoutsForDay = cache(
     const mappedData: WorkoutResponse[] = mapWorkoutData(data);
 
     return mappedData;
-  }
+  },
 );
 
 const mapWorkoutData = (data: any[]): WorkoutResponse[] => {
@@ -59,6 +59,6 @@ const mapWorkoutData = (data: any[]): WorkoutResponse[] => {
         year: workout.year,
         month: workout.month,
         day: workout.day,
-      } as WorkoutResponse)
+      }) as WorkoutResponse,
   );
 };

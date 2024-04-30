@@ -23,7 +23,7 @@ const createWorkoutSchema = z.object({
 
 export async function addWorkout(
   _: any,
-  formData: FormData
+  formData: FormData,
 ): Promise<ActionResponse> {
   const session = await getSession();
 

@@ -41,7 +41,7 @@ export default function Component({
     {
       success: false,
       errors: [],
-    }
+    },
   );
   const [open, setOpen] = useState(false);
 

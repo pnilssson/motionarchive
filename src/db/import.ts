@@ -2,8 +2,8 @@
 
 import { getSession } from '../lib/server-utils';
 import { promises as fs } from 'fs';
-import { WorkoutRequest } from '../types/workout';
 import collections from './db';
+import { WorkoutRequest } from '../types/types';
 
 function getActivityType(activitiesData: any, id: string) {
   switch (id) {

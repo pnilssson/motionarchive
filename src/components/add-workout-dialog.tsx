@@ -12,15 +12,14 @@ import {
   TextField,
   VisuallyHidden,
 } from '@radix-ui/themes';
-import { WorkoutTypeResponse } from '../types/workoutType';
 import { useEffect, useState } from 'react';
 import ErrorMessages from './error-messages';
 import SubmitButton from './submit-button';
 import { useFormState } from 'react-dom';
 import { addWorkout } from '../db/actions';
-import { AddWorkoutActionResponse } from '../types/workout';
 import { PlusIcon } from '@radix-ui/react-icons';
-import { dateToDateInput } from '../lib/utils';
+import { ActionResponse, WorkoutTypeResponse } from '../types/types';
+import { showSuccessToast } from './toast';
 
 export default function Component({
   day,
@@ -35,9 +34,9 @@ export default function Component({
   triggerType?: 'button' | 'plus';
   workoutTypes: WorkoutTypeResponse[];
 }) {
-  const [state, action] = useFormState(
-    (state: AddWorkoutActionResponse, formData: any) => {
-      return addWorkout(state, formData);
+  const [formState, action] = useFormState(
+    (formState: ActionResponse, formData: any) => {
+      return addWorkout(formState, formData);
     },
     {
       success: false,
@@ -47,10 +46,11 @@ export default function Component({
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    if (state.success) {
+    if (formState.success) {
       setOpen(false);
+      showSuccessToast('Workout added successfully.');
     }
-  }, [state]);
+  }, [formState]);
 
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
@@ -86,21 +86,21 @@ export default function Component({
                   required
                   type="number"
                   name="year"
-                  value={year}
+                  defaultValue={year}
                 ></TextField.Root>
                 <TextField.Root
                   size="3"
                   required
                   type="number"
                   name="month"
-                  value={month}
+                  defaultValue={month}
                 ></TextField.Root>
                 <TextField.Root
                   size="3"
                   required
                   type="number"
                   name="day"
-                  value={day}
+                  defaultValue={day}
                 ></TextField.Root>
               </VisuallyHidden>
             </Box>
@@ -116,7 +116,7 @@ export default function Component({
                 placeholder="Time"
               ></TextField.Root>
             </Box>
-            <ErrorMessages name="time" errors={state && state.errors} />
+            <ErrorMessages name="time" errors={formState && formState.errors} />
 
             <Flex mb="4" direction="column">
               <Text as="div" size="2" weight="bold" mb="2">
@@ -138,7 +138,7 @@ export default function Component({
                 </Select.Content>
               </Select.Root>
             </Flex>
-            <ErrorMessages name="type" errors={state && state.errors} />
+            <ErrorMessages name="type" errors={formState && formState.errors} />
 
             <Box mb="4">
               <Text as="div" size="2" weight="bold" mb="2">
@@ -151,7 +151,10 @@ export default function Component({
                 name="description"
               />
             </Box>
-            <ErrorMessages name="description" errors={state && state.errors} />
+            <ErrorMessages
+              name="description"
+              errors={formState && formState.errors}
+            />
           </Flex>
 
           <Flex gap="3" mt="4" justify="end">
@@ -160,7 +163,9 @@ export default function Component({
                 Cancel
               </Button>
             </Dialog.Close>
-            <SubmitButton />
+            <Flex justify="end">
+              <SubmitButton />
+            </Flex>
           </Flex>
         </form>
       </Dialog.Content>

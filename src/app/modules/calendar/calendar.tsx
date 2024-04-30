@@ -1,8 +1,8 @@
 import { getTypes, getWorkoutsForMonth } from '@/src/db/queries';
 import { Text, Grid, Box } from '@radix-ui/themes';
-import { WorkoutResponse } from '@/src/types/workout';
 import CalendarNavigation from '../../archive/calendar/[year]/[month]/calendar-navigation';
 import { Day } from './card/day';
+import { WorkoutResponse } from '@/src/types/types';
 
 export default async function Calendar({
   year,

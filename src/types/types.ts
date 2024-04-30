@@ -1,4 +1,8 @@
-import { Audit } from './audit';
+import { ZodIssue } from 'zod';
+
+interface Audit {
+  userId: string;
+}
 
 export interface WorkoutResponse extends Audit {
   _id: string;
@@ -21,7 +25,13 @@ export interface WorkoutRequest extends Audit {
   day: number;
 }
 
-export interface AddWorkoutActionResponse {
+export interface WorkoutTypeResponse {
+  _id: string;
+  name: string;
+  subcategory: string;
+}
+
+export interface ActionResponse {
   success: boolean;
-  errors: any[];
+  errors: ZodIssue[];
 }

@@ -14,7 +14,11 @@
   --cursor-switch: pointer;
 }
 
-@import "@radix-ui/themes/styles.css";
+.radix-themes {
+  --default-font-family: var(--font-geist-sans);
+}
+
+@import '@radix-ui/themes/styles.css';
 
 .background {
   background-color: #fafaff;

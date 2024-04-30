@@ -1,8 +1,8 @@
 import { getTypes, getWorkoutsForDay } from '@/src/db/queries';
 import { Box, Card, Flex, Grid, Text } from '@radix-ui/themes';
 import AddWorkoutDialog from '@/src/components/add-workout-dialog';
-import { WorkoutResponse } from '@/src/types/workout';
 import DeleteWorkout from './delete-workout';
+import { WorkoutResponse } from '@/src/types/types';
 
 export default async function Page({
   params,

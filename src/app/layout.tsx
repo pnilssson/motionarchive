@@ -1,12 +1,10 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import './globals.css';
 import { Navbar } from './navbar';
 import { auth } from './auth';
 import { Box, Container, Theme } from '@radix-ui/themes';
 import Script from 'next/script';
-
-const inter = Inter({ subsets: ['latin'] });
+import { Toaster } from 'react-hot-toast';
 
 export const metadata: Metadata = {
   title: 'Motion Archive',
@@ -21,8 +19,9 @@ export default async function RootLayout({
   const session = await auth();
   return (
     <html lang="en">
-      <body className={`${inter.className} antialiased`}>
+      <body>
         <Theme accentColor="violet">
+          <Toaster />
           <Container className="background">
             <Navbar session={session} />
             <Box className="h-[calc(100vh-56px)]">{children}</Box>

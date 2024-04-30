@@ -4,10 +4,10 @@ import AddWorkoutDialog from '@/src/components/add-workout-dialog';
 import { getMonthAndDayLink } from '@/src/lib/utils';
 import { Box, Flex, Text, Avatar, Tooltip } from '@radix-ui/themes';
 import { useRouter } from 'next/navigation';
-import { WorkoutResponse } from '@/src/types/workout';
-import { WorkoutTypeResponse } from '@/src/types/workoutType';
 import { useRef } from 'react';
 import { DayCard } from './day-card';
+import { avatarPropDefs } from '@radix-ui/themes/props';
+import { WorkoutResponse, WorkoutTypeResponse } from '@/src/types/types';
 
 export default function Component({
   day,
@@ -42,6 +42,22 @@ export default function Component({
     }
   }
 
+  function getAvatarcolor(type: string): typeof avatarPropDefs.color.default {
+    const workoutType = workoutTypes.find((a) => a.name === type);
+    switch (workoutType?.subcategory) {
+      case 'Strength':
+        return 'red';
+      case 'Conditioning':
+        return 'blue';
+      case 'Mobility':
+        return 'jade';
+      case 'Sport':
+        return 'orange';
+      default:
+        return 'violet';
+    }
+  }
+
   return (
     <>
       <Box
@@ -71,6 +87,7 @@ export default function Component({
                         size="2"
                         radius="full"
                         variant="soft"
+                        color={getAvatarcolor(workout.type)}
                         fallback={workout.type.substring(0, 1)}
                       ></Avatar>
                     </Tooltip>

@@ -1,7 +1,7 @@
 import { cache } from 'react';
 import collections from './db';
 import { getSession } from '../lib/server-utils';
-import { WorkoutResponse } from '../types/workout';
+import { WorkoutResponse } from '../types/types';
 
 export const getTypes = cache(async () => {
   const workoutTypes = await collections.workoutTypes();

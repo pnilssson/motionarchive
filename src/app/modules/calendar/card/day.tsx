@@ -1,7 +1,6 @@
-import { WorkoutResponse } from '@/src/types/workout';
 import dynamic from 'next/dynamic';
-import { WorkoutTypeResponse } from '@/src/types/workoutType';
 import DayMobile from './day-mobile';
+import { WorkoutResponse, WorkoutTypeResponse } from '@/src/types/types';
 const MobileDesktopSwitch = dynamic(
   () => import('@/src/components/mobile-desktop-switch'),
   {

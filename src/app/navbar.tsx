@@ -90,7 +90,7 @@ export function Navbar({ session }: { session: Session | null }) {
         </TabNav.Root>
       </Flex>
       {session ? (
-        <Flex className="md:hidden" position="absolute" bottom="2" right="2">
+        <Flex className="md:hidden z-10" position="fixed" bottom="2" right="2">
           <LoginButton session={session}></LoginButton>
         </Flex>
       ) : null}

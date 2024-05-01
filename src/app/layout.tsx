@@ -24,7 +24,7 @@ export default async function RootLayout({
           <Toaster />
           <Container className="background">
             <Navbar session={session} />
-            <Box className="h-[calc(100vh-56px)]">{children}</Box>
+            <Box className="min-h-[calc(100vh-56px)]">{children}</Box>
           </Container>
         </Theme>
       </body>

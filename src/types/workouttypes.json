@@ -1,27 +1,71 @@
 [
   {
-    "name": "Running",
-    "subcategory": "Conditioning"
+    "name": "American Football",
+    "subcategory": "Sport"
   },
   {
-    "name": "Cardio",
-    "subcategory": "Conditioning"
+    "name": "Archery",
+    "subcategory": "Sport"
   },
   {
     "name": "Badminton",
     "subcategory": "Sport"
   },
   {
-    "name": "Padel",
+    "name": "Baseball",
     "subcategory": "Sport"
   },
   {
-    "name": "Thai Boxing",
+    "name": "Basketball",
     "subcategory": "Sport"
   },
   {
-    "name": "Walk",
+    "name": "Biking",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Biking Machine",
     "subcategory": "Conditioning"
+  },
+  {
+    "name": "Boxing",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "BMX",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Canoeing",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Cardio",
+    "subcategory": "Conditioning"
+  },
+  {
+    "name": "Climbing",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Cricket",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Dance",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Diving",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Field Hockey",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Figure Skating",
+    "subcategory": "Sport"
   },
   {
     "name": "Floorball",
@@ -32,95 +76,7 @@
     "subcategory": "Sport"
   },
   {
-    "name": "Rowing",
-    "subcategory": "Conditioning"
-  },
-  {
-    "name": "Biking",
-    "subcategory": "Conditioning"
-  },
-  {
-    "name": "Skiing",
-    "subcategory": "Conditioning"
-  },
-  {
-    "name": "Strength Training",
-    "subcategory": "Strength"
-  },
-  {
-    "name": "Weightlifting",
-    "subcategory": "Strength"
-  },
-  {
-    "name": "Soccer",
-    "subcategory": "Sport"
-  },
-  {
-    "name": "Basketball",
-    "subcategory": "Sport"
-  },
-  {
-    "name": "Cricket",
-    "subcategory": "Sport"
-  },
-  {
-    "name": "Field Hockey",
-    "subcategory": "Sport"
-  },
-  {
-    "name": "Tennis",
-    "subcategory": "Sport"
-  },
-  {
-    "name": "Volleyball",
-    "subcategory": "Sport"
-  },
-  {
-    "name": "Table Tennis",
-    "subcategory": "Sport"
-  },
-  {
-    "name": "Baseball",
-    "subcategory": "Sport"
-  },
-  {
-    "name": "Softball",
-    "subcategory": "Sport"
-  },
-  {
     "name": "Golf",
-    "subcategory": "Sport"
-  },
-  {
-    "name": "American Football",
-    "subcategory": "Sport"
-  },
-  {
-    "name": "Rugby",
-    "subcategory": "Sport"
-  },
-  {
-    "name": "Ice Hockey",
-    "subcategory": "Sport"
-  },
-  {
-    "name": "Lacrosse",
-    "subcategory": "Sport"
-  },
-  {
-    "name": "Boxing",
-    "subcategory": "Sport"
-  },
-  {
-    "name": "Martial Arts",
-    "subcategory": "Sport"
-  },
-  {
-    "name": "Swimming",
-    "subcategory": "Sport"
-  },
-  {
-    "name": "Track and Field",
     "subcategory": "Sport"
   },
   {
@@ -128,43 +84,11 @@
     "subcategory": "Sport"
   },
   {
-    "name": "Cycling",
+    "name": "Ice Hockey",
     "subcategory": "Sport"
   },
   {
-    "name": "Wrestling",
-    "subcategory": "Sport"
-  },
-  {
-    "name": "Ski Jumping",
-    "subcategory": "Sport"
-  },
-  {
-    "name": "Snowboarding",
-    "subcategory": "Sport"
-  },
-  {
-    "name": "Speed Skating",
-    "subcategory": "Sport"
-  },
-  {
-    "name": "Figure Skating",
-    "subcategory": "Sport"
-  },
-  {
-    "name": "Diving",
-    "subcategory": "Sport"
-  },
-  {
-    "name": "Surfing",
-    "subcategory": "Sport"
-  },
-  {
-    "name": "Sailing",
-    "subcategory": "Sport"
-  },
-  {
-    "name": "Canoeing",
+    "name": "Jiu-Jitsu",
     "subcategory": "Sport"
   },
   {
@@ -172,43 +96,27 @@
     "subcategory": "Sport"
   },
   {
-    "name": "Archery",
+    "name": "Kickboxing",
     "subcategory": "Sport"
   },
   {
-    "name": "Shooting",
+    "name": "Lacrosse",
     "subcategory": "Sport"
   },
   {
-    "name": "Fishing",
+    "name": "Martial Arts",
     "subcategory": "Sport"
   },
   {
-    "name": "Hiking",
+    "name": "Mountainbike",
     "subcategory": "Sport"
   },
   {
-    "name": "Mountaineering",
+    "name": "Obstacle Course Racing",
     "subcategory": "Sport"
   },
   {
-    "name": "Climbing",
-    "subcategory": "Sport"
-  },
-  {
-    "name": "Camping",
-    "subcategory": "Sport"
-  },
-  {
-    "name": "Ski Touring",
-    "subcategory": "Sport"
-  },
-  {
-    "name": "Skateboarding",
-    "subcategory": "Sport"
-  },
-  {
-    "name": "BMX",
+    "name": "Padel",
     "subcategory": "Sport"
   },
   {
@@ -216,23 +124,123 @@
     "subcategory": "Sport"
   },
   {
-    "name": "Yoga",
+    "name": "Pilates",
     "subcategory": "Mobility"
   },
   {
-    "name": "Pilates",
-    "subcategory": "Mobility"
+    "name": "Rowing",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Rowing Machine",
+    "subcategory": "Conditioning"
+  },
+  {
+    "name": "Rugby",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Rugby Sevens",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Running",
+    "subcategory": "Conditioning"
+  },
+  {
+    "name": "Sailing",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Skateboarding",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Skiing",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Skiing Machine",
+    "subcategory": "Conditioning"
+  },
+  {
+    "name": "Snowboarding",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Soccer",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Softball",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Speed Skating",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Strength Training",
+    "subcategory": "Strength"
   },
   {
     "name": "Stretching",
     "subcategory": "Mobility"
   },
   {
+    "name": "Surfing",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Swimming",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Table Tennis",
+    "subcategory": "Sport"
+  },
+  {
     "name": "Tai Chi",
     "subcategory": "Mobility"
   },
   {
-    "name": "Dance",
+    "name": "Tennis",
     "subcategory": "Sport"
+  },
+  {
+    "name": "Thai Boxing",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Track and Field",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Triathlon",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Ultimate Frisbee",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Volleyball",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Walk",
+    "subcategory": "Conditioning"
+  },
+  {
+    "name": "Weightlifting",
+    "subcategory": "Strength"
+  },
+  {
+    "name": "Wrestling",
+    "subcategory": "Sport"
+  },
+  {
+    "name": "Yoga",
+    "subcategory": "Mobility"
   }
 ]

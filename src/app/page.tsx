@@ -11,6 +11,7 @@ import {
 } from '@radix-ui/themes';
 import Image from 'next/image';
 import Footer from '../components/footer';
+import JoinNow from '../components/join-now';
 
 export default function Home() {
   return (
@@ -25,6 +26,9 @@ export default function Home() {
               Motion archive is a simple yet powerful online tool for keeping
               all training related notes in one place.
             </Text>
+            <Box mx="auto">
+              <JoinNow />
+            </Box>
           </Flex>
         </Flex>
         <Flex justify="center" mt="8">

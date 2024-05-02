@@ -10,9 +10,13 @@ const collections = {
     const db = await getDb();
     return db.collection('workout');
   },
-  workoutTypes: async function () {
+  workoutType: async function () {
     const db = await getDb();
-    return db.collection('workout_types');
+    return db.collection('workout_type');
+  },
+  personalRecord: async function () {
+    const db = await getDb();
+    return db.collection('personal_record');
   },
 };
 

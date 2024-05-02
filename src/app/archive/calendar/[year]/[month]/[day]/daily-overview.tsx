@@ -1,3 +1,3 @@
-export default function Component() {
+export default async function Component() {
   return <div></div>;
 }

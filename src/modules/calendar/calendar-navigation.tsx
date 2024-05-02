@@ -1,4 +1,4 @@
-import MonthPicker from '@/src/components/month-picker';
+import MonthPicker from '@/src/modules/calendar/month-picker';
 import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
 import { Flex, Link, Tooltip } from '@radix-ui/themes';
 

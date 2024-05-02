@@ -1,10 +1,10 @@
 import { cache } from 'react';
 import collections from './db';
 import { getSession } from '../lib/server-utils';
-import { WorkoutResponse } from '../types/types';
+import { PersonalRecordResponse, WorkoutResponse } from '../types/types';
 
 export const getTypes = cache(async () => {
-  const workoutTypes = await collections.workoutTypes();
+  const workoutTypes = await collections.workoutType();
   const data = await workoutTypes.find({}).sort({ name: 1 }).toArray();
   return JSON.parse(JSON.stringify(data));
 });
@@ -60,5 +60,32 @@ const mapWorkoutData = (data: any[]): WorkoutResponse[] => {
         month: workout.month,
         day: workout.day,
       }) as WorkoutResponse,
+  );
+};
+
+export const getPersonalBests = cache(async () => {
+  const session = await getSession();
+  const workouts = await collections.personalRecord();
+
+  const data = await workouts
+    .find({
+      userId: session.user.userId,
+    })
+    .toArray();
+
+  const mappedData: PersonalRecordResponse[] = mapPersonalRecordData(data);
+
+  return mappedData;
+});
+
+const mapPersonalRecordData = (data: any[]): PersonalRecordResponse[] => {
+  return data.map(
+    (personalRecord: PersonalRecordResponse) =>
+      ({
+        _id: personalRecord._id.toString(),
+        userId: personalRecord.userId,
+        name: personalRecord.name,
+        results: personalRecord.results,
+      }) as PersonalRecordResponse,
   );
 };

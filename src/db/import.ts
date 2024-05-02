@@ -94,7 +94,7 @@ export async function importWorkouts() {
 export async function checkTypes() {
   const workoutsCollection = await collections.workout();
   const workouts = await workoutsCollection.find().toArray();
-  const workoutTypesCollection = await collections.workoutTypes();
+  const workoutTypesCollection = await collections.workoutType();
   const workoutTypes = await workoutTypesCollection.find().toArray();
 
   workouts.forEach(async (workout: any) => {

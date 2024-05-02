@@ -1,8 +1,9 @@
 import { getTypes, getWorkoutsForDay } from '@/src/db/queries';
-import { Box, Card, Flex, Grid, Text } from '@radix-ui/themes';
-import AddWorkoutDialog from '@/src/components/add-workout-dialog';
+import { Box, Card, Flex, Grid, Heading, Text } from '@radix-ui/themes';
+import AddWorkoutDialog from '@/src/components/dialogs/add-workout-dialog';
 import DeleteWorkout from './delete-workout';
 import { WorkoutResponse } from '@/src/types/types';
+import WorkoutCard from './workout-card';
 
 export default async function Page({
   params,
@@ -22,7 +23,14 @@ export default async function Page({
   return (
     <>
       <Flex justify={'between'}>
-        <h1 className="text-2xl md:text-4xl font-bold mb-6">Overview</h1>
+        <Heading
+          as="h3"
+          size={{ initial: '6', md: '8' }}
+          weight={'bold'}
+          mb={'4'}
+        >
+          Overview
+        </Heading>
         <AddWorkoutDialog
           day={day}
           month={month}
@@ -42,31 +50,11 @@ export default async function Page({
         </Text>
       </Box>
       <Grid columns={{ initial: '1', md: '4' }} gap="2" width="auto">
-        {workouts.length > 0 ? (
-          <>
-            {workouts.map((workout: WorkoutResponse) => (
-              <Card key={workout._id} variant="surface">
-                <Flex justify="between" align="center">
-                  <Text as="div" size="2" weight="bold">
-                    {workout.type}
-                  </Text>
-                  <DeleteWorkout id={workout._id} />
-                </Flex>
-                <Text as="div" size="2" mb="2">
-                  {workout.time} min
-                </Text>
-
-                {workout.description ? (
-                  <Text
-                    as="div"
-                    size="2"
-                    dangerouslySetInnerHTML={{ __html: workout.description }}
-                  ></Text>
-                ) : null}
-              </Card>
-            ))}
-          </>
-        ) : null}
+        {workouts && workouts.length > 0
+          ? workouts.map((workout: WorkoutResponse) => (
+              <WorkoutCard key={workout._id} workout={workout} />
+            ))
+          : null}
       </Grid>
     </>
   );

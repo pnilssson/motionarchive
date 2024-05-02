@@ -1,11 +1,11 @@
-import { Box, Text } from '@radix-ui/themes';
+import { Flex, Heading } from '@radix-ui/themes';
 
 export default async function Page() {
   return (
-    <Box>
-      <Text size={{ initial: '6', md: '8' }} weight={'bold'} mb={'4'} as="div">
+    <Flex gap="6" mb="6">
+      <Heading as="h3" size={{ initial: '6', md: '8' }} weight="bold">
         Dashboard
-      </Text>
-    </Box>
+      </Heading>
+    </Flex>
   );
 }

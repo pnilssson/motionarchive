@@ -6,7 +6,7 @@ import { Button, DropdownMenu, Flex, TabNav } from '@radix-ui/themes';
 import { usePathname } from 'next/navigation';
 import { HamburgerMenuIcon } from '@radix-ui/react-icons';
 import dynamic from 'next/dynamic';
-import LoginButton from '../components/login-button';
+import LoginButton from './buttons/login-button';
 const MobileDesktopSwitch = dynamic(
   () => import('@/src/components/mobile-desktop-switch'),
   {
@@ -45,6 +45,14 @@ export function Navbar({ session }: { session: Session | null }) {
                         Calendar
                       </Link>
                     </TabNav.Link>
+                    <TabNav.Link
+                      asChild
+                      active={pathname === '/archive/personal-records'}
+                    >
+                      <Link href="/archive/personal-records">
+                        Personal records
+                      </Link>
+                    </TabNav.Link>
                     <Flex align="center" ml="auto">
                       <LoginButton session={session}></LoginButton>
                     </Flex>
@@ -69,6 +77,11 @@ export function Navbar({ session }: { session: Session | null }) {
                             }`}
                           >
                             Calendar
+                          </Link>
+                        </DropdownMenu.Item>
+                        <DropdownMenu.Item>
+                          <Link href="/archive/personal-records">
+                            Personal records
                           </Link>
                         </DropdownMenu.Item>
                       </DropdownMenu.Content>

@@ -5,7 +5,7 @@ import { revalidatePath } from 'next/cache';
 import collections from './db';
 import { getSession } from '../lib/server-utils';
 import { ObjectId } from 'mongodb';
-import { ActionResponse } from '../types/types';
+import { ActionResponse, PersonalRecordResponse } from '../types/types';
 
 const createWorkoutSchema = z.object({
   userId: z.string(),
@@ -75,6 +75,82 @@ export async function deleteWorkout(id: string): Promise<ActionResponse> {
   });
 
   revalidatePath('/archive/calendar');
+  return {
+    success: validated.success,
+    errors: [],
+  };
+}
+
+const createPersonalRecordTypeSchema = z.object({
+  userId: z.string(),
+  name: z.string({ required_error: 'Name is required.' }),
+  results: z.array(z.object({})),
+});
+
+export async function addBenchmarkType(
+  _: any,
+  formData: FormData,
+): Promise<ActionResponse> {
+  const session = await getSession();
+
+  const request = {
+    userId: session?.user?.userId,
+    name: formData.get('name'),
+    results: [],
+  };
+
+  const validated = createPersonalRecordTypeSchema.safeParse(request);
+  if (!validated.success) {
+    return {
+      success: validated.success,
+      errors: validated.error.issues,
+    };
+  }
+
+  const workouts = await collections.personalRecord();
+  await workouts.insertOne(validated.data);
+
+  revalidatePath('/archive/benchmarks');
+  return {
+    success: validated.success,
+    errors: [],
+  };
+}
+
+const createPersonalRecordResultSchema = z.object({
+  date: z.coerce.date({ required_error: 'Date is required.' }),
+  result: z.string({ required_error: 'Name is required.' }),
+});
+
+export async function addPersonalRecordResult(
+  _: any,
+  formData: FormData,
+): Promise<ActionResponse> {
+  const personalRecordId = formData.get('id') as unknown as string;
+  const request = {
+    date: formData.get('date'),
+    result: formData.get('result'),
+  };
+
+  const validated = createPersonalRecordResultSchema.safeParse(request);
+  if (!validated.success) {
+    return {
+      success: validated.success,
+      errors: validated.error.issues,
+    };
+  }
+
+  const personalRecords = await collections.personalRecord();
+  const personalRecord = (await personalRecords.findOne({
+    _id: new ObjectId(personalRecordId),
+  })) as unknown as PersonalRecordResponse;
+
+  await personalRecords.updateOne(
+    { _id: new ObjectId(personalRecordId) },
+    { $set: { results: [validated.data, ...personalRecord.results] } },
+  );
+
+  revalidatePath('/archive/benchmarks');
   return {
     success: validated.success,
     errors: [],

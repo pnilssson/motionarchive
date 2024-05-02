@@ -1,6 +1,6 @@
 'use client';
 
-import { Flex, Select } from '@radix-ui/themes';
+import { Select } from '@radix-ui/themes';
 import { useRouter } from 'next/navigation';
 
 const months = [

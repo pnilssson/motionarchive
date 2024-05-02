@@ -13,13 +13,13 @@ import {
   VisuallyHidden,
 } from '@radix-ui/themes';
 import { useEffect, useState } from 'react';
-import ErrorMessages from './error-messages';
-import SubmitButton from './submit-button';
+import ErrorMessages from '../error-messages';
 import { useFormState } from 'react-dom';
-import { addWorkout } from '../db/actions';
+import { addWorkout } from '../../db/actions';
 import { PlusIcon } from '@radix-ui/react-icons';
-import { ActionResponse, WorkoutTypeResponse } from '../types/types';
-import { showSuccessToast } from './toast';
+import { ActionResponse, WorkoutTypeResponse } from '../../types/types';
+import { showSuccessToast } from '../toast';
+import SubmitButton from '../buttons/submit-button';
 
 export default function Component({
   day,
@@ -56,7 +56,7 @@ export default function Component({
     <Dialog.Root open={open} onOpenChange={setOpen}>
       {triggerType === 'button' ? (
         <Dialog.Trigger>
-          <Button>Add workout</Button>
+          <Button>New workout</Button>
         </Dialog.Trigger>
       ) : (
         <Dialog.Trigger>
@@ -105,7 +105,7 @@ export default function Component({
               </VisuallyHidden>
             </Box>
 
-            <Box mb="2">
+            <Box mb="4">
               <Text as="div" size="2" weight="bold" mb="2">
                 Time
               </Text>
@@ -115,8 +115,11 @@ export default function Component({
                 name="time"
                 placeholder="Time"
               ></TextField.Root>
+              <ErrorMessages
+                name="time"
+                errors={formState && formState.errors}
+              />
             </Box>
-            <ErrorMessages name="time" errors={formState && formState.errors} />
 
             <Flex mb="4" direction="column">
               <Text as="div" size="2" weight="bold" mb="2">
@@ -125,7 +128,7 @@ export default function Component({
               <Select.Root
                 size="3"
                 required
-                defaultValue={workoutTypes[0].name}
+                defaultValue={workoutTypes[0]?.name ?? ''}
                 name="type"
               >
                 <Select.Trigger />
@@ -137,8 +140,11 @@ export default function Component({
                   ))}
                 </Select.Content>
               </Select.Root>
+              <ErrorMessages
+                name="type"
+                errors={formState && formState.errors}
+              />
             </Flex>
-            <ErrorMessages name="type" errors={formState && formState.errors} />
 
             <Box mb="4">
               <Text as="div" size="2" weight="bold" mb="2">
@@ -150,11 +156,11 @@ export default function Component({
                 placeholder="Description"
                 name="description"
               />
+              <ErrorMessages
+                name="description"
+                errors={formState && formState.errors}
+              />
             </Box>
-            <ErrorMessages
-              name="description"
-              errors={formState && formState.errors}
-            />
           </Flex>
 
           <Flex gap="3" mt="4" justify="end">

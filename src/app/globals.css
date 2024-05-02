@@ -23,3 +23,7 @@
 .background {
   background-color: #fafaff;
 }
+
+.date-input > input {
+  display: block;
+}

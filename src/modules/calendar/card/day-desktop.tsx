@@ -1,6 +1,6 @@
 'use client';
 
-import AddWorkoutDialog from '@/src/components/add-workout-dialog';
+import AddWorkoutDialog from '@/src/components/dialogs/add-workout-dialog';
 import { getMonthAndDayLink } from '@/src/lib/utils';
 import { Box, Flex, Text, Avatar, Tooltip } from '@radix-ui/themes';
 import { useRouter } from 'next/navigation';

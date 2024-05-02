@@ -22,8 +22,9 @@ function getUrl(path: string) {
 }
 
 function dateToDateInput(date: Date): string {
+  const currentMonth = date.getMonth() + 1;
   const year = date.getFullYear();
-  const month = date.getMonth().toString().padStart(2, '0');
+  const month = currentMonth.toString().padStart(2, '0');
   const day = date.getDate().toString().padStart(2, '0');
   return `${year}-${month}-${day}`;
 }

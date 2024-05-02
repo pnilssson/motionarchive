@@ -11,7 +11,7 @@ import {
 } from '@radix-ui/themes';
 import Image from 'next/image';
 import Footer from '../components/footer';
-import JoinNow from '../components/join-now';
+import GetStartedButton from '../components/buttons/get-started-button';
 
 export default function Home() {
   return (
@@ -27,7 +27,7 @@ export default function Home() {
               all training related notes in one place.
             </Text>
             <Box mx="auto">
-              <JoinNow />
+              <GetStartedButton />
             </Box>
           </Flex>
         </Flex>

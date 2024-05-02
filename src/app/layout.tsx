@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import { Navbar } from './navbar';
+import { Navbar } from '../components/navbar';
 import { auth } from './auth';
 import { Box, Container, Theme } from '@radix-ui/themes';
 import Script from 'next/script';

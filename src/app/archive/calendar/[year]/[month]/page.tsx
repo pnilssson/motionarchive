@@ -1,5 +1,5 @@
 import Calendar from '@/src/modules/calendar/calendar';
-import { Box, Text } from '@radix-ui/themes';
+import { Box, Flex, Heading } from '@radix-ui/themes';
 
 export default async function Page({
   params,
@@ -10,11 +10,11 @@ export default async function Page({
   };
 }) {
   return (
-    <Box>
-      <Text size={{ initial: '6', md: '8' }} weight="bold" mb="4" as="div">
+    <Flex direction="column" gap="6" mb="6">
+      <Heading as="h3" size={{ initial: '6', md: '8' }} weight="bold">
         Calendar
-      </Text>
+      </Heading>
       <Calendar month={parseInt(params.month)} year={parseInt(params.year)} />
-    </Box>
+    </Flex>
   );
 }

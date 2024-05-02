@@ -1,6 +1,6 @@
 'use client';
 
-import ConfirmModal from '@/src/components/confirm-modal';
+import ConfirmModal from '@/src/components/dialogs/confirm-dialog';
 import { showSuccessToast } from '@/src/components/toast';
 import { deleteWorkout } from '@/src/db/actions';
 import { TrashIcon } from '@radix-ui/react-icons';
@@ -23,7 +23,7 @@ export default function Component({ id }: { id: string }) {
       content="Are you sure you want to delete the workout?"
       onConfirm={deletWorkout}
     >
-      <IconButton size="1">
+      <IconButton size="1" variant="soft">
         <TrashIcon />
       </IconButton>
     </ConfirmModal>

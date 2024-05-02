@@ -1,10 +1,6 @@
 import { ZodIssue } from 'zod';
 
-interface Audit {
-  userId: string;
-}
-
-export interface WorkoutResponse extends Audit {
+export interface WorkoutResponse {
   _id: string;
   userId: string;
   type: string;
@@ -15,7 +11,7 @@ export interface WorkoutResponse extends Audit {
   day: number;
 }
 
-export interface WorkoutRequest extends Audit {
+export interface WorkoutRequest {
   userId: string;
   type: string;
   time: number;
@@ -34,4 +30,22 @@ export interface WorkoutTypeResponse {
 export interface ActionResponse {
   success: boolean;
   errors: ZodIssue[];
+}
+
+export interface PersonalRecordResponse {
+  _id: string;
+  userId: string;
+  name: string;
+  results: PersonalRecordResult[];
+}
+
+export interface PersonalRecordResult {
+  result: string;
+  date: Date;
+}
+
+export interface PersonalRecordRequest {
+  userId: string;
+  name: string;
+  results: PersonalRecordResult[];
 }

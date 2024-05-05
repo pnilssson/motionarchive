@@ -15,7 +15,7 @@ export default async function Page() {
         </Heading>
         <AddPersonalRecordTypeDialog />
       </Flex>
-      <Grid columns={{ initial: '1', sm: '3', xl: '4' }} gap="2" width="auto">
+      <Grid columns={{ initial: '1', sm: '2', md: '3' }} gap="2" width="auto">
         {personalBests && personalBests.length > 0
           ? personalBests.map((personalRecord: PersonalRecordResponse) => (
               <RecordCard

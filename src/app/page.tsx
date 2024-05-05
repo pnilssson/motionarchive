@@ -65,12 +65,11 @@ export default function Home() {
             </Card>
             <Card className="shadow-md py-8 px-4">
               <Text as="div" size="4" weight="bold" mb="2">
-                Benchmarks
+                Personal Records
               </Text>
               <Text as="div" color="gray" size="2" mb="2">
-                Keep track of your personal bests and the progression of them.
+                Keep track of your personal records and the progression of them.
               </Text>
-              <Badge color="ruby">Coming soon</Badge>
             </Card>
             <Card className="shadow-md py-8 px-4">
               <Text as="div" size="4" weight="bold" mb="2">

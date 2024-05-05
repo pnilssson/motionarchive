@@ -4,10 +4,9 @@ export default async function SignIn() {
   return (
     <Flex
       align="center"
-      height="100%"
       direction="column"
       px="4"
-      className="text-center"
+      className="text-center h-[calc(100vh-56px)]"
     >
       <Box className="h-1/4"></Box>
       <Text size={{ initial: '6', sm: '8' }} weight="bold" mb="4" as="div">

@@ -12,9 +12,8 @@ export default function SignIn() {
     <Flex
       align="center"
       direction="column"
-      height="100%"
       px="4"
-      className="text-center"
+      className="text-center h-[calc(100vh-56px)]"
     >
       <div className="h-1/4"></div>
       <Text size={{ initial: '6', sm: '8' }} weight="bold" mb="4" as="div">

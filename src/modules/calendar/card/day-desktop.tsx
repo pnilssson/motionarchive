@@ -44,14 +44,14 @@ export default function Component({
 
   function getAvatarcolor(type: string): typeof avatarPropDefs.color.default {
     const workoutType = workoutTypes.find((a) => a.name === type);
-    switch (workoutType?.subcategory) {
-      case 'Strength':
+    switch (workoutType?.subcategory.toLowerCase()) {
+      case 'strength':
         return 'red';
-      case 'Conditioning':
+      case 'conditioning':
         return 'blue';
-      case 'Mobility':
+      case 'mobility':
         return 'jade';
-      case 'Sport':
+      case 'sport':
         return 'orange';
       default:
         return 'violet';

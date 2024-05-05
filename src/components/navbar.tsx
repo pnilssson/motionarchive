@@ -50,7 +50,7 @@ export function Navbar({ session }: { session: Session | null }) {
                       active={pathname === '/archive/personal-records'}
                     >
                       <Link href="/archive/personal-records">
-                        Personal records
+                        Personal Records
                       </Link>
                     </TabNav.Link>
                     <Flex align="center" ml="auto">
@@ -81,7 +81,7 @@ export function Navbar({ session }: { session: Session | null }) {
                         </DropdownMenu.Item>
                         <DropdownMenu.Item>
                           <Link href="/archive/personal-records">
-                            Personal records
+                            Personal Records
                           </Link>
                         </DropdownMenu.Item>
                       </DropdownMenu.Content>

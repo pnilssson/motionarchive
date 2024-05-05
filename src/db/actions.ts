@@ -55,7 +55,7 @@ export async function addWorkout(
   };
 }
 
-const deleteWorkoutId = z.string({ required_error: 'Id is required.' });
+const deleteWorkoutId = z.string({ required_error: 'Workout id is required.' });
 
 export async function deleteWorkout(id: string): Promise<ActionResponse> {
   const session = await getSession();
@@ -87,7 +87,7 @@ const createPersonalRecordTypeSchema = z.object({
   results: z.array(z.object({})),
 });
 
-export async function addBenchmarkType(
+export async function addPersonalRecordType(
   _: any,
   formData: FormData,
 ): Promise<ActionResponse> {
@@ -110,7 +110,7 @@ export async function addBenchmarkType(
   const workouts = await collections.personalRecord();
   await workouts.insertOne(validated.data);
 
-  revalidatePath('/archive/benchmarks');
+  revalidatePath('/archive/personal-records');
   return {
     success: validated.success,
     errors: [],
@@ -120,6 +120,7 @@ export async function addBenchmarkType(
 const createPersonalRecordResultSchema = z.object({
   date: z.coerce.date({ required_error: 'Date is required.' }),
   result: z.string({ required_error: 'Name is required.' }),
+  id: z.string(),
 });
 
 export async function addPersonalRecordResult(
@@ -130,6 +131,7 @@ export async function addPersonalRecordResult(
   const request = {
     date: formData.get('date'),
     result: formData.get('result'),
+    id: crypto.randomUUID(),
   };
 
   const validated = createPersonalRecordResultSchema.safeParse(request);
@@ -150,7 +152,82 @@ export async function addPersonalRecordResult(
     { $set: { results: [validated.data, ...personalRecord.results] } },
   );
 
-  revalidatePath('/archive/benchmarks');
+  revalidatePath('/archive/personal-records');
+  return {
+    success: validated.success,
+    errors: [],
+  };
+}
+
+const deletePersonalRecordId = z.string({
+  required_error: 'Personal record id is required.',
+});
+
+export async function deletePersonalRecord(
+  id: string,
+): Promise<ActionResponse> {
+  const session = await getSession();
+
+  const validated = deletePersonalRecordId.safeParse(id);
+  if (!validated.success) {
+    return {
+      success: validated.success,
+      errors: validated.error.issues,
+    };
+  }
+
+  const personalRecords = await collections.personalRecord();
+  await personalRecords.deleteOne({
+    _id: new ObjectId(validated.data),
+    userId: session.user.userId,
+  });
+
+  revalidatePath('/archive/personal-records');
+  return {
+    success: validated.success,
+    errors: [],
+  };
+}
+
+const deletePersonalRecordResultSchema = z.object({
+  personalRecordId: z.string({
+    required_error: 'Personal record id is required.',
+  }),
+  resultId: z.string({ required_error: 'Result record id is required.' }),
+});
+
+export async function deletePersonalRecordResult(
+  personalRecordId: string,
+  resultId: string,
+): Promise<ActionResponse> {
+  const request = {
+    personalRecordId: personalRecordId,
+    resultId: resultId,
+  };
+
+  const validated = deletePersonalRecordResultSchema.safeParse(request);
+  if (!validated.success) {
+    return {
+      success: validated.success,
+      errors: validated.error.issues,
+    };
+  }
+
+  const personalRecords = await collections.personalRecord();
+  const personalRecord = (await personalRecords.findOne({
+    _id: new ObjectId(personalRecordId),
+  })) as unknown as PersonalRecordResponse;
+
+  await personalRecords.updateOne(
+    { _id: new ObjectId(personalRecordId) },
+    {
+      $set: {
+        results: [...personalRecord.results.filter((a) => a.id != resultId)],
+      },
+    },
+  );
+
+  revalidatePath('/archive/personal-records');
   return {
     success: validated.success,
     errors: [],

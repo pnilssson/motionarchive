@@ -1,7 +1,7 @@
 import { getTypes, getWorkoutsForDay } from '@/src/db/queries';
 import { Box, Card, Flex, Grid, Heading, Text } from '@radix-ui/themes';
 import AddWorkoutDialog from '@/src/components/dialogs/add-workout-dialog';
-import DeleteWorkout from './delete-workout';
+import DeleteWorkout from './delete-workout-button';
 import { WorkoutResponse } from '@/src/types/types';
 import WorkoutCard from './workout-card';
 
@@ -25,7 +25,7 @@ export default async function Page({
       <Flex justify={'between'}>
         <Heading
           as="h3"
-          size={{ initial: '6', md: '8' }}
+          size={{ initial: '6', sm: '8' }}
           weight={'bold'}
           mb={'4'}
         >

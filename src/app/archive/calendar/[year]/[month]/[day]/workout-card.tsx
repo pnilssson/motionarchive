@@ -1,5 +1,5 @@
 import { Card, Flex, Text } from '@radix-ui/themes';
-import DeleteWorkout from './delete-workout';
+import DeleteWorkoutButton from './delete-workout-button';
 import { WorkoutResponse } from '@/src/types/types';
 
 export default async function Component({
@@ -13,7 +13,7 @@ export default async function Component({
         <Text as="div" size="3" weight="bold">
           {workout.type}
         </Text>
-        <DeleteWorkout id={workout._id} />
+        <DeleteWorkoutButton id={workout._id} />
       </Flex>
       <Text as="div" size="2" mb="2">
         {workout.time} min

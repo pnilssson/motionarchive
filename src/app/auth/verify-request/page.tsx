@@ -10,7 +10,7 @@ export default async function SignIn() {
       className="text-center"
     >
       <Box className="h-1/4"></Box>
-      <Text size={{ initial: '6', md: '8' }} weight="bold" mb="4" as="div">
+      <Text size={{ initial: '6', sm: '8' }} weight="bold" mb="4" as="div">
         Please check your email
       </Text>
       <Text size="3" as="div">

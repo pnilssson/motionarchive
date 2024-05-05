@@ -8,6 +8,7 @@ import {
   IconButton,
   Text,
   TextField,
+  Tooltip,
   VisuallyHidden,
 } from '@radix-ui/themes';
 import { useEffect, useState } from 'react';
@@ -41,18 +42,19 @@ export default function Component({
       setOpen(false);
       showSuccessToast('Result added successfully.');
     }
-    console.log(formState.errors);
   }, [formState]);
 
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
-      <Dialog.Trigger>
+      <Tooltip content="Add result">
         <Dialog.Trigger>
-          <IconButton size="1" variant="soft">
-            <PlusIcon />
-          </IconButton>
+          <Dialog.Trigger>
+            <IconButton size="1" variant="soft">
+              <PlusIcon />
+            </IconButton>
+          </Dialog.Trigger>
         </Dialog.Trigger>
-      </Dialog.Trigger>
+      </Tooltip>
 
       <Dialog.Content maxWidth="450px">
         <Dialog.Title mb="2">{personalRecord.name}</Dialog.Title>

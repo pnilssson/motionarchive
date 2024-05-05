@@ -5,7 +5,7 @@ export default async function Component() {
     <Container className="mt-16 md:mt-24">
       <Separator size="4" />
 
-      <Flex py="6" px={{ initial: '4', md: '0' }}>
+      <Flex py="6" px={{ initial: '4', sm: '0' }}>
         <Text size="2">
           Created by{' '}
           <Link href="https://pnilssson.dev" weight="medium" target="_blank">

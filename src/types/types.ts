@@ -40,6 +40,7 @@ export interface PersonalRecordResponse {
 }
 
 export interface PersonalRecordResult {
+  id: string;
   result: string;
   date: Date;
 }

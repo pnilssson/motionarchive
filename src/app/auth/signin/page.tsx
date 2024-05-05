@@ -17,7 +17,7 @@ export default function SignIn() {
       className="text-center"
     >
       <div className="h-1/4"></div>
-      <Text size={{ initial: '6', md: '8' }} weight="bold" mb="4" as="div">
+      <Text size={{ initial: '6', sm: '8' }} weight="bold" mb="4" as="div">
         Sign in
       </Text>
       <Text size="3" mb={'4'} as="div">

@@ -10,6 +10,7 @@ import {
   Text,
   TextArea,
   TextField,
+  Tooltip,
   VisuallyHidden,
 } from '@radix-ui/themes';
 import { useEffect, useState } from 'react';
@@ -56,14 +57,16 @@ export default function Component({
     <Dialog.Root open={open} onOpenChange={setOpen}>
       {triggerType === 'button' ? (
         <Dialog.Trigger>
-          <Button>New workout</Button>
+          <Button>Add workout</Button>
         </Dialog.Trigger>
       ) : (
-        <Dialog.Trigger>
-          <IconButton size="1" variant="soft">
-            <PlusIcon />
-          </IconButton>
-        </Dialog.Trigger>
+        <Tooltip content="Add workout">
+          <Dialog.Trigger>
+            <IconButton size="1" variant="soft">
+              <PlusIcon />
+            </IconButton>
+          </Dialog.Trigger>
+        </Tooltip>
       )}
 
       <Dialog.Content maxWidth="450px">

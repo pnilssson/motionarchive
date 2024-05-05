@@ -5,14 +5,14 @@ import { useEffect, useState } from 'react';
 import ErrorMessages from '../error-messages';
 import SubmitButton from '../buttons/submit-button';
 import { useFormState } from 'react-dom';
-import { addBenchmarkType } from '../../db/actions';
+import { addPersonalRecordType } from '../../db/actions';
 import { ActionResponse } from '../../types/types';
 import { showSuccessToast } from '../toast';
 
 export default function Component() {
   const [formState, action] = useFormState(
     (formState: ActionResponse, formData: any) => {
-      return addBenchmarkType(formState, formData);
+      return addPersonalRecordType(formState, formData);
     },
     {
       success: false,

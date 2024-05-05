@@ -3,7 +3,15 @@ import {
   PersonalRecordResponse,
   PersonalRecordResult,
 } from '@/src/types/types';
-import { Box, Card, Flex, Inset, Table, Text } from '@radix-ui/themes';
+import {
+  Box,
+  Card,
+  Flex,
+  Inset,
+  ScrollArea,
+  Table,
+  Text,
+} from '@radix-ui/themes';
 import DeleteResultButton from './delete-result-button';
 import DeleteRecordButton from './delete-record-button';
 
@@ -13,7 +21,7 @@ export default async function Component({
   personalRecord: PersonalRecordResponse;
 }) {
   return (
-    <Card className="p-4 h-fit ">
+    <Card className="p-4 h-fit">
       <Flex justify="between" align="center" pb="4">
         <Text as="div" size="3" weight="bold">
           {personalRecord.name}
@@ -25,13 +33,17 @@ export default async function Component({
       </Flex>
 
       {personalRecord.results.length > 0 ? (
-        <Inset side="x">
-          <Table.Root>
+        <Inset side="bottom">
+          <Table.Root size="1" layout="auto">
             <Table.Header>
               <Table.Row>
-                <Table.ColumnHeaderCell>Result</Table.ColumnHeaderCell>
-                <Table.ColumnHeaderCell>Date</Table.ColumnHeaderCell>
-                <Table.ColumnHeaderCell></Table.ColumnHeaderCell>
+                <Table.ColumnHeaderCell className="shadow-none">
+                  Result
+                </Table.ColumnHeaderCell>
+                <Table.ColumnHeaderCell className="shadow-none">
+                  Date
+                </Table.ColumnHeaderCell>
+                <Table.ColumnHeaderCell className="shadow-none"></Table.ColumnHeaderCell>
               </Table.Row>
             </Table.Header>
 
@@ -40,11 +52,17 @@ export default async function Component({
                 ? personalRecord.results.map(
                     (result: PersonalRecordResult, i: number) => (
                       <Table.Row key={i} align="center">
-                        <Table.RowHeaderCell>
+                        <Table.RowHeaderCell className="shadow-none">
                           {result.result}
                         </Table.RowHeaderCell>
-                        <Table.Cell>{result.date.toDateString()}</Table.Cell>
-                        <Table.Cell align="right">
+                        <Table.Cell className="shadow-none">
+                          {result.date.toDateString()}
+                        </Table.Cell>
+                        <Table.Cell
+                          align="right"
+                          className="shadow-none"
+                          pr="4"
+                        >
                           <DeleteResultButton
                             personalRecordId={personalRecord._id}
                             resultId={result.id}

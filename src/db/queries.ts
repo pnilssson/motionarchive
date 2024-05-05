@@ -63,7 +63,7 @@ const mapWorkoutData = (data: any[]): WorkoutResponse[] => {
   );
 };
 
-export const getPersonalBests = cache(async () => {
+export const getPersonalRecords = cache(async () => {
   const session = await getSession();
   const workouts = await collections.personalRecord();
 
@@ -74,7 +74,6 @@ export const getPersonalBests = cache(async () => {
     .toArray();
 
   const mappedData: PersonalRecordResponse[] = mapPersonalRecordData(data);
-
   return mappedData;
 });
 
@@ -85,7 +84,10 @@ const mapPersonalRecordData = (data: any[]): PersonalRecordResponse[] => {
         _id: personalRecord._id.toString(),
         userId: personalRecord.userId,
         name: personalRecord.name,
-        results: personalRecord.results,
+        results: personalRecord.results.sort(
+          (a: any, b: any) =>
+            new Date(b.date).getTime() - new Date(a.date).getTime(),
+        ),
       }) as PersonalRecordResponse,
   );
 };

@@ -1,11 +1,11 @@
 import AddPersonalRecordTypeDialog from '@/src/components/dialogs/add-personal-record-type-dialog';
-import { getPersonalBests } from '@/src/db/queries';
+import { getPersonalRecords } from '@/src/db/queries';
 import RecordCard from '@/src/modules/personal-record/record-card';
 import { PersonalRecordResponse } from '@/src/types/types';
 import { Flex, Grid, Heading } from '@radix-ui/themes';
 
 export default async function Page() {
-  const personalBests = await getPersonalBests();
+  const personalBests = await getPersonalRecords();
 
   return (
     <Flex gap="6" mb="6" direction="column">

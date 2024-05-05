@@ -7,7 +7,8 @@ export default function Page() {
   const { pending } = useFormStatus();
   return (
     <Button type="submit" aria-disabled={pending} size="2">
-      <Spinner loading={pending}>Save</Spinner>
+      <Spinner loading={pending}></Spinner>
+      Save
     </Button>
   );
 }

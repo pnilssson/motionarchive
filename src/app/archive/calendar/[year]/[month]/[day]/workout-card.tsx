@@ -22,6 +22,7 @@ export default async function Component({
       <Inset clip="padding-box" side="top" pb="current">
         <Flex
           justify="between"
+          p="4"
           className={clsx(
             'text-radix-white',
             {
@@ -42,7 +43,7 @@ export default async function Component({
             },
           )}
         >
-          <Flex p="2" direction="column">
+          <Flex direction="column">
             <Heading as="h3" size="3" weight="medium">
               {workout.type}
             </Heading>
@@ -50,7 +51,7 @@ export default async function Component({
               {workout.time} min
             </Text>
           </Flex>
-          <Flex p="2">
+          <Flex>
             <DeleteWorkoutButton id={workout._id} />
           </Flex>
         </Flex>

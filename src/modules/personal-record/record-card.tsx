@@ -24,11 +24,11 @@ export default function Component({
 
   return (
     <Card className="h-fit">
-      <Inset clip="padding-box" side="top" pb="current">
+      <Inset clip="padding-box" side="all" pb="current">
         <Flex
           justify="between"
           align="center"
-          p="2"
+          p="4"
           className="text-radix-white bg-gradient-to-tr from-violet-600 to-purple-400"
         >
           <Heading as="h3" size="3" weight="medium">

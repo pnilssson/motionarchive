@@ -49,7 +49,7 @@ export default function Component({
       <Tooltip content="Add result">
         <Dialog.Trigger>
           <Dialog.Trigger>
-            <IconButton size="1" variant="soft" highContrast color="gray">
+            <IconButton size="1" variant="soft">
               <PlusIcon />
             </IconButton>
           </Dialog.Trigger>

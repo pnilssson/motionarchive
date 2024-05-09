@@ -20,14 +20,7 @@ export default function Page({ toggleEdit }: { toggleEdit: () => void }) {
   if (value) {
     return (
       <Tooltip content="Done">
-        <IconButton
-          type="button"
-          variant="soft"
-          highContrast
-          color="gray"
-          size="1"
-          onClick={onSave}
-        >
+        <IconButton type="button" variant="soft" size="1" onClick={onSave}>
           <CheckIcon />
         </IconButton>
       </Tooltip>
@@ -37,14 +30,7 @@ export default function Page({ toggleEdit }: { toggleEdit: () => void }) {
   if (!value) {
     return (
       <Tooltip content="Edit">
-        <IconButton
-          type="button"
-          variant="soft"
-          highContrast
-          color="gray"
-          size="1"
-          onClick={onEdit}
-        >
+        <IconButton type="button" variant="soft" size="1" onClick={onEdit}>
           <Pencil1Icon />
         </IconButton>
       </Tooltip>

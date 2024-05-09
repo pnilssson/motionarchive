@@ -1,4 +1,5 @@
 import {
+  Avatar,
   Box,
   Card,
   Flex,
@@ -8,54 +9,40 @@ import {
   Text,
 } from '@radix-ui/themes';
 import DeleteWorkoutButton from './delete-workout-button';
-import { WorkoutResponse } from '@/src/types/types';
+import { WorkoutResponse, WorkoutTypeResponse } from '@/src/types/types';
 import clsx from 'clsx';
 import { TrashIcon } from '@radix-ui/react-icons';
+import { getAvatarcolor } from '@/src/lib/utils';
 
 export default async function Component({
   workout,
+  workoutTypes,
 }: {
   workout: WorkoutResponse;
+  workoutTypes: WorkoutTypeResponse[];
 }) {
   return (
     <Card key={workout._id} className="h-fit">
-      <Inset clip="padding-box" side="top" pb="current">
-        <Flex
-          justify="between"
-          p="4"
-          className={clsx(
-            'text-radix-white',
-            {
-              'bg-gradient-to-tr from-sky-600 to-blue-400':
-                workout.category.toLowerCase() == 'conditioning',
-            },
-            {
-              'bg-gradient-to-tr from-amber-600 to-orange-400':
-                workout.category.toLowerCase() == 'sport',
-            },
-            {
-              'bg-gradient-to-tr from-emerald-600 to-green-400':
-                workout.category.toLowerCase() == 'mobility',
-            },
-            {
-              'bg-gradient-to-tr from-rose-600 to-pink-400':
-                workout.category.toLowerCase() == 'strength',
-            },
-          )}
-        >
-          <Flex direction="column">
-            <Heading as="h3" size="3" weight="medium">
+      <Flex gap="4" align="center" pb="4">
+        <Avatar
+          size="3"
+          radius="full"
+          variant="soft"
+          color={getAvatarcolor(workout.type, workoutTypes)}
+          fallback={workout.type.substring(0, 1)}
+        ></Avatar>
+        <Flex direction="column" width="100%">
+          <Flex direction="row" justify="between">
+            <Heading as="h3" size="3" weight="bold">
               {workout.type}
             </Heading>
-            <Text as="div" size="2">
-              {workout.time} min
-            </Text>
-          </Flex>
-          <Flex>
             <DeleteWorkoutButton id={workout._id} />
           </Flex>
+          <Text as="div" size="2">
+            {workout.time} min
+          </Text>
         </Flex>
-      </Inset>
+      </Flex>
       <Flex justify="between" align="center"></Flex>
       {workout.description ? (
         <Text

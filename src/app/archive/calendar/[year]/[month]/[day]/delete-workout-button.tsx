@@ -24,7 +24,7 @@ export default function Component({ id }: { id: string }) {
       tooltipContent="Delete workout"
       onConfirm={remove}
     >
-      <IconButton size="1" variant="soft" highContrast color="gray">
+      <IconButton size="1" variant="soft">
         <TrashIcon />
       </IconButton>
     </ConfirmModal>

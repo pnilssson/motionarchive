@@ -1,3 +1,6 @@
+import { avatarPropDefs } from '@radix-ui/themes/props';
+import { WorkoutTypeResponse } from '../types/types';
+
 function getMonthAndDayLink(month: number, day: number) {
   return `${month.toString()}/${day.toString()}`;
 }
@@ -29,4 +32,29 @@ function dateToDateInput(date: Date): string {
   return `${year}-${month}-${day}`;
 }
 
-export { getMonthAndDayLink, getDayLink, getUrl, dateToDateInput };
+function getAvatarcolor(
+  type: string,
+  workoutTypes: WorkoutTypeResponse[],
+): typeof avatarPropDefs.color.default {
+  const workoutType = workoutTypes.find((a) => a.name === type);
+  switch (workoutType?.subcategory.toLowerCase()) {
+    case 'strength':
+      return 'red';
+    case 'conditioning':
+      return 'blue';
+    case 'mobility':
+      return 'jade';
+    case 'sport':
+      return 'orange';
+    default:
+      return 'violet';
+  }
+}
+
+export {
+  getMonthAndDayLink,
+  getDayLink,
+  getUrl,
+  dateToDateInput,
+  getAvatarcolor,
+};

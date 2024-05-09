@@ -52,7 +52,11 @@ export default async function Page({
       <Grid columns={{ initial: '1', md: '4' }} gap="2" width="auto">
         {workouts && workouts.length > 0
           ? workouts.map((workout: WorkoutResponse) => (
-              <WorkoutCard key={workout._id} workout={workout} />
+              <WorkoutCard
+                key={workout._id}
+                workout={workout}
+                workoutTypes={workoutTypes}
+              />
             ))
           : null}
       </Grid>

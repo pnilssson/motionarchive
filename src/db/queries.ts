@@ -9,6 +9,12 @@ export const getTypes = cache(async () => {
   return JSON.parse(JSON.stringify(data));
 });
 
+export const getTypeByName = cache(async (name: string) => {
+  const workoutTypes = await collections.workoutType();
+  const data = await workoutTypes.findOne({ name: name });
+  return JSON.parse(JSON.stringify(data));
+});
+
 export const getWorkoutsForMonth = cache(
   async (year: number, month: number) => {
     const session = await getSession();
@@ -22,7 +28,6 @@ export const getWorkoutsForMonth = cache(
       .toArray();
 
     const mappedData: WorkoutResponse[] = mapWorkoutData(data);
-
     return mappedData;
   },
 );
@@ -54,6 +59,7 @@ const mapWorkoutData = (data: any[]): WorkoutResponse[] => {
         _id: workout._id.toString(),
         userId: workout.userId,
         type: workout.type,
+        category: workout.category,
         time: workout.time,
         description: workout.description,
         year: workout.year,

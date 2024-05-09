@@ -28,7 +28,7 @@ export default function Component({
       tooltipContent="Delete record"
       onConfirm={remove}
     >
-      <IconButton size="1" variant="soft">
+      <IconButton size="1" variant="soft" highContrast color="gray">
         <TrashIcon />
       </IconButton>
     </ConfirmModal>

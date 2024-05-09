@@ -1,6 +1,16 @@
-import { Card, Flex, Text } from '@radix-ui/themes';
+import {
+  Box,
+  Card,
+  Flex,
+  Heading,
+  IconButton,
+  Inset,
+  Text,
+} from '@radix-ui/themes';
 import DeleteWorkoutButton from './delete-workout-button';
 import { WorkoutResponse } from '@/src/types/types';
+import clsx from 'clsx';
+import { TrashIcon } from '@radix-ui/react-icons';
 
 export default async function Component({
   workout,
@@ -8,24 +18,55 @@ export default async function Component({
   workout: WorkoutResponse;
 }) {
   return (
-    <Card key={workout._id} className="p-4 h-fit">
-      <Flex justify="between" align="center">
-        <Text as="div" size="3" weight="bold">
-          {workout.type}
-        </Text>
-        <DeleteWorkoutButton id={workout._id} />
-      </Flex>
-      <Text as="div" size="2" mb="2">
-        {workout.time} min
-      </Text>
-
+    <Card key={workout._id} className="h-fit">
+      <Inset clip="padding-box" side="top" pb="current">
+        <Flex
+          justify="between"
+          className={clsx(
+            'text-radix-white',
+            {
+              'bg-gradient-to-tr from-sky-600 to-blue-400':
+                workout.category.toLowerCase() == 'conditioning',
+            },
+            {
+              'bg-gradient-to-tr from-amber-600 to-orange-400':
+                workout.category.toLowerCase() == 'sport',
+            },
+            {
+              'bg-gradient-to-tr from-emerald-600 to-green-400':
+                workout.category.toLowerCase() == 'mobility',
+            },
+            {
+              'bg-gradient-to-tr from-rose-600 to-pink-400':
+                workout.category.toLowerCase() == 'strength',
+            },
+          )}
+        >
+          <Flex p="2" direction="column">
+            <Heading as="h3" size="3" weight="medium">
+              {workout.type}
+            </Heading>
+            <Text as="div" size="2">
+              {workout.time} min
+            </Text>
+          </Flex>
+          <Flex p="2">
+            <DeleteWorkoutButton id={workout._id} />
+          </Flex>
+        </Flex>
+      </Inset>
+      <Flex justify="between" align="center"></Flex>
       {workout.description ? (
         <Text
           as="div"
           size="2"
           dangerouslySetInnerHTML={{ __html: workout.description }}
         ></Text>
-      ) : null}
+      ) : (
+        <Text as="div" size="2">
+          No description.
+        </Text>
+      )}
     </Card>
   );
 }

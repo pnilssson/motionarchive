@@ -1,36 +1,48 @@
+'use client';
+
 import AddPersonalRecordResultDialog from '@/src/components/dialogs/add-personal-record-result-dialog';
 import {
   PersonalRecordResponse,
   PersonalRecordResult,
 } from '@/src/types/types';
-import {
-  Box,
-  Card,
-  Flex,
-  Inset,
-  ScrollArea,
-  Table,
-  Text,
-} from '@radix-ui/themes';
+import { Card, Flex, Heading, Inset, Table, Text } from '@radix-ui/themes';
 import DeleteResultButton from './delete-result-button';
 import DeleteRecordButton from './delete-record-button';
+import EditSaveButton from '@/src/components/buttons/edit-save-button';
+import { useState } from 'react';
 
-export default async function Component({
+export default function Component({
   personalRecord,
 }: {
   personalRecord: PersonalRecordResponse;
 }) {
+  const [editing, setEditing] = useState(false);
+
+  function toggleEdit() {
+    setEditing(!editing);
+  }
+
   return (
-    <Card className="p-4 h-fit">
-      <Flex justify="between" align="center" pb="4">
-        <Text as="div" size="3" weight="bold">
-          {personalRecord.name}
-        </Text>
-        <Flex direction="row" gap="2">
-          <DeleteRecordButton personalRecordId={personalRecord._id} />
-          <AddPersonalRecordResultDialog personalRecord={personalRecord} />
+    <Card className="h-fit">
+      <Inset clip="padding-box" side="top" pb="current">
+        <Flex
+          justify="between"
+          align="center"
+          p="2"
+          className="text-radix-white bg-gradient-to-tr from-violet-600 to-purple-400"
+        >
+          <Heading as="h3" size="3" weight="medium">
+            {personalRecord.name}
+          </Heading>
+          <Flex direction="row" gap="2">
+            {editing ? (
+              <DeleteRecordButton personalRecordId={personalRecord._id} />
+            ) : null}
+            <AddPersonalRecordResultDialog personalRecord={personalRecord} />
+            <EditSaveButton toggleEdit={toggleEdit} />
+          </Flex>
         </Flex>
-      </Flex>
+      </Inset>
 
       {personalRecord.results.length > 0 ? (
         <Inset side="bottom">
@@ -43,7 +55,9 @@ export default async function Component({
                 <Table.ColumnHeaderCell className="shadow-none">
                   Date
                 </Table.ColumnHeaderCell>
-                <Table.ColumnHeaderCell className="shadow-none"></Table.ColumnHeaderCell>
+                {editing ? (
+                  <Table.ColumnHeaderCell className="shadow-none"></Table.ColumnHeaderCell>
+                ) : null}
               </Table.Row>
             </Table.Header>
 
@@ -58,16 +72,18 @@ export default async function Component({
                         <Table.Cell className="shadow-none">
                           {result.date.toDateString()}
                         </Table.Cell>
-                        <Table.Cell
-                          align="right"
-                          className="shadow-none"
-                          pr="4"
-                        >
-                          <DeleteResultButton
-                            personalRecordId={personalRecord._id}
-                            resultId={result.id}
-                          />
-                        </Table.Cell>
+                        {editing ? (
+                          <Table.Cell
+                            align="right"
+                            className="shadow-none"
+                            pr="4"
+                          >
+                            <DeleteResultButton
+                              personalRecordId={personalRecord._id}
+                              resultId={result.id}
+                            />
+                          </Table.Cell>
+                        ) : null}
                       </Table.Row>
                     ),
                   )
@@ -79,7 +95,7 @@ export default async function Component({
         <Text as="div" size="2" mt="4">
           {personalRecord.results.length > 0
             ? `Last result on ${personalRecord.results[0].date.toDateString()}`
-            : 'No results has been added.'}
+            : 'No results.'}
         </Text>
       )}
     </Card>

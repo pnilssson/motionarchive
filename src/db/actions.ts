@@ -6,10 +6,12 @@ import collections from './db';
 import { getSession } from '../lib/server-utils';
 import { ObjectId } from 'mongodb';
 import { ActionResponse, PersonalRecordResponse } from '../types/types';
+import { getTypeByName } from './queries';
 
 const createWorkoutSchema = z.object({
   userId: z.string(),
   type: z.string({ required_error: 'Type is required.' }),
+  category: z.string({ required_error: 'Category could not be found.' }),
   time: z.coerce
     .number({ required_error: 'Time is required.' })
     .min(1, { message: 'Minimum workout length is 1 minute.' }),
@@ -26,10 +28,13 @@ export async function addWorkout(
   formData: FormData,
 ): Promise<ActionResponse> {
   const session = await getSession();
+  const type = formData.get('type');
+  const workoutType = await getTypeByName(type?.toString() as string);
 
   const request = {
     userId: session?.user?.userId,
     type: formData.get('type'),
+    category: workoutType.subcategory,
     time: formData.get('time'),
     description: formData.get('description'),
     year: formData.get('year'),

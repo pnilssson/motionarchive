@@ -4,6 +4,7 @@ export interface WorkoutResponse {
   _id: string;
   userId: string;
   type: string;
+  category: string;
   time: number;
   description: string;
   year: number;
@@ -14,6 +15,7 @@ export interface WorkoutResponse {
 export interface WorkoutRequest {
   userId: string;
   type: string;
+  category: string;
   time: number;
   description: string;
   year: number;

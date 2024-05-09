@@ -25,3 +25,7 @@
 .date-input > input {
   display: block;
 }
+
+.text-radix-white {
+  color: #edeef0;
+}

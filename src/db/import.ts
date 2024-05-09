@@ -4,6 +4,7 @@ import { getSession } from '../lib/server-utils';
 import { promises as fs } from 'fs';
 import collections from './db';
 import { WorkoutRequest } from '../types/types';
+import { getTypes } from './queries';
 
 function getActivityType(activitiesData: any, id: string) {
   switch (id) {
@@ -65,29 +66,41 @@ export async function importWorkouts() {
     'utf8',
   );
   const workoutData = JSON.parse(workoutFile);
+  const workoutTypes = await getTypes();
   const activitiesData = JSON.parse(activitiesFile);
 
   workoutData.Workouts.forEach(async (workout: any) => {
-    let type =
-      workout.ActivityId != null && workout.ActivityId.__text != null
-        ? getActivityType(activitiesData, workout.ActivityId.__text)
-        : workout._type;
-    if (type == 'strength') type = 'Strength Training';
-    if (type == 'cardiogym') type = 'Cardio';
+    try {
+      let type =
+        workout.ActivityId != null && workout.ActivityId.__text != null
+          ? getActivityType(activitiesData, workout.ActivityId.__text)
+          : workout._type;
+      if (type == 'strength') type = 'Strength Training';
+      if (type == 'cardiogym') type = 'Cardio';
+      if (type == 'Cycling') type = 'Biking';
 
-    const request: WorkoutRequest = {
-      userId: session?.user?.userId,
-      type: capitalizeFirstLetter(type),
-      time: workout.Time,
-      description: workout.Comment.replaceAll('&ouml;', 'ö')
-        .replaceAll('&aring;', 'å')
-        .replaceAll('&auml;', 'ä'),
-      year: new Date(workout._date).getFullYear(),
-      month: new Date(workout._date).getMonth() + 1,
-      day: new Date(workout._date).getDate(),
-    };
-    const workouts = await collections.workout();
-    await workouts.insertOne(request);
+      const workoutType = workoutTypes.find(
+        (a: any) => a.name.toLowerCase() === type.toLowerCase(),
+      );
+
+      const request: WorkoutRequest = {
+        userId: session?.user?.userId,
+        type: capitalizeFirstLetter(type),
+        category: workoutType?.subcategory ?? '',
+        time: workout.Time,
+        description: workout.Comment.replaceAll('&ouml;', 'ö')
+          .replaceAll('&aring;', 'å')
+          .replaceAll('&auml;', 'ä'),
+        year: new Date(workout._date).getFullYear(),
+        month: new Date(workout._date).getMonth() + 1,
+        day: new Date(workout._date).getDate(),
+      };
+      const workouts = await collections.workout();
+      await workouts.insertOne(request);
+    } catch (e) {
+      console.log(e);
+      throw e;
+    }
   });
 }
 

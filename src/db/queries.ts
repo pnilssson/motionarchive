@@ -77,6 +77,7 @@ export const getPersonalRecords = cache(async () => {
     .find({
       userId: session.user.userId,
     })
+    .sort({ name: 1 })
     .toArray();
 
   const mappedData: PersonalRecordResponse[] = mapPersonalRecordData(data);

@@ -1,7 +1,15 @@
 'use client';
 
 import { EnvelopeClosedIcon, PaperPlaneIcon } from '@radix-ui/react-icons';
-import { Box, Button, Flex, Spinner, Text, TextField } from '@radix-ui/themes';
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  Spinner,
+  Text,
+  TextField,
+} from '@radix-ui/themes';
 import { signIn } from 'next-auth/react';
 import { useState } from 'react';
 
@@ -16,11 +24,11 @@ export default function SignIn() {
       className="text-center h-[calc(100vh-56px)]"
     >
       <div className="h-1/4"></div>
-      <Text size={{ initial: '6', sm: '8' }} weight="bold" mb="4" as="div">
+      <Heading size={{ initial: '6', sm: '8' }} weight="bold" mb="4" as="h3">
         Sign in
-      </Text>
-      <Text size="3" mb={'4'} as="div">
-        We will send you a sign-in link to your email address.
+      </Heading>
+      <Text size="3" mb={'4'} as="p">
+        We will send a sign-in link to your email address.
       </Text>
       <Box className="w-80">
         <TextField.Root
@@ -46,14 +54,14 @@ export default function SignIn() {
           setLoading(true);
           signIn('resend', {
             email: email,
-            callbackUrl: '/archive/dashboard',
+            callbackUrl: '/archive/calendar',
           });
         }}
       >
         <Spinner loading={loading}>
           <PaperPlaneIcon />
         </Spinner>
-        Sign in with Email
+        Sign in
       </Button>
     </Flex>
   );

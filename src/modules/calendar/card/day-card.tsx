@@ -25,7 +25,7 @@ export async function DayCard({
 
   return (
     <Card
-      className={clsx(classes && `${classes}`, {
+      className={clsx(classes && `${classes}`, 'shadow-sm', {
         'bg-blue-200': isToday(),
       })}
     >

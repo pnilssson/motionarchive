@@ -20,7 +20,7 @@ export default function Component({
       <Tooltip content={tooltipContent}>
         <Dialog.Trigger>{children}</Dialog.Trigger>
       </Tooltip>
-      <Dialog.Content>
+      <Dialog.Content maxWidth="450px">
         <Dialog.Title>{title}</Dialog.Title>
         <Dialog.Description>{content}</Dialog.Description>
         <Flex gap="3" mt="4" justify="end">

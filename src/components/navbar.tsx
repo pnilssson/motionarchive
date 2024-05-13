@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { Session } from 'next-auth';
-import { Button, DropdownMenu, Flex, TabNav } from '@radix-ui/themes';
+import { Button, DropdownMenu, Flex, TabNav, Text } from '@radix-ui/themes';
 import { usePathname } from 'next/navigation';
 import { HamburgerMenuIcon } from '@radix-ui/react-icons';
 import dynamic from 'next/dynamic';
@@ -27,12 +27,12 @@ export function Navbar({ session }: { session: Session | null }) {
               <MobileDesktopSwitch
                 desktop={
                   <>
-                    <TabNav.Link
+                    {/* <TabNav.Link
                       asChild
                       active={pathname === '/archive/dashboard'}
                     >
                       <Link href="/archive/dashboard">Dashboard</Link>
-                    </TabNav.Link>
+                    </TabNav.Link> */}
                     <TabNav.Link
                       asChild
                       active={pathname.startsWith('/archive/calendar')}
@@ -59,7 +59,10 @@ export function Navbar({ session }: { session: Session | null }) {
                   </>
                 }
                 mobile={
-                  <Flex ml="auto">
+                  <Flex justify="between" align="center" className="w-full">
+                    <Text as="p" weight="medium" size="3">
+                      Motion Archive
+                    </Text>
                     <DropdownMenu.Root>
                       <DropdownMenu.Trigger>
                         <Button variant="soft">
@@ -67,9 +70,9 @@ export function Navbar({ session }: { session: Session | null }) {
                         </Button>
                       </DropdownMenu.Trigger>
                       <DropdownMenu.Content>
-                        <DropdownMenu.Item>
+                        {/* <DropdownMenu.Item>
                           <Link href="/archive/dashboard">Dashboard</Link>
-                        </DropdownMenu.Item>
+                        </DropdownMenu.Item> */}
                         <DropdownMenu.Item>
                           <Link
                             href={`/archive/calendar/${today.getFullYear()}/${

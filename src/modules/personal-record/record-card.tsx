@@ -23,7 +23,7 @@ export default function Component({
   }
 
   return (
-    <Card className="h-fit">
+    <Card className="h-fit shadow-sm">
       <Flex justify="between" align="center" p="2">
         <Heading as="h3" size="3" weight="bold">
           {personalRecord.name}
@@ -90,7 +90,7 @@ export default function Component({
         </Text>
       )}
       <Inset clip="padding-box" side="bottom">
-        <Flex className="min-h-2 bg-violet-400"></Flex>
+        <Flex className="min-h-1 bg-violet-400"></Flex>
       </Inset>
     </Card>
   );

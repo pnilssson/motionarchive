@@ -22,7 +22,7 @@ export default async function Component({
   workoutTypes: WorkoutTypeResponse[];
 }) {
   return (
-    <Card key={workout._id} className="h-fit">
+    <Card key={workout._id} className="h-fit shadow-sm">
       <Flex gap="4" align="center" pb="4">
         <Avatar
           size="3"
@@ -45,11 +45,9 @@ export default async function Component({
       </Flex>
       <Flex justify="between" align="center"></Flex>
       {workout.description ? (
-        <Text
-          as="div"
-          size="2"
-          dangerouslySetInnerHTML={{ __html: workout.description }}
-        ></Text>
+        <Text as="div" size="2" className="whitespace-pre-wrap">
+          {workout.description}
+        </Text>
       ) : (
         <Text as="div" size="2">
           No description.

@@ -1,1 +1,3 @@
-export { GET, POST } from '@/src/app/auth';
+import { handlers } from '@/src/app/auth';
+
+export const { GET, POST } = handlers;

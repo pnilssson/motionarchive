@@ -1,7 +1,5 @@
 import { getTypes, getWorkoutsForDay } from '@/src/db/queries';
-import { Box, Card, Flex, Grid, Heading, Text } from '@radix-ui/themes';
 import AddWorkoutDialog from '@/src/components/dialogs/add-workout-dialog';
-import DeleteWorkout from './delete-workout-button';
 import { WorkoutResponse } from '@/src/types/types';
 import WorkoutCard from './workout-card';
 
@@ -22,44 +20,32 @@ export default async function Page({
 
   return (
     <>
-      <Flex justify={'between'}>
-        <Heading
-          as="h3"
-          size={{ initial: '6', sm: '8' }}
-          weight={'bold'}
-          mb={'4'}
-        >
-          Overview
-        </Heading>
+      <div className="flex justify-between items-center">
+        <h1 className="text-4xl font-bold mb-4">Overview</h1>
         <AddWorkoutDialog
           day={day}
           month={month}
           year={year}
           workoutTypes={workoutTypes}
         />
-      </Flex>
-      <Box mb="4">
-        {' '}
-        <Text size={'5'}>
+      </div>
+      <div className="mb-4">
+        <p className="text-xl text-muted-foreground">
           {new Date(year, month, day).toLocaleDateString(undefined, {
             weekday: 'short',
             year: 'numeric',
             month: 'long',
             day: 'numeric',
           })}
-        </Text>
-      </Box>
-      <Grid columns={{ initial: '1', md: '4' }} gap="2" width="auto">
+        </p>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-4 w-auto gap-2">
         {workouts && workouts.length > 0
           ? workouts.map((workout: WorkoutResponse) => (
-              <WorkoutCard
-                key={workout._id}
-                workout={workout}
-                workoutTypes={workoutTypes}
-              />
+              <WorkoutCard key={workout._id} workout={workout} />
             ))
           : null}
-      </Grid>
+      </div>
     </>
   );
 }

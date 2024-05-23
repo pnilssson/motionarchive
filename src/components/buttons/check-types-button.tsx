@@ -1,5 +1,5 @@
-import { Button } from '@radix-ui/themes';
 import { checkTypes } from '../../db/import';
+import { Button } from '../ui/button';
 
 export default async function Page() {
   return (

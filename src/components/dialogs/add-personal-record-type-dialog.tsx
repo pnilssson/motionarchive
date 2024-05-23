@@ -1,13 +1,14 @@
 'use client';
 
-import { Box, Button, Dialog, Flex, Text, TextField } from '@radix-ui/themes';
+import { Box, Dialog, Flex, Text, TextField } from '@radix-ui/themes';
 import { useEffect, useState } from 'react';
 import ErrorMessages from '../error-messages';
 import SubmitButton from '../buttons/submit-button';
 import { useFormState } from 'react-dom';
 import { addPersonalRecordType } from '../../db/actions';
 import { ActionResponse } from '../../types/types';
-import { showSuccessToast } from '../toast';
+import { Button } from '../ui/button';
+import { useToast } from '../ui/use-toast';
 
 export default function Component() {
   const [formState, action] = useFormState(
@@ -20,18 +21,19 @@ export default function Component() {
     },
   );
   const [open, setOpen] = useState(false);
+  const { toast } = useToast();
 
   useEffect(() => {
     if (formState.success) {
       setOpen(false);
-      showSuccessToast('Personal record type added successfully.');
+      toast({ description: 'Personal record type added successfully.' });
     }
-  }, [formState]);
+  }, [formState, toast]);
 
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger>
-        <Button>Add record</Button>
+        <Button size="sm">Add record</Button>
       </Dialog.Trigger>
 
       <Dialog.Content maxWidth="450px">
@@ -61,7 +63,7 @@ export default function Component() {
 
           <Flex gap="3" mt="4" justify="end">
             <Dialog.Close>
-              <Button variant="soft" color="gray" size="2">
+              <Button size="sm" variant="secondary">
                 Cancel
               </Button>
             </Dialog.Close>

@@ -1,11 +1,17 @@
+import { type ClassValue, clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
 import { avatarPropDefs } from '@radix-ui/themes/props';
 import { WorkoutTypeResponse } from '../types/types';
 
-function getMonthAndDayLink(month: number, day: number) {
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
+
+export function getMonthAndDayLink(month: number, day: number) {
   return `${month.toString()}/${day.toString()}`;
 }
 
-function getDayLink(day: number) {
+export function getDayLink(day: number) {
   return `${day.toString()}`;
 }
 
@@ -24,7 +30,7 @@ function getUrl(path: string) {
   }${path}`;
 }
 
-function dateToDateInput(date: Date): string {
+export function dateToDateInput(date: Date): string {
   const currentMonth = date.getMonth() + 1;
   const year = date.getFullYear();
   const month = currentMonth.toString().padStart(2, '0');
@@ -32,7 +38,7 @@ function dateToDateInput(date: Date): string {
   return `${year}-${month}-${day}`;
 }
 
-function getAvatarcolor(
+export function getAvatarcolor(
   type: string,
   workoutTypes: WorkoutTypeResponse[],
 ): typeof avatarPropDefs.color.default {
@@ -50,11 +56,3 @@ function getAvatarcolor(
       return 'violet';
   }
 }
-
-export {
-  getMonthAndDayLink,
-  getDayLink,
-  getUrl,
-  dateToDateInput,
-  getAvatarcolor,
-};

@@ -1,20 +1,20 @@
 'use client';
 
 import ConfirmModal from '@/src/components/dialogs/confirm-dialog';
-import { showSuccessToast } from '@/src/components/toast';
 import { deleteWorkout } from '@/src/db/actions';
-import { IconButton } from '@radix-ui/themes';
 import { useRouter } from 'next/navigation';
 import { TrashIcon } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/src/components/ui/button';
+import { useToast } from '@/src/components/ui/use-toast';
 
 export default function Component({ id }: { id: string }) {
   const router = useRouter();
+  const { toast } = useToast();
 
   function remove() {
     deleteWorkout(id).then(() => {
       router.refresh();
-      showSuccessToast('Workout deleted successfully.');
+      toast({ description: 'Workout deleted successfully.' });
     });
   }
 
@@ -25,7 +25,7 @@ export default function Component({ id }: { id: string }) {
       tooltipContent="Delete workout"
       onConfirm={remove}
     >
-      <Button variant="outline" size="icon" className="h-6 w-6 bg-violet-50">
+      <Button size="icon" className="h-6 w-6 bg-violet-100 hover:bg-violet-200">
         <TrashIcon className="h-3 w-3 text-violet-950" />
       </Button>
     </ConfirmModal>

@@ -1,18 +1,22 @@
-import { Container, Flex, Link, Separator, Text } from '@radix-ui/themes';
+import Link from 'next/link';
+import { Separator } from './ui/separator';
 
 export default async function Component() {
   return (
-    <Container className="mt-16 md:mt-24">
-      <Separator size="4" />
-
-      <Flex py="6" px={{ initial: '4', sm: '0' }}>
-        <Text size="2">
-          Created by{' '}
-          <Link href="https://pnilssson.dev" weight="medium" target="_blank">
+    <div className="mt-16 md:mt-24">
+      <Separator />
+      <div className="py-6 px-6">
+        <div className="flex text-sm font-semibold">
+          <p className="pr-1">Created by</p>
+          <Link
+            href="https://pnilssson.dev"
+            target="_blank"
+            className="text-violet-600"
+          >
             Pär Nilsson
           </Link>
-        </Text>
-      </Flex>
-    </Container>
+        </div>
+      </div>
+    </div>
   );
 }

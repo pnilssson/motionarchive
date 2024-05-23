@@ -1,4 +1,3 @@
-import { Box, Text } from '@radix-ui/themes';
 import { ZodIssue } from 'zod';
 
 export default function Component({
@@ -20,12 +19,12 @@ export default function Component({
   if (issues.length === 0) return null;
 
   return (
-    <Box mb="2">
+    <div className="mb-2">
       {issues.map((error, index) => (
-        <Text color="red" key={index}>
+        <p className="text-red-500" key={index}>
           {error}
-        </Text>
+        </p>
       ))}
-    </Box>
+    </div>
   );
 }

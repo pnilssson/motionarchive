@@ -2,20 +2,17 @@ import AddPersonalRecordTypeDialog from '@/src/components/dialogs/add-personal-r
 import { getPersonalRecords } from '@/src/db/queries';
 import RecordCard from '@/src/modules/personal-record/record-card';
 import { PersonalRecordResponse } from '@/src/types/types';
-import { Flex, Grid, Heading } from '@radix-ui/themes';
 
 export default async function Page() {
   const personalBests = await getPersonalRecords();
 
   return (
-    <Flex gap="6" mb="6" direction="column">
-      <Flex justify="between" align="center" gap="6" mb="6">
-        <Heading as="h3" size={{ initial: '6', sm: '8' }} weight="bold">
-          Personal records
-        </Heading>
+    <div className="flex flex-col">
+      <div className="flex justify-between items-center mb-4">
+        <h1 className="text-4xl font-bold mb-4">Personal records</h1>
         <AddPersonalRecordTypeDialog />
-      </Flex>
-      <Grid columns={{ initial: '1', sm: '2', md: '3' }} gap="2" width="auto">
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 w-auto">
         {personalBests && personalBests.length > 0
           ? personalBests.map((personalRecord: PersonalRecordResponse) => (
               <RecordCard
@@ -24,7 +21,7 @@ export default async function Page() {
               />
             ))
           : null}
-      </Grid>
-    </Flex>
+      </div>
+    </div>
   );
 }

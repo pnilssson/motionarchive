@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { Navbar } from '../components/navbar';
 import { auth } from './auth';
-import { Box, Container, Theme } from '@radix-ui/themes';
+import { Theme } from '@radix-ui/themes';
 import Script from 'next/script';
-import { Toaster } from 'react-hot-toast';
+import { Toaster } from '../components/ui/toaster';
 
 export const metadata: Metadata = {
   title: 'Motion Archive',
@@ -22,10 +22,12 @@ export default async function RootLayout({
       <body>
         <Theme accentColor="violet">
           <Toaster />
-          <Container className="background">
-            <Navbar session={session} />
-            <Box className="min-h-[calc(100vh-56px)]">{children}</Box>
-          </Container>
+          <div className="background">
+            <div className="container">
+              <Navbar session={session} />
+              <div className="min-h-[calc(100vh-56px)]">{children}</div>
+            </div>
+          </div>
         </Theme>
       </body>
       <Script

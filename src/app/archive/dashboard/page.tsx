@@ -1,11 +1,7 @@
-import { Flex, Heading } from '@radix-ui/themes';
-
 export default async function Page() {
   return (
-    <Flex gap="6" mb="6">
-      <Heading as="h3" size={{ initial: '6', sm: '8' }} weight="bold">
-        Dashboard
-      </Heading>
-    </Flex>
+    <div className="flex">
+      <h1 className="text-4xl font-bold mb-4">Dashboard</h1>
+    </div>
   );
 }

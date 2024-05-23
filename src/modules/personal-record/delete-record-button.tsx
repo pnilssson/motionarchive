@@ -1,7 +1,7 @@
 'use client';
 
 import ConfirmModal from '@/src/components/dialogs/confirm-dialog';
-import { showSuccessToast } from '@/src/components/toast';
+import { useToast } from '@/src/components/ui/use-toast';
 import { deletePersonalRecord } from '@/src/db/actions';
 import { TrashIcon } from '@radix-ui/react-icons';
 import { IconButton } from '@radix-ui/themes';
@@ -13,11 +13,12 @@ export default function Component({
   personalRecordId: string;
 }) {
   const router = useRouter();
+  const { toast } = useToast();
 
   function remove() {
     deletePersonalRecord(personalRecordId).then(() => {
       router.refresh();
-      showSuccessToast('Record deleted successfully.');
+      toast({ description: 'Record deleted successfully.' });
     });
   }
 

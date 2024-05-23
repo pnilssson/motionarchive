@@ -1,5 +1,5 @@
-import { Button } from '@radix-ui/themes';
 import { importWorkouts } from '../../db/import';
+import { Button } from '../ui/button';
 
 export default async function Page() {
   return (

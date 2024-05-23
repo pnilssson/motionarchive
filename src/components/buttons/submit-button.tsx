@@ -1,13 +1,16 @@
 'use client';
 
-import { Button, Spinner } from '@radix-ui/themes';
 import { useFormStatus } from 'react-dom';
+import { Button } from '../ui/button';
+import { LoaderCircleIcon } from 'lucide-react';
 
 export default function Page() {
   const { pending } = useFormStatus();
   return (
-    <Button type="submit" aria-disabled={pending} size="2">
-      <Spinner loading={pending}></Spinner>
+    <Button size="sm" type="submit" aria-disabled={pending}>
+      {pending ? (
+        <LoaderCircleIcon className="mr-2 h-4 w-4 animate-spin" />
+      ) : null}
       Save
     </Button>
   );

@@ -19,8 +19,8 @@ import { useFormState } from 'react-dom';
 import { addWorkout } from '../../db/actions';
 import { PlusIcon } from '@radix-ui/react-icons';
 import { ActionResponse, WorkoutTypeResponse } from '../../types/types';
-import { showSuccessToast } from '../toast';
 import SubmitButton from '../buttons/submit-button';
+import { useToast } from '../ui/use-toast';
 
 export default function Component({
   day,
@@ -45,11 +45,12 @@ export default function Component({
     },
   );
   const [open, setOpen] = useState(false);
+  const { toast } = useToast();
 
   useEffect(() => {
     if (formState.success) {
       setOpen(false);
-      showSuccessToast('Workout added successfully.');
+      toast({ description: 'Workout added successfully.' });
     }
   }, [formState]);
 

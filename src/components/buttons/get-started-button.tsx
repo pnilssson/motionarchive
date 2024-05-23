@@ -1,12 +1,8 @@
 'use client';
 
-import { Button } from '@radix-ui/themes';
 import { signIn } from 'next-auth/react';
+import { Button } from '../ui/button';
 
 export default function Component() {
-  return (
-    <Button onClick={() => signIn()} variant="soft" size="3">
-      Get started
-    </Button>
-  );
+  return <Button onClick={() => signIn()}>Get started</Button>;
 }

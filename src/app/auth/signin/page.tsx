@@ -11,7 +11,8 @@ import {
 } from '@/src/components/ui/card';
 import { Input } from '@/src/components/ui/input';
 import { Label } from '@/src/components/ui/label';
-import { LoaderCircleIcon, MailIcon } from 'lucide-react';
+import { EnvelopeClosedIcon } from '@radix-ui/react-icons';
+import { LoaderCircleIcon } from 'lucide-react';
 import { signIn } from 'next-auth/react';
 import { useState } from 'react';
 
@@ -49,6 +50,7 @@ export default function Page() {
             className="w-full"
             onClick={() => {
               setLoading(true);
+              // TODO: Validate email
               signIn('resend', {
                 email: email,
                 callbackUrl: `/archive/calendar/${today.getFullYear()}/${
@@ -60,7 +62,7 @@ export default function Page() {
             {loading ? (
               <LoaderCircleIcon className="mr-2 h-4 w-4 animate-spin" />
             ) : (
-              <MailIcon className="mr-2 h-4 w-4" />
+              <EnvelopeClosedIcon className="mr-2" />
             )}
             Sign in
           </Button>

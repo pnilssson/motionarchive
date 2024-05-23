@@ -10,8 +10,9 @@ export default function Page() {
     <Button size="sm" type="submit" aria-disabled={pending}>
       {pending ? (
         <LoaderCircleIcon className="mr-2 h-4 w-4 animate-spin" />
-      ) : null}
-      Save
+      ) : (
+        'Save'
+      )}
     </Button>
   );
 }

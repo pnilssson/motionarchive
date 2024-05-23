@@ -1,10 +1,10 @@
 'use client';
 
 import ConfirmModal from '@/src/components/dialogs/confirm-dialog';
+import { Button } from '@/src/components/ui/button';
 import { useToast } from '@/src/components/ui/use-toast';
 import { deletePersonalRecordResult } from '@/src/db/actions';
 import { TrashIcon } from '@radix-ui/react-icons';
-import { IconButton } from '@radix-ui/themes';
 import { useRouter } from 'next/navigation';
 
 export default function Component({
@@ -31,9 +31,9 @@ export default function Component({
       tooltipContent="Delete result"
       onConfirm={remove}
     >
-      <IconButton size="1" variant="soft">
-        <TrashIcon />
-      </IconButton>
+      <Button size="icon" className="h-6 w-6 bg-violet-100 hover:bg-violet-200">
+        <TrashIcon className="text-violet-950" />
+      </Button>
     </ConfirmModal>
   );
 }

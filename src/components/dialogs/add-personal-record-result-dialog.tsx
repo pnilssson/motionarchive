@@ -16,10 +16,10 @@ import SubmitButton from '../buttons/submit-button';
 import { useFormState } from 'react-dom';
 import { addPersonalRecordResult } from '../../db/actions';
 import { ActionResponse, PersonalRecordResponse } from '../../types/types';
-import { PlusIcon } from '@radix-ui/react-icons';
 import { dateToDateInput } from '@/src/lib/utils';
 import { Button } from '../ui/button';
 import { useToast } from '../ui/use-toast';
+import { PlusIcon } from '@radix-ui/react-icons';
 
 export default function Component({
   personalRecord,
@@ -50,9 +50,12 @@ export default function Component({
       <Tooltip content="Add result">
         <Dialog.Trigger>
           <Dialog.Trigger>
-            <IconButton size="1" variant="soft">
-              <PlusIcon />
-            </IconButton>
+            <Button
+              size="icon"
+              className="h-6 w-6 bg-violet-100 hover:bg-violet-200"
+            >
+              <PlusIcon className="text-violet-950" />
+            </Button>
           </Dialog.Trigger>
         </Dialog.Trigger>
       </Tooltip>
@@ -113,7 +116,9 @@ export default function Component({
 
           <Flex gap="3" mt="4" justify="end">
             <Dialog.Close>
-              <Button variant="secondary">Cancel</Button>
+              <Button variant="secondary" size="sm">
+                Cancel
+              </Button>
             </Dialog.Close>
             <Flex justify="end">
               <SubmitButton />

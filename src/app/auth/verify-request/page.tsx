@@ -13,8 +13,8 @@ export default function Page() {
         <CardHeader>
           <CardTitle className="text-2xl">Please check your email</CardTitle>
           <CardDescription>
-            We have sent a sign-in link to your email address. No email? Please
-            check your spam folder.
+            We have sent a sign-in link to your email address. <br /> No email?
+            Please check your spam folder.
           </CardDescription>
         </CardHeader>
       </Card>

@@ -1,7 +1,6 @@
 'use client';
 
 import { useToggle } from '@/src/hooks/useToggle';
-import { CheckIcon, PencilIcon } from 'lucide-react';
 import {
   Tooltip,
   TooltipContent,
@@ -9,6 +8,7 @@ import {
   TooltipTrigger,
 } from '../ui/tooltip';
 import { Button } from '../ui/button';
+import { CheckIcon, Pencil1Icon } from '@radix-ui/react-icons';
 
 export default function Page({ toggleEdit }: { toggleEdit: () => void }) {
   const [value, toggle] = useToggle();
@@ -48,7 +48,7 @@ export default function Page({ toggleEdit }: { toggleEdit: () => void }) {
               className="h-6 w-6 bg-violet-100 hover:bg-violet-200"
               onClick={onEdit}
             >
-              <PencilIcon className="h-3 w-3 text-violet-950" />
+              <Pencil1Icon className="h-3 w-3 text-violet-950" />
             </Button>
           </TooltipTrigger>
           <TooltipContent side="left">

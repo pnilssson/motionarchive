@@ -1,6 +1,5 @@
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import { avatarPropDefs } from '@radix-ui/themes/props';
 import { WorkoutTypeResponse } from '../types/types';
 
 export function cn(...inputs: ClassValue[]) {

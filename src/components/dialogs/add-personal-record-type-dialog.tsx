@@ -1,6 +1,5 @@
 'use client';
 
-import { Box, Dialog, Flex, Text, TextField } from '@radix-ui/themes';
 import { useEffect, useState } from 'react';
 import ErrorMessages from '../error-messages';
 import SubmitButton from '../buttons/submit-button';
@@ -9,6 +8,18 @@ import { addPersonalRecordType } from '../../db/actions';
 import { ActionResponse } from '../../types/types';
 import { Button } from '../ui/button';
 import { useToast } from '../ui/use-toast';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogClose,
+} from '../ui/dialog';
+import { Label } from '../ui/label';
+import { Input } from '../ui/input';
+import { Divide } from 'lucide-react';
 
 export default function Component() {
   const [formState, action] = useFormState(
@@ -31,48 +42,42 @@ export default function Component() {
   }, [formState, toast]);
 
   return (
-    <Dialog.Root open={open} onOpenChange={setOpen}>
-      <Dialog.Trigger>
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>
         <Button size="sm">Add record</Button>
-      </Dialog.Trigger>
-
-      <Dialog.Content maxWidth="450px">
-        <Dialog.Title mb="2">New personal record</Dialog.Title>
-        <Dialog.Description size="2" mb="4">
-          New type of personal record, results can be added once the personal
-          record type has been created.
-        </Dialog.Description>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>New personal record</DialogTitle>
+          <DialogDescription>
+            New type of personal record, results can be added once the personal
+            record type has been created.
+          </DialogDescription>
+        </DialogHeader>
         <form action={action}>
-          <Flex direction="column">
-            <Box mb="2">
-              <Text as="div" size="2" weight="bold" mb="2">
-                Name
-              </Text>
-              <TextField.Root
-                size="3"
-                type="text"
-                name="name"
-                placeholder="Name"
-              ></TextField.Root>
+          <div className="flex flex-col">
+            <div className="mb-2">
+              <Label>Name</Label>
+              <Input required type="text" name="name" placeholder="Name" />
               <ErrorMessages
                 name="name"
                 errors={formState && formState.errors}
               />
-            </Box>
-          </Flex>
+            </div>
+          </div>
 
-          <Flex gap="3" mt="4" justify="end">
-            <Dialog.Close>
+          <div className="flex gap-2 mt-4 justify-end">
+            <DialogClose asChild>
               <Button size="sm" variant="secondary">
                 Cancel
               </Button>
-            </Dialog.Close>
-            <Flex justify="end">
+            </DialogClose>
+            <div>
               <SubmitButton />
-            </Flex>
-          </Flex>
+            </div>
+          </div>
         </form>
-      </Dialog.Content>
-    </Dialog.Root>
+      </DialogContent>
+    </Dialog>
   );
 }

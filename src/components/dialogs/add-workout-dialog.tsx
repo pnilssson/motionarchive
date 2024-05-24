@@ -150,7 +150,7 @@ export default function Component({
                 Cancel
               </Button>
             </DialogClose>
-            <div className="flex justify-end">
+            <div>
               <SubmitButton />
             </div>
           </div>

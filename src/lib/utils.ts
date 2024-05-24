@@ -41,18 +41,16 @@ export function dateToDateInput(date: Date): string {
 export function getAvatarcolor(
   type: string,
   workoutTypes: WorkoutTypeResponse[],
-): typeof avatarPropDefs.color.default {
+) {
   const workoutType = workoutTypes.find((a) => a.name === type);
   switch (workoutType?.subcategory.toLowerCase()) {
     case 'strength':
-      return 'red';
+      return 'bg-rose-100';
     case 'conditioning':
-      return 'blue';
+      return 'bg-blue-100';
     case 'mobility':
-      return 'jade';
+      return 'bg-emerald-100';
     case 'sport':
-      return 'orange';
-    default:
-      return 'violet';
+      return 'bg-orange-100';
   }
 }

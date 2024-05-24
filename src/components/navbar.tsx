@@ -1,12 +1,15 @@
 'use client';
 
-import Link from 'next/link';
 import { Session } from 'next-auth';
-import { Button, DropdownMenu, Flex, TabNav, Text } from '@radix-ui/themes';
-import { usePathname } from 'next/navigation';
-import { HamburgerMenuIcon } from '@radix-ui/react-icons';
 import dynamic from 'next/dynamic';
 import LoginButton from './buttons/login-button';
+import {
+  NavigationMenu,
+  NavigationMenuList,
+  NavigationMenuItem,
+  NavigationMenuLink,
+} from '@radix-ui/react-navigation-menu';
+import { navigationMenuTriggerStyle } from './ui/navigation-menu';
 const MobileDesktopSwitch = dynamic(
   () => import('@/src/components/mobile-desktop-switch'),
   {
@@ -16,100 +19,32 @@ const MobileDesktopSwitch = dynamic(
 
 export function Navbar({ session }: { session: Session | null }) {
   const today = new Date();
-  const pathname = usePathname();
+
+  const items = [
+    {
+      label: 'Calendar',
+      url: `/archive/calendar/${today.getFullYear()}/${today.getMonth() + 1}`,
+    },
+    { label: 'Personal Records', url: '/archive/personal-records' },
+  ];
 
   return (
-    <>
-      <Flex direction="column" gap="4">
-        <TabNav.Root className="shadow-none">
-          <Flex p="2" width="100%">
-            {session ? (
-              <MobileDesktopSwitch
-                desktop={
-                  <>
-                    {/* <TabNav.Link
-                      asChild
-                      active={pathname === '/archive/dashboard'}
-                    >
-                      <Link href="/archive/dashboard">Dashboard</Link>
-                    </TabNav.Link> */}
-                    <TabNav.Link
-                      asChild
-                      active={pathname.startsWith('/archive/calendar')}
-                    >
-                      <Link
-                        href={`/archive/calendar/${today.getFullYear()}/${
-                          today.getMonth() + 1
-                        }`}
-                      >
-                        Calendar
-                      </Link>
-                    </TabNav.Link>
-                    <TabNav.Link
-                      asChild
-                      active={pathname === '/archive/personal-records'}
-                    >
-                      <Link href="/archive/personal-records">
-                        Personal Records
-                      </Link>
-                    </TabNav.Link>
-                    <Flex align="center" ml="auto">
-                      <LoginButton session={session}></LoginButton>
-                    </Flex>
-                  </>
-                }
-                mobile={
-                  <Flex justify="between" align="center" className="w-full">
-                    <Text as="p" weight="medium" size="3">
-                      Motion Archive
-                    </Text>
-                    <DropdownMenu.Root>
-                      <DropdownMenu.Trigger>
-                        <Button variant="soft">
-                          <HamburgerMenuIcon />
-                        </Button>
-                      </DropdownMenu.Trigger>
-                      <DropdownMenu.Content>
-                        {/* <DropdownMenu.Item>
-                          <Link href="/archive/dashboard">Dashboard</Link>
-                        </DropdownMenu.Item> */}
-                        <DropdownMenu.Item>
-                          <Link
-                            href={`/archive/calendar/${today.getFullYear()}/${
-                              today.getMonth() + 1
-                            }`}
-                          >
-                            Calendar
-                          </Link>
-                        </DropdownMenu.Item>
-                        <DropdownMenu.Item>
-                          <Link href="/archive/personal-records">
-                            Personal Records
-                          </Link>
-                        </DropdownMenu.Item>
-                      </DropdownMenu.Content>
-                    </DropdownMenu.Root>
-                  </Flex>
-                }
-              ></MobileDesktopSwitch>
-            ) : (
-              <>
-                <TabNav.Link asChild active={pathname === '/'}>
-                  <Link href="/">Motion Archive</Link>
-                </TabNav.Link>
-                <Flex align="center" ml="auto">
-                  <LoginButton session={session}></LoginButton>
-                </Flex>
-              </>
-            )}
-          </Flex>
-        </TabNav.Root>
-      </Flex>
-      {session ? (
-        <Flex className="md:hidden z-10" position="fixed" bottom="2" right="2">
-          <LoginButton session={session}></LoginButton>
-        </Flex>
-      ) : null}
-    </>
+    <NavigationMenu>
+      <NavigationMenuList className="py-2 flex">
+        {items.map((item) => (
+          <NavigationMenuItem key={item.label}>
+            <NavigationMenuLink
+              className={navigationMenuTriggerStyle()}
+              href={item.url}
+            >
+              {item.label}
+            </NavigationMenuLink>
+          </NavigationMenuItem>
+        ))}
+        <NavigationMenuItem className="ml-auto">
+          <LoginButton session={session} />
+        </NavigationMenuItem>
+      </NavigationMenuList>
+    </NavigationMenu>
   );
 }

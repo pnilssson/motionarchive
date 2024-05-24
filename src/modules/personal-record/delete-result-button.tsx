@@ -26,7 +26,7 @@ export default function Component({
 
   return (
     <ConfirmModal
-      title="Delete Result"
+      title="Delete result"
       content="Are you sure you want to delete the result?"
       onConfirm={remove}
     >

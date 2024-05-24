@@ -131,10 +131,11 @@ const createPersonalRecordResultSchema = z.object({
 export async function addPersonalRecordResult(
   _: any,
   formData: FormData,
+  date: Date | undefined,
 ): Promise<ActionResponse> {
   const personalRecordId = formData.get('id') as unknown as string;
   const request = {
-    date: formData.get('date'),
+    date: date,
     result: formData.get('result'),
     id: crypto.randomUUID(),
   };

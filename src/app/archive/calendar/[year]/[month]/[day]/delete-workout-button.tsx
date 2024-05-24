@@ -20,7 +20,7 @@ export default function Component({ id }: { id: string }) {
 
   return (
     <ConfirmModal
-      title="Delete Workout"
+      title="Delete workout"
       content="Are you sure you want to delete the workout?"
       onConfirm={remove}
     >

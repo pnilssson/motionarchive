@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { Navbar } from '../components/navbar';
 import { auth } from './auth';
-import { Theme } from '@radix-ui/themes';
 import Script from 'next/script';
 import { Toaster } from '../components/ui/toaster';
 
@@ -19,16 +18,10 @@ export default async function RootLayout({
   const session = await auth();
   return (
     <html lang="en">
-      <body>
-        <Theme accentColor="violet">
-          <Toaster />
-          <div className="background">
-            <div className="container">
-              <Navbar session={session} />
-              <div className="min-h-[calc(100vh-56px)]">{children}</div>
-            </div>
-          </div>
-        </Theme>
+      <body className="min-h-screen font-sans antialiased background container">
+        <Toaster />
+        <Navbar session={session} />
+        <div className="min-h-[calc(100vh-56px)]">{children}</div>
       </body>
       <Script
         id="cookieyes"

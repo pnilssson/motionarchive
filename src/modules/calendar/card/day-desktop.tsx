@@ -2,11 +2,11 @@
 
 import AddWorkoutDialog from '@/src/components/dialogs/add-workout-dialog';
 import { getMonthAndDayLink, getAvatarcolor } from '@/src/lib/utils';
-import { Box, Flex, Text, Avatar, Tooltip } from '@radix-ui/themes';
 import { useRouter } from 'next/navigation';
 import { useRef } from 'react';
 import { DayCard } from './day-card';
 import { WorkoutResponse, WorkoutTypeResponse } from '@/src/types/types';
+import { Avatar, AvatarFallback } from '@/src/components/ui/avatar';
 
 export default function Component({
   day,
@@ -43,15 +43,15 @@ export default function Component({
 
   return (
     <>
-      <Box
+      <div
         ref={desktopCardRef}
         onClick={handleCardClick}
         className="cursor-pointer"
       >
         <DayCard day={day} month={month} year={year} classes="min-h-24 h-full">
-          <Flex justify="between" mb="2">
-            <Text weight="medium">{day}</Text>
-            <Box ref={addWorkoutButtonRef}>
+          <div className="flex justify-between mb-2">
+            <p className="font-mediumbold">{day}</p>
+            <div ref={addWorkoutButtonRef}>
               <AddWorkoutDialog
                 day={day}
                 month={month}
@@ -59,27 +59,25 @@ export default function Component({
                 workoutTypes={workoutTypes}
                 triggerType="plus"
               />
-            </Box>
-          </Flex>
-          <Flex gap="1" className="flex-wrap">
+            </div>
+          </div>
+          <div className="flex gap-1 flex-wrap">
             {workouts
               ? workouts.map((workout) => (
-                  <Box key={workout._id}>
-                    <Tooltip content={workout.type}>
-                      <Avatar
-                        size="2"
-                        radius="full"
-                        variant="soft"
-                        color={getAvatarcolor(workout.type, workoutTypes)}
-                        fallback={workout.type.substring(0, 1)}
-                      ></Avatar>
-                    </Tooltip>
-                  </Box>
+                  <div key={workout._id}>
+                    <Avatar className="h-8 w-8">
+                      <AvatarFallback
+                        className={`${getAvatarcolor(workout.type, workoutTypes)} font-semibold`}
+                      >
+                        {workout.type.substring(0, 1)}
+                      </AvatarFallback>
+                    </Avatar>
+                  </div>
                 ))
               : null}
-          </Flex>
+          </div>
         </DayCard>
-      </Box>
+      </div>
     </>
   );
 }

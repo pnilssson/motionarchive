@@ -5,11 +5,25 @@ import {
   PersonalRecordResponse,
   PersonalRecordResult,
 } from '@/src/types/types';
-import { Card, Flex, Heading, Inset, Table, Text } from '@radix-ui/themes';
 import DeleteResultButton from './delete-result-button';
 import DeleteRecordButton from './delete-record-button';
 import EditSaveButton from '@/src/components/buttons/edit-save-button';
 import { useState } from 'react';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/src/components/ui/table';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/src/components/ui/card';
 
 export default function Component({
   personalRecord,
@@ -23,77 +37,72 @@ export default function Component({
   }
 
   return (
-    <Card className="h-fit shadow-sm">
-      <Flex justify="between" align="center" p="2">
-        <Heading as="h3" size="3" weight="bold">
-          {personalRecord.name}
-        </Heading>
-        <Flex direction="row" gap="2">
-          {editing ? (
-            <>
-              <DeleteRecordButton personalRecordId={personalRecord._id} />
-              <AddPersonalRecordResultDialog personalRecord={personalRecord} />
-            </>
-          ) : null}
-          <EditSaveButton toggleEdit={toggleEdit} />
-        </Flex>
-      </Flex>
-
-      {personalRecord.results.length > 0 ? (
-        <Table.Root size="1" layout="auto" className="py-2">
-          <Table.Header>
-            <Table.Row>
-              <Table.ColumnHeaderCell className="shadow-none">
-                Result
-              </Table.ColumnHeaderCell>
-              <Table.ColumnHeaderCell className="shadow-none">
-                Date
-              </Table.ColumnHeaderCell>
-              {editing ? (
-                <Table.ColumnHeaderCell className="shadow-none"></Table.ColumnHeaderCell>
-              ) : null}
-            </Table.Row>
-          </Table.Header>
-
-          <Table.Body>
-            {personalRecord.results.length > 0
-              ? personalRecord.results.map(
-                  (result: PersonalRecordResult, i: number) => (
-                    <Table.Row key={i} align="center">
-                      <Table.RowHeaderCell className="shadow-none">
-                        {result.result}
-                      </Table.RowHeaderCell>
-                      <Table.Cell className="shadow-none">
-                        {result.date.toDateString()}
-                      </Table.Cell>
-                      {editing ? (
-                        <Table.Cell
-                          align="right"
-                          className="shadow-none"
-                          pr="4"
-                        >
-                          <DeleteResultButton
-                            personalRecordId={personalRecord._id}
-                            resultId={result.id}
-                          />
-                        </Table.Cell>
-                      ) : null}
-                    </Table.Row>
-                  ),
-                )
-              : null}
-          </Table.Body>
-        </Table.Root>
-      ) : (
-        <Text as="div" size="2" my="4">
+    <Card className="h-fit">
+      <CardHeader>
+        <div className="flex flex-row items-center justify-between">
+          <CardTitle>{personalRecord.name}</CardTitle>
+          <div className="flex flex-row gap-1">
+            {editing ? (
+              <>
+                <DeleteRecordButton personalRecordId={personalRecord._id} />
+                <AddPersonalRecordResultDialog
+                  personalRecord={personalRecord}
+                />
+              </>
+            ) : null}
+            <EditSaveButton toggleEdit={toggleEdit} />
+          </div>
+        </div>
+        <CardDescription>
           {personalRecord.results.length > 0
-            ? `Last result on ${personalRecord.results[0].date.toDateString()}`
-            : 'No results.'}
-        </Text>
-      )}
-      <Inset clip="padding-box" side="bottom">
-        <Flex className="min-h-1 bg-violet-400"></Flex>
-      </Inset>
+            ? `Latest record ${personalRecord.results[0].date.toDateString()}`
+            : null}
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        {personalRecord.results.length > 0 ? (
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="p-2 h-8">Result</TableHead>
+                <TableHead className="p-2 h-8">Date</TableHead>
+                <TableHead className="text-right h-8"></TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {personalRecord.results.length > 0
+                ? personalRecord.results.map(
+                    (result: PersonalRecordResult, i: number) => (
+                      <TableRow key={i}>
+                        <TableCell className="p-2 font-semibold">
+                          {result.result}
+                        </TableCell>
+                        <TableCell className="p-2">
+                          {result.date.toDateString()}
+                        </TableCell>
+                        <TableCell className="p-0 pr-2 text-right">
+                          {editing ? (
+                            <DeleteResultButton
+                              personalRecordId={personalRecord._id}
+                              resultId={result.id}
+                            />
+                          ) : null}
+                        </TableCell>
+                      </TableRow>
+                    ),
+                  )
+                : null}
+            </TableBody>
+          </Table>
+        ) : (
+          <p className="text-sm">
+            {personalRecord.results.length > 0
+              ? `Last result on ${personalRecord.results[0].date.toDateString()}`
+              : 'No results'}
+          </p>
+        )}
+      </CardContent>
+      <div className="flex min-h-1 bg-violet-400 rounded-b-lg"></div>
     </Card>
   );
 }

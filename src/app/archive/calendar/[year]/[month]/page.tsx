@@ -1,4 +1,5 @@
 import Calendar from '@/src/modules/calendar/calendar';
+import CalendarNavigation from '@/src/modules/calendar/calendar-navigation';
 
 export default async function Page({
   params,
@@ -8,10 +9,21 @@ export default async function Page({
     month: string;
   };
 }) {
+  const month = parseInt(params.month);
+  const year = parseInt(params.year);
   return (
     <div className="flex flex-col">
-      <h1 className="text-4xl font-bold mb-4">Calendar</h1>
-      <Calendar month={parseInt(params.month)} year={parseInt(params.year)} />
+      <div className="flex flex-col sm:flex-row sm:justify-between mb-8">
+        <h1 className="text-4xl font-bold mb-4 sm:mb-0">Calendar</h1>
+        <CalendarNavigation
+          monthName={new Date(year, month - 1, 1).toLocaleString(undefined, {
+            month: 'long',
+          })}
+          month={month}
+          year={year}
+        />
+      </div>
+      <Calendar month={month} year={year} />
     </div>
   );
 }

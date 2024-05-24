@@ -1,18 +1,5 @@
 'use client';
 
-import {
-  Box,
-  Button,
-  Dialog,
-  Flex,
-  IconButton,
-  Select,
-  Text,
-  TextArea,
-  TextField,
-  Tooltip,
-  VisuallyHidden,
-} from '@radix-ui/themes';
 import { useEffect, useState } from 'react';
 import ErrorMessages from '../error-messages';
 import { useFormState } from 'react-dom';
@@ -21,6 +8,27 @@ import { PlusIcon } from '@radix-ui/react-icons';
 import { ActionResponse, WorkoutTypeResponse } from '../../types/types';
 import SubmitButton from '../buttons/submit-button';
 import { useToast } from '../ui/use-toast';
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '../ui/dialog';
+import { Button } from '../ui/button';
+import { Input } from '../ui/input';
+import { Label } from '../ui/label';
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '../ui/select';
+import { Textarea } from '../ui/textarea';
 
 export default function Component({
   day,
@@ -52,133 +60,102 @@ export default function Component({
       setOpen(false);
       toast({ description: 'Workout added successfully.' });
     }
-  }, [formState]);
+  }, [formState, toast]);
 
   return (
-    <Dialog.Root open={open} onOpenChange={setOpen}>
-      {triggerType === 'button' ? (
-        <Dialog.Trigger>
-          <Button>Add workout</Button>
-        </Dialog.Trigger>
-      ) : (
-        <Tooltip content="Add workout">
-          <Dialog.Trigger>
-            <IconButton size="1" variant="soft">
-              <PlusIcon />
-            </IconButton>
-          </Dialog.Trigger>
-        </Tooltip>
-      )}
-
-      <Dialog.Content maxWidth="450px">
-        <Dialog.Title mb="2">Add workout</Dialog.Title>
-        <Dialog.Description size="2" mb="4">
-          On{' '}
-          {new Date(year, month, day).toLocaleDateString(undefined, {
-            weekday: 'short',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-          })}
-        </Dialog.Description>
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>
+        {triggerType === 'button' ? (
+          <Button size="sm">Add workout</Button>
+        ) : (
+          <Button
+            size="icon"
+            className="h-6 w-6 bg-violet-100 hover:bg-violet-200"
+          >
+            <PlusIcon className="text-violet-950" />
+          </Button>
+        )}
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Add workout</DialogTitle>
+          <DialogDescription>
+            {new Date(year, month, day).toLocaleDateString(undefined, {
+              weekday: 'short',
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            })}
+          </DialogDescription>
+        </DialogHeader>
         <form action={action}>
-          <Flex direction="column">
-            <Box>
-              <VisuallyHidden>
-                <TextField.Root
-                  size="3"
-                  required
-                  type="number"
-                  name="year"
-                  defaultValue={year}
-                ></TextField.Root>
-                <TextField.Root
-                  size="3"
-                  required
-                  type="number"
-                  name="month"
-                  defaultValue={month}
-                ></TextField.Root>
-                <TextField.Root
-                  size="3"
-                  required
-                  type="number"
-                  name="day"
-                  defaultValue={day}
-                ></TextField.Root>
-              </VisuallyHidden>
-            </Box>
+          <div className="flex flex-col">
+            <div className="hidden">
+              <Input required type="number" name="year" defaultValue={year} />
+              <Input required type="number" name="month" defaultValue={month} />
+              <Input required type="number" name="day" defaultValue={day} />
+            </div>
 
-            <Box mb="4">
-              <Text as="div" size="2" weight="bold" mb="2">
-                Time
-              </Text>
-              <TextField.Root
-                size="3"
-                type="number"
-                name="time"
-                placeholder="Time"
-              ></TextField.Root>
+            <div className="mb-4">
+              <Label htmlFor="time">Time</Label>
+              <Input type="number" name="time" placeholder="Time" id="time" />
               <ErrorMessages
                 name="time"
                 errors={formState && formState.errors}
               />
-            </Box>
+            </div>
 
-            <Flex mb="4" direction="column">
-              <Text as="div" size="2" weight="bold" mb="2">
-                Type
-              </Text>
-              <Select.Root
-                size="3"
+            <div className="flex flex-col mb-4">
+              <Label className="mb-2">Type</Label>
+              <Select
                 required
                 defaultValue={workoutTypes[0]?.name ?? ''}
                 name="type"
               >
-                <Select.Trigger />
-                <Select.Content position="popper" style={{ maxHeight: 200 }}>
-                  {workoutTypes.map((type: WorkoutTypeResponse) => (
-                    <Select.Item key={type._id} value={type.name}>
-                      {type.name}
-                    </Select.Item>
-                  ))}
-                </Select.Content>
-              </Select.Root>
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    {workoutTypes.map((type: WorkoutTypeResponse) => (
+                      <SelectItem key={type._id} value={type.name}>
+                        {type.name}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
               <ErrorMessages
                 name="type"
                 errors={formState && formState.errors}
               />
-            </Flex>
-
-            <Box mb="4">
-              <Text as="div" size="2" weight="bold" mb="2">
-                Description
-              </Text>
-              <TextArea
-                resize="vertical"
-                size="3"
+            </div>
+            <div className="mb-4">
+              <Label htmlFor="description">Description</Label>
+              <Textarea
                 placeholder="Description"
                 name="description"
+                id="description"
               />
               <ErrorMessages
                 name="description"
                 errors={formState && formState.errors}
               />
-            </Box>
-          </Flex>
+            </div>
+          </div>
 
-          <Flex gap="3" mt="4" justify="end">
-            <Dialog.Close>
-              <Button variant="soft" color="gray" size="2">
+          <div className="flex gap-2 mt-4 justify-end">
+            <DialogClose asChild>
+              <Button size="sm" variant="secondary">
                 Cancel
               </Button>
-            </Dialog.Close>
-            <Flex justify="end">
+            </DialogClose>
+            <div className="flex justify-end">
               <SubmitButton />
-            </Flex>
-          </Flex>
+            </div>
+          </div>
         </form>
-      </Dialog.Content>
-    </Dialog.Root>
+      </DialogContent>
+    </Dialog>
   );
 }

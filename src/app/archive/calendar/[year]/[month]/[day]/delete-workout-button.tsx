@@ -22,7 +22,6 @@ export default function Component({ id }: { id: string }) {
     <ConfirmModal
       title="Delete Workout"
       content="Are you sure you want to delete the workout?"
-      tooltipContent="Delete workout"
       onConfirm={remove}
     >
       <Button size="icon" className="h-6 w-6 bg-violet-100 hover:bg-violet-200">

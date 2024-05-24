@@ -30,9 +30,11 @@ export default function Component({
         </Heading>
         <Flex direction="row" gap="2">
           {editing ? (
-            <DeleteRecordButton personalRecordId={personalRecord._id} />
+            <>
+              <DeleteRecordButton personalRecordId={personalRecord._id} />
+              <AddPersonalRecordResultDialog personalRecord={personalRecord} />
+            </>
           ) : null}
-          <AddPersonalRecordResultDialog personalRecord={personalRecord} />
           <EditSaveButton toggleEdit={toggleEdit} />
         </Flex>
       </Flex>

@@ -19,9 +19,9 @@ export default function Component({
   if (issues.length === 0) return null;
 
   return (
-    <div className="mb-2">
+    <div>
       {issues.map((error, index) => (
-        <p className="text-red-500" key={index}>
+        <p className="mt-2 ml-2 text-sm text-bold text-red-500" key={index}>
           {error}
         </p>
       ))}

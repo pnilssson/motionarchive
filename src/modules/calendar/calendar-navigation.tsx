@@ -1,6 +1,6 @@
 import MonthPicker from '@/src/modules/calendar/month-picker';
 import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
-import { Flex, Link, Tooltip } from '@radix-ui/themes';
+import Link from 'next/link';
 
 export default async function Page({
   monthName,
@@ -32,18 +32,14 @@ export default async function Page({
   }
 
   return (
-    <Flex align={'center'} mb={'5'} gap="2">
-      <Tooltip content="Previous month">
-        <Link href={`/archive/calendar/${getPreviousMonthDateParameter()}`}>
-          <ChevronLeftIcon />
-        </Link>
-      </Tooltip>
+    <div className="flex gap-2 items-center">
+      <Link href={`/archive/calendar/${getPreviousMonthDateParameter()}`}>
+        <ChevronLeftIcon />
+      </Link>
       <MonthPicker monthName={monthName} year={year} />
-      <Tooltip content="Next month">
-        <Link href={`/archive/calendar/${getNextMonthDateParameter()}`}>
-          <ChevronRightIcon />
-        </Link>
-      </Tooltip>
-    </Flex>
+      <Link href={`/archive/calendar/${getNextMonthDateParameter()}`}>
+        <ChevronRightIcon />
+      </Link>
+    </div>
   );
 }

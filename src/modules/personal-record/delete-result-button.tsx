@@ -28,7 +28,6 @@ export default function Component({
     <ConfirmModal
       title="Delete Result"
       content="Are you sure you want to delete the result?"
-      tooltipContent="Delete result"
       onConfirm={remove}
     >
       <Button size="icon" className="h-6 w-6 bg-violet-100 hover:bg-violet-200">

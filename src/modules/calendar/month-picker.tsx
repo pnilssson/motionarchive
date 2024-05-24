@@ -1,6 +1,13 @@
 'use client';
 
-import { Select } from '@radix-ui/themes';
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/src/components/ui/select';
 import { useRouter } from 'next/navigation';
 
 const months = [
@@ -52,34 +59,42 @@ export default function Component({
 
   return (
     <>
-      <Select.Root
-        size="2"
-        defaultValue={monthName}
-        onValueChange={handleMonthChange}
-      >
-        <Select.Trigger />
-        <Select.Content position="popper" style={{ maxHeight: 200 }}>
+      <Select defaultValue={monthName} onValueChange={handleMonthChange}>
+        <SelectTrigger>
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent
+          ref={(ref) => {
+            if (!ref) return;
+            ref.ontouchstart = (e) => e.preventDefault();
+          }}
+        >
           {months.map((type: any) => (
-            <Select.Item key={type.value} value={type.name}>
+            <SelectItem key={type.value} value={type.name}>
               {type.name}
-            </Select.Item>
+            </SelectItem>
           ))}
-        </Select.Content>
-      </Select.Root>
-      <Select.Root
-        size="2"
-        defaultValue={year.toString()}
-        onValueChange={handleYearChange}
-      >
-        <Select.Trigger />
-        <Select.Content position="popper" style={{ maxHeight: 200 }}>
-          {getYears().map((year: any) => (
-            <Select.Item key={year} value={year.toString()}>
-              {year}
-            </Select.Item>
-          ))}
-        </Select.Content>
-      </Select.Root>
+        </SelectContent>
+      </Select>
+      <Select defaultValue={year.toString()} onValueChange={handleYearChange}>
+        <SelectTrigger>
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent
+          ref={(ref) => {
+            if (!ref) return;
+            ref.ontouchstart = (e) => e.preventDefault();
+          }}
+        >
+          <SelectGroup>
+            {getYears().map((year: any) => (
+              <SelectItem key={year} value={year.toString()}>
+                {year}
+              </SelectItem>
+            ))}
+          </SelectGroup>
+        </SelectContent>
+      </Select>
     </>
   );
 }

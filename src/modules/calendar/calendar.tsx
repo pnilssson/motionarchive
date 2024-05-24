@@ -1,9 +1,6 @@
 import { getTypes, getWorkoutsForMonth } from '@/src/db/queries';
-import { Text, Grid, Box } from '@radix-ui/themes';
 import { Day } from './card/day';
 import { WorkoutResponse } from '@/src/types/types';
-import CalendarNavigation from './calendar-navigation';
-import ImportButton from '@/src/components/buttons/import-button';
 
 export default async function Calendar({
   year,
@@ -16,7 +13,6 @@ export default async function Calendar({
   const workoutTypes = await getTypes();
 
   const date = new Date(year, month - 1, 1);
-  const monthName = date.toLocaleString(undefined, { month: 'long' });
   let days = setDays();
 
   function setDays() {
@@ -55,30 +51,27 @@ export default async function Calendar({
   }
 
   return (
-    <>
-      <CalendarNavigation monthName={monthName} month={month} year={year} />{' '}
-      <Grid columns={'7'} gap={'2'}>
-        <Text weight="medium">Mon</Text>
-        <Text weight="medium">Tue</Text>
-        <Text weight="medium">Wed</Text>
-        <Text weight="medium">Thu</Text>
-        <Text weight="medium">Fri</Text>
-        <Text weight="medium">Sat</Text>
-        <Text weight="medium">Sun</Text>
-        {days.map((day, i) => (
-          <Box key={i}>
-            {day ? (
-              <Day
-                day={day}
-                month={month}
-                year={year}
-                workouts={getWorkoutByDay(day)}
-                workoutTypes={workoutTypes}
-              />
-            ) : null}
-          </Box>
-        ))}
-      </Grid>
-    </>
+    <div className="grid grid-cols-7 gap-2">
+      <p className="font-semibold">Mon</p>
+      <p className="font-semibold">Tue</p>
+      <p className="font-semibold">Wed</p>
+      <p className="font-semibold">Thu</p>
+      <p className="font-semibold">Fri</p>
+      <p className="font-semibold">Sat</p>
+      <p className="font-semibold">Sun</p>
+      {days.map((day, i) => (
+        <div key={i}>
+          {day ? (
+            <Day
+              day={day}
+              month={month}
+              year={year}
+              workouts={getWorkoutByDay(day)}
+              workoutTypes={workoutTypes}
+            />
+          ) : null}
+        </div>
+      ))}
+    </div>
   );
 }

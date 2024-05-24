@@ -1,7 +1,7 @@
-import { Card } from '@radix-ui/themes';
+import { Card } from '@/src/components/ui/card';
 import clsx from 'clsx';
 
-export async function DayCard({
+export function DayCard({
   day,
   month,
   year,
@@ -25,7 +25,7 @@ export async function DayCard({
 
   return (
     <Card
-      className={clsx(classes && `${classes}`, 'shadow-sm', {
+      className={clsx(classes && `${classes}`, 'p-3', {
         'bg-blue-200': isToday(),
       })}
     >

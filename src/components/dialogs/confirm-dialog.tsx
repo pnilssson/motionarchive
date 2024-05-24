@@ -1,39 +1,48 @@
 'use client';
 
-import { Button, Dialog, Flex, Tooltip } from '@radix-ui/themes';
+import { Button } from '../ui/button';
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '../ui/dialog';
 
 export default function Component({
   title,
   content,
-  tooltipContent,
   onConfirm,
   children,
 }: {
   title: string;
   content: string;
-  tooltipContent: string;
   onConfirm: () => void;
   children: React.ReactNode;
 }) {
   return (
-    <Dialog.Root>
-      <Tooltip content={tooltipContent}>
-        <Dialog.Trigger>{children}</Dialog.Trigger>
-      </Tooltip>
-      <Dialog.Content maxWidth="450px">
-        <Dialog.Title>{title}</Dialog.Title>
-        <Dialog.Description>{content}</Dialog.Description>
-        <Flex gap="3" mt="4" justify="end">
-          <Dialog.Close>
-            <Button variant="soft" color="gray" size="2">
+    <Dialog>
+      <DialogTrigger asChild>{children}</DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>{title}</DialogTitle>
+          <DialogDescription>{content}</DialogDescription>
+        </DialogHeader>
+        <div className="flex gap-2 mt-4 justify-end">
+          <DialogClose asChild>
+            <Button variant="secondary" size="sm">
               Cancel
             </Button>
-          </Dialog.Close>
-          <Dialog.Close onClick={onConfirm}>
-            <Button size="2">Confirm</Button>
-          </Dialog.Close>
-        </Flex>
-      </Dialog.Content>
-    </Dialog.Root>
+          </DialogClose>
+          <DialogClose asChild>
+            <Button size="sm" onClick={onConfirm}>
+              Confirm
+            </Button>
+          </DialogClose>
+        </div>
+      </DialogContent>
+    </Dialog>
   );
 }

@@ -37,11 +37,11 @@ export default function Component({
   }
 
   return (
-    <Card className="h-fit">
+    <Card className="h-fit max-h-96 overflow-auto">
       <CardHeader>
         <div className="flex flex-row items-center justify-between">
           <CardTitle>{personalRecord.name}</CardTitle>
-          <div className="flex flex-row gap-1">
+          <div className="flex flex-row gap-2">
             {editing ? (
               <>
                 <DeleteRecordButton personalRecordId={personalRecord._id} />
@@ -74,13 +74,13 @@ export default function Component({
                 ? personalRecord.results.map(
                     (result: PersonalRecordResult, i: number) => (
                       <TableRow key={i}>
-                        <TableCell className="p-2 font-semibold">
+                        <TableCell className="p-4 font-semibold">
                           {result.result}
                         </TableCell>
-                        <TableCell className="p-2">
+                        <TableCell className="p-4">
                           {result.date.toDateString()}
                         </TableCell>
-                        <TableCell className="p-0 pr-2 text-right">
+                        <TableCell className="p-0 pr-4 text-right">
                           {editing ? (
                             <DeleteResultButton
                               personalRecordId={personalRecord._id}

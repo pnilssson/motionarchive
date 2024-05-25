@@ -24,7 +24,7 @@ export default function Component({ id }: { id: string }) {
       content="Are you sure you want to delete the workout?"
       onConfirm={remove}
     >
-      <Button size="icon" className="h-6 w-6 bg-violet-100 hover:bg-violet-200">
+      <Button size="icon" className="h-8 w-8 bg-violet-100 hover:bg-violet-200">
         <TrashIcon className="text-violet-950" />
       </Button>
     </ConfirmModal>

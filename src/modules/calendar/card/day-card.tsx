@@ -25,7 +25,7 @@ export function DayCard({
 
   return (
     <Card
-      className={clsx(classes && `${classes}`, 'p-3', {
+      className={clsx(classes && `${classes}`, 'p-2 sm:p-3', {
         'bg-blue-200': isToday(),
       })}
     >

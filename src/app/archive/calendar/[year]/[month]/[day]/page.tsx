@@ -13,7 +13,7 @@ export default async function Page({
   };
 }) {
   const year = parseInt(params.year);
-  const month = parseInt(params.month);
+  const month = parseInt(params.month) - 1;
   const day = parseInt(params.day);
   const workoutTypes = await getTypes();
   const workouts = await getWorkoutsForDay(year, month, day);

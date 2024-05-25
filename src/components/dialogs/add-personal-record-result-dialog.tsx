@@ -56,7 +56,7 @@ export default function Component({
         <DialogTrigger asChild>
           <Button
             size="icon"
-            className="h-6 w-6 bg-violet-100 hover:bg-violet-200"
+            className="h-8 w-8 bg-violet-100 hover:bg-violet-200"
           >
             <PlusIcon className="text-violet-950" />
           </Button>

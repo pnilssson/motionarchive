@@ -8,8 +8,8 @@ export default async function Page() {
 
   return (
     <div className="flex flex-col">
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-4xl font-bold">Personal records</h1>
+      <div className="flex flex-col sm:flex-row sm:justify-between mb-8">
+        <h1 className="text-4xl font-bold mb-4 sm:mb-0">Personal records</h1>
         <AddPersonalRecordTypeDialog />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 w-auto">

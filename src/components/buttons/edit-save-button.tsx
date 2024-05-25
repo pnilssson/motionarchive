@@ -22,7 +22,7 @@ export default function Page({ toggleEdit }: { toggleEdit: () => void }) {
       {value ? (
         <Button
           size="icon"
-          className="h-6 w-6 bg-violet-100 hover:bg-violet-200"
+          className="h-8 w-8 bg-violet-100 hover:bg-violet-200"
           onClick={onSave}
         >
           <CheckIcon className="h-3 w-3 text-violet-950" />
@@ -30,7 +30,7 @@ export default function Page({ toggleEdit }: { toggleEdit: () => void }) {
       ) : (
         <Button
           size="icon"
-          className="h-6 w-6 bg-violet-100 hover:bg-violet-200"
+          className="h-8 w-8 bg-violet-100 hover:bg-violet-200"
           onClick={onEdit}
         >
           <Pencil1Icon className="h-3 w-3 text-violet-950" />

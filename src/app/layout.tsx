@@ -4,6 +4,7 @@ import { Navbar } from '../components/navbar';
 import { auth } from './auth';
 import Script from 'next/script';
 import { Toaster } from '../components/ui/toaster';
+import Footer from '../components/footer';
 
 export const metadata: Metadata = {
   title: 'Motion Archive',
@@ -18,10 +19,13 @@ export default async function RootLayout({
   const session = await auth();
   return (
     <html lang="en">
-      <body className="min-h-screen font-sans antialiased background container">
-        <Toaster />
-        <Navbar session={session} />
-        <div className="min-h-[calc(100vh-56px)]">{children}</div>
+      <body className="min-h-screen font-sans antialiased background">
+        <div className="container">
+          <Toaster />
+          <Navbar session={session} />
+          <div className="min-h-[calc(100vh-126px)]">{children}</div>
+          <Footer />
+        </div>
       </body>
       <Script
         id="cookieyes"

@@ -10,6 +10,7 @@ import {
   NavigationMenuLink,
 } from '@radix-ui/react-navigation-menu';
 import { navigationMenuTriggerStyle } from './ui/navigation-menu';
+import { Separator } from './ui/separator';
 const MobileDesktopSwitch = dynamic(
   () => import('@/src/components/mobile-desktop-switch'),
   {
@@ -29,22 +30,29 @@ export function Navbar({ session }: { session: Session | null }) {
   ];
 
   return (
-    <NavigationMenu>
-      <NavigationMenuList className="py-2 flex">
-        {items.map((item) => (
-          <NavigationMenuItem key={item.label}>
-            <NavigationMenuLink
-              className={navigationMenuTriggerStyle()}
-              href={item.url}
-            >
-              {item.label}
-            </NavigationMenuLink>
+    <>
+      <NavigationMenu>
+        <NavigationMenuList className="py-2 px-0 flex">
+          {session ? (
+            <>
+              {items.map((item) => (
+                <NavigationMenuItem key={item.label}>
+                  <NavigationMenuLink
+                    className={`${navigationMenuTriggerStyle()}`}
+                    href={item.url}
+                  >
+                    {item.label}
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
+              ))}
+            </>
+          ) : null}
+          <NavigationMenuItem className="ml-auto">
+            <LoginButton session={session} />
           </NavigationMenuItem>
-        ))}
-        <NavigationMenuItem className="ml-auto">
-          <LoginButton session={session} />
-        </NavigationMenuItem>
-      </NavigationMenuList>
-    </NavigationMenu>
+        </NavigationMenuList>
+      </NavigationMenu>
+      <Separator />
+    </>
   );
 }

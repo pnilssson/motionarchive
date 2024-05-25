@@ -12,7 +12,7 @@ export default async function Page() {
         <h1 className="text-4xl font-bold mb-4 sm:mb-0">Personal records</h1>
         <AddPersonalRecordTypeDialog />
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 w-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-auto">
         {personalBests && personalBests.length > 0
           ? personalBests.map((personalRecord: PersonalRecordResponse) => (
               <RecordCard

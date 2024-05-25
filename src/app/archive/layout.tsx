@@ -10,5 +10,5 @@ export default async function Layout({
   if (!session) {
     redirect('/api/auth/signin');
   }
-  return <div className="p-4">{children}</div>;
+  return <div className="py-4 px-4">{children}</div>;
 }

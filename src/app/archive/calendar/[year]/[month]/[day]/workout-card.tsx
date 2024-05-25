@@ -18,9 +18,7 @@ export default async function Component({
       <Card key={workout._id} className="h-fit">
         <CardHeader>
           <div className="flex flex-row items-center justify-between">
-            <CardTitle className="text-md font-medium">
-              {workout.type}
-            </CardTitle>
+            <CardTitle>{workout.type}</CardTitle>
             <DeleteWorkoutButton id={workout._id} />
           </div>
           <CardDescription>{workout.time} min</CardDescription>

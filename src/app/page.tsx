@@ -47,7 +47,7 @@ export default function Home() {
             believe in keeping it simple.
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-auto pb-12">
           <Card>
             <CardHeader>
               <CardTitle>Calendar</CardTitle>
@@ -85,7 +85,6 @@ export default function Home() {
           </Card>
         </div>
       </div>
-      <Footer />
     </>
   );
 }

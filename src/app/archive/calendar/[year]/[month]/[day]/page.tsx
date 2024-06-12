@@ -13,7 +13,7 @@ export default async function Page({
   };
 }) {
   const year = parseInt(params.year);
-  const month = parseInt(params.month) - 1;
+  const month = parseInt(params.month);
   const day = parseInt(params.day);
   const workoutTypes = await getTypes();
   const workouts = await getWorkoutsForDay(year, month, day);
@@ -31,7 +31,7 @@ export default async function Page({
       </div>
       <div className="mb-4">
         <p className="text-xl text-muted-foreground">
-          {new Date(year, month, day).toLocaleDateString(undefined, {
+          {new Date(year, month - 1, day).toLocaleDateString(undefined, {
             weekday: 'short',
             year: 'numeric',
             month: 'long',

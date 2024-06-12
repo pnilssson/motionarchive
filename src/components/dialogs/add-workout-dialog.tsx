@@ -80,7 +80,7 @@ export default function Component({
         <DialogHeader>
           <DialogTitle>Add workout</DialogTitle>
           <DialogDescription>
-            {new Date(year, month, day).toLocaleDateString(undefined, {
+            {new Date(year, month - 1, day).toLocaleDateString(undefined, {
               weekday: 'short',
               year: 'numeric',
               month: 'long',

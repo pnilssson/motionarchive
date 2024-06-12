@@ -7,8 +7,7 @@ export default function Component({
   name: string;
   errors: ZodIssue[] | undefined;
 }) {
-  if (!errors) return null;
-  if (errors?.length === 0) return null;
+  if (!errors || errors?.length === 0) return null;
 
   const issues = errors
     .filter((item) => {

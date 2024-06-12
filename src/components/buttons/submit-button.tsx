@@ -8,11 +8,10 @@ export default function Page() {
   const { pending } = useFormStatus();
   return (
     <Button size="sm" type="submit" aria-disabled={pending}>
+      Save{' '}
       {pending ? (
-        <LoaderCircleIcon className="mr-2 h-4 w-4 animate-spin" />
-      ) : (
-        'Save'
-      )}
+        <LoaderCircleIcon className="h-4 w-4 animate-spin ml-2" />
+      ) : null}
     </Button>
   );
 }

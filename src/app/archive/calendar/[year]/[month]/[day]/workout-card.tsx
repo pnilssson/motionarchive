@@ -21,9 +21,7 @@ export default async function Component({
             <CardTitle>{workout.type}</CardTitle>
             <DeleteWorkoutButton id={workout._id} />
           </div>
-          <CardDescription>
-            {workout.time} min {workout.day} {workout.month} {workout.year}
-          </CardDescription>
+          <CardDescription>{workout.time} min</CardDescription>
         </CardHeader>
         <CardContent>
           {workout.description ? (

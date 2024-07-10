@@ -28,6 +28,7 @@ export default function Component({ children }: { children: React.ReactNode }) {
       <div className='md:hidden'></div>
       {items.map((item) => (
         <Button
+          key={item.url}
           variant="link"
           asChild
           className={cn(

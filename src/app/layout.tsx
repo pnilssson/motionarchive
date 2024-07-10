@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import { Navbar } from '../components/navbar';
 import { auth } from './auth';
 import Script from 'next/script';
 import { Toaster } from '../components/ui/toaster';
-import Footer from '../components/footer';
+import Header from '../components/header';
+import LoginButton from '../components/buttons/login-button';
 
 export const metadata: Metadata = {
   title: 'Motion Archive',
@@ -19,13 +19,10 @@ export default async function RootLayout({
   const session = await auth();
   return (
     <html lang="en">
-      <body className="min-h-screen font-sans antialiased background">
-        <div className="container">
+      <body className="min-h-screen font-sans antialiased">
           <Toaster />
-          <Navbar session={session} />
+          <Header session={session}><LoginButton session={session} /></Header>
           <div className="min-h-[calc(100vh-126px)]">{children}</div>
-          <Footer />
-        </div>
       </body>
       <Script
         id="cookieyes"

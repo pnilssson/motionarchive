@@ -1,4 +1,6 @@
 import { auth } from '@/src/app/auth';
+import LoginButton from '@/src/components/buttons/login-button';
+import Sidebar from '@/src/components/sidebar';
 import { redirect } from 'next/navigation';
 
 export default async function Layout({
@@ -10,5 +12,12 @@ export default async function Layout({
   if (!session) {
     redirect('/api/auth/signin');
   }
-  return <div className="py-4 px-4">{children}</div>;
+  return (
+    <div className="flex">
+      <Sidebar>
+        <LoginButton session={session} />
+      </Sidebar>
+      <div className="md:mt-12 py-4 px-4 container">{children}</div>
+    </div>
+  );
 }

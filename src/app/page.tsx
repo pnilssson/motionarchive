@@ -14,7 +14,7 @@ import { Badge } from '../components/ui/badge';
 export default function Home() {
   return (
     <>
-      <div className="flex justify-center items-center mt-16 md:mt-24">
+      <div className="flex justify-center items-center mt-16 md:mt-24 container">
         <div className="flex flex-col gap-6 items-center max-w-[720px]">
           <h1 className="text-4xl md:text-6xl text-center font-bold">
             Time to say goodbye to coffee-stained notes.
@@ -47,7 +47,7 @@ export default function Home() {
             believe in keeping it simple.
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-auto pb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-auto pb-12 container">
           <Card>
             <CardHeader>
               <CardTitle>Calendar</CardTitle>
@@ -84,6 +84,7 @@ export default function Home() {
             </CardFooter>
           </Card>
         </div>
+        <Footer />
       </div>
     </>
   );

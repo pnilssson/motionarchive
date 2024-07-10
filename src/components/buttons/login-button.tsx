@@ -14,19 +14,19 @@ export default function Component({ session }: ComponentProps) {
     <>
       {session ? (
         <Button
-          size="icon"
-          className="h-8 w-8 bg-violet-100 hover:bg-violet-200"
+          variant="link"
+          className="text-lg text-black px-0 font-medium"
           onClick={() => signOut()}
         >
-          <ExitIcon className="text-violet-950" />
+          <ExitIcon className="mr-4 h-5 w-5" /> Sign out
         </Button>
       ) : (
         <Button
-          size="icon"
-          className="h-8 w-8 bg-violet-100 hover:bg-violet-200"
+          variant="link"
+          className="text-lg text-black px-0 font-medium"
           onClick={() => signIn()}
         >
-          <EnterIcon className="text-violet-950" />
+          <EnterIcon className="mr-4 h-5 w-5" /> Sign in
         </Button>
       )}
     </>

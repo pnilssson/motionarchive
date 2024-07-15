@@ -1,5 +1,4 @@
-import DeleteWorkoutButton from './delete-workout-button';
-import { IllnessResponse, WorkoutResponse } from '@/src/types/types';
+import { IllnessResponse } from '@/src/types/types';
 import {
   Card,
   CardContent,
@@ -7,6 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/src/components/ui/card';
+import DeleteIllnessButton from './delete-illness-button';
 
 export default async function Component({
   illness,
@@ -19,7 +19,7 @@ export default async function Component({
         <CardHeader>
           <div className="flex flex-row items-center justify-between">
             <CardTitle>Illness</CardTitle>
-            <DeleteWorkoutButton id={illness._id} />
+            <DeleteIllnessButton id={illness._id} />
           </div>
           <CardDescription></CardDescription>
         </CardHeader>

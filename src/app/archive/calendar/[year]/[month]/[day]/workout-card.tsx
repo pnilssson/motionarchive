@@ -24,13 +24,9 @@ export default async function Component({
           <CardDescription>{workout.time} min</CardDescription>
         </CardHeader>
         <CardContent>
-          {workout.description ? (
-            <p className="whitespace-pre-wrap text-sm text-muted-foreground">
-              {workout.description}
-            </p>
-          ) : (
-            <p>No description.</p>
-          )}
+          <p className="whitespace-pre-wrap text-sm text-muted-foreground">
+            {workout.description ? workout.description : 'No description.'}
+          </p>
         </CardContent>
       </Card>
     </>

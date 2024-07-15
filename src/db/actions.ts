@@ -86,6 +86,102 @@ export async function deleteWorkout(id: string): Promise<ActionResponse> {
   };
 }
 
+const createIllnessSchema = z.object({
+  userId: z.string(),
+  days: z.coerce
+    .number({ required_error: 'Days are required.' })
+    .min(1, { message: 'Minimum amount of days is 1.' })
+    .max(365, { message: 'Maximum amount of days is 365.' }),
+  description: z
+    .string({ required_error: 'Description is required.' })
+    .max(4000, { message: 'Description must be less than 4000 characters.' }),
+  year: z.coerce.number({ required_error: 'Date is required.' }),
+  month: z.coerce.number({ required_error: 'Date is required.' }),
+  day: z.coerce.number({ required_error: 'Date is required.' }),
+});
+
+export async function addIllness(
+  _: any,
+  formData: FormData,
+): Promise<ActionResponse> {
+  const session = await getSession();
+
+  const request = {
+    userId: session?.user?.userId,
+    days: formData.get('days'),
+    description: formData.get('description'),
+    year: formData.get('year'),
+    month: formData.get('month'),
+    day: formData.get('day'),
+  };
+
+  const validated = createIllnessSchema.safeParse(request);
+  if (!validated.success) {
+    return {
+      success: validated.success,
+      errors: validated.error.issues,
+    };
+  }
+
+  const illness = await collections.illness();
+  const { userId, days, description, year, month, day } = validated.data;
+
+  // Helper function to add days to a date
+  function addDays(date: Date, days: number): Date {
+    const result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
+  }
+
+  // Loop through the number of days and insert into the database
+  for (let i = 0; i < days; i++) {
+    const currentDate = addDays(new Date(year, month - 1, day), i); // Month is 0-indexed in JS Date
+    const currentYear = currentDate.getFullYear();
+    const currentMonth = currentDate.getMonth() + 1; // Adjust back to 1-indexed
+    const currentDay = currentDate.getDate();
+
+    await illness.insertOne({
+      userId,
+      description,
+      year: currentYear,
+      month: currentMonth,
+      day: currentDay,
+    });
+  }
+
+  revalidatePath('/archive/calendar');
+  return {
+    success: validated.success,
+    errors: [],
+  };
+}
+
+const deleteIllnessId = z.string({ required_error: 'Illness id is required.' });
+
+export async function deleteIllness(id: string): Promise<ActionResponse> {
+  const session = await getSession();
+
+  const validated = deleteIllnessId.safeParse(id);
+  if (!validated.success) {
+    return {
+      success: validated.success,
+      errors: validated.error.issues,
+    };
+  }
+
+  const illness = await collections.illness();
+  await illness.deleteOne({
+    _id: new ObjectId(validated.data),
+    userId: session.user.userId,
+  });
+
+  revalidatePath('/archive/calendar');
+  return {
+    success: validated.success,
+    errors: [],
+  };
+}
+
 const createPersonalRecordTypeSchema = z.object({
   userId: z.string(),
   name: z.string({ required_error: 'Name is required.' }),

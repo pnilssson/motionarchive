@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic';
 import DayMobile from './day-mobile';
-import { WorkoutResponse, WorkoutTypeResponse } from '@/src/types/types';
+import { IllnessResponse, WorkoutResponse, WorkoutTypeResponse } from '@/src/types/types';
 const MobileDesktopSwitch = dynamic(
   () => import('@/src/components/mobile-desktop-switch'),
   {
@@ -16,18 +16,20 @@ export async function Day({
   month,
   year,
   workouts,
+  illness,
   workoutTypes,
 }: {
   day: number;
   month: number;
   year: number;
   workouts: WorkoutResponse[];
+  illness: IllnessResponse[];
   workoutTypes: WorkoutTypeResponse[];
 }) {
   return (
     <MobileDesktopSwitch
       mobile={
-        <DayMobile day={day} month={month} year={year} workouts={workouts} />
+        <DayMobile day={day} month={month} year={year} workouts={workouts} illness={illness} />
       }
       desktop={
         <DayDesktop
@@ -35,6 +37,7 @@ export async function Day({
           month={month}
           year={year}
           workouts={workouts}
+          illness={illness}
           workoutTypes={workoutTypes}
         />
       }

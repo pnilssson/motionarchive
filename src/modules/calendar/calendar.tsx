@@ -1,6 +1,6 @@
-import { getTypes, getWorkoutsForMonth } from '@/src/db/queries';
+import { getIllnessForMonth, getTypes, getWorkoutsForMonth } from '@/src/db/queries';
 import { Day } from './card/day';
-import { WorkoutResponse } from '@/src/types/types';
+import { IllnessResponse, WorkoutResponse } from '@/src/types/types';
 
 export default async function Calendar({
   year,
@@ -10,6 +10,7 @@ export default async function Calendar({
   month: number;
 }) {
   const workouts = await getWorkoutsForMonth(year, month);
+  const illness = await getIllnessForMonth(year, month);
   const workoutTypes = await getTypes();
 
   const date = new Date(year, month - 1, 1);
@@ -50,6 +51,15 @@ export default async function Calendar({
     return workoutsOfDay;
   }
 
+  function getIllnessByDay(day: number) {
+    const illnessOfDay = illness.filter((illness: IllnessResponse) => {
+      return (
+        illness.day === day && illness.month === month && illness.year === year
+      );
+    });
+    return illnessOfDay;
+  }
+
   return (
     <div className="grid grid-cols-7 gap-2">
       <p className="font-semibold">Mon</p>
@@ -67,6 +77,7 @@ export default async function Calendar({
               month={month}
               year={year}
               workouts={getWorkoutByDay(day)}
+              illness={getIllnessByDay(day)}
               workoutTypes={workoutTypes}
             />
           ) : null}

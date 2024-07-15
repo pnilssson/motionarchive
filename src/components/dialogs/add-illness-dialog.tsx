@@ -3,9 +3,9 @@
 import { useEffect, useState } from 'react';
 import ErrorMessages from '../error-messages';
 import { useFormState } from 'react-dom';
-import { addWorkout } from '../../db/actions';
-import { PlusIcon, TargetIcon } from '@radix-ui/react-icons';
-import { ActionResponse, WorkoutTypeResponse } from '../../types/types';
+import { addIllness } from '../../db/actions';
+import { HeartIcon } from '@radix-ui/react-icons';
+import { ActionResponse } from '../../types/types';
 import SubmitButton from '../buttons/submit-button';
 import { useToast } from '../ui/use-toast';
 import {
@@ -20,31 +20,21 @@ import {
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '../ui/select';
-import { Textarea } from '../ui/textarea';
 import { Avatar, AvatarFallback } from '../ui/avatar';
+import { Textarea } from '../ui/textarea';
 
 export default function Component({
   day,
   month,
   year,
-  workoutTypes,
 }: {
   day: number;
   month: number;
   year: number;
-  workoutTypes: WorkoutTypeResponse[];
 }) {
   const [formState, action] = useFormState(
     (formState: ActionResponse, formData: any) => {
-      return addWorkout(formState, formData);
+      return addIllness(formState, formData);
     },
     {
       success: false,
@@ -57,7 +47,7 @@ export default function Component({
   useEffect(() => {
     if (formState.success) {
       setOpen(false);
-      toast({ description: 'Workout added successfully.' });
+      toast({ description: 'Sickness added successfully.' });
     }
   }, [formState, toast]);
 
@@ -65,14 +55,14 @@ export default function Component({
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Avatar className="h-10 w-10 cursor-pointer">
-          <AvatarFallback className="bg-violet-200">
-            <TargetIcon className="h-5 w-5 text-violet-950" />
+          <AvatarFallback className="bg-red-200">
+            <HeartIcon className="h-5 w-5 text-violet-950" />
           </AvatarFallback>
         </Avatar>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Add workout</DialogTitle>
+          <DialogTitle>Add sickness</DialogTitle>
           <DialogDescription>
             {new Date(year, month - 1, day).toLocaleDateString(undefined, {
               weekday: 'short',
@@ -91,39 +81,20 @@ export default function Component({
             </div>
 
             <div className="mb-4">
-              <Label htmlFor="time">Time</Label>
-              <Input type="number" name="time" placeholder="Time" id="time" />
+              <Label htmlFor="days">Days</Label>
+              <Input
+                type="number"
+                name="days"
+                placeholder="Days"
+                id="days"
+                defaultValue={1}
+              />
               <ErrorMessages
-                name="time"
+                name="days"
                 errors={formState && formState.errors}
               />
             </div>
 
-            <div className="flex flex-col mb-4">
-              <Label className="mb-2">Type</Label>
-              <Select
-                required
-                defaultValue={workoutTypes[0]?.name ?? ''}
-                name="type"
-              >
-                <SelectTrigger>
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    {workoutTypes.map((type: WorkoutTypeResponse) => (
-                      <SelectItem key={type._id} value={type.name}>
-                        {type.name}
-                      </SelectItem>
-                    ))}
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-              <ErrorMessages
-                name="type"
-                errors={formState && formState.errors}
-              />
-            </div>
             <div className="mb-4">
               <Label htmlFor="description">Description</Label>
               <Textarea

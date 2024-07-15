@@ -1,7 +1,12 @@
-import { getTypes, getWorkoutsForDay } from '@/src/db/queries';
-import AddWorkoutDialog from '@/src/components/dialogs/add-workout-dialog';
-import { WorkoutResponse } from '@/src/types/types';
+import {
+  getIllnessForDay,
+  getTypes,
+  getWorkoutsForDay,
+} from '@/src/db/queries';
+import { IllnessResponse, WorkoutResponse } from '@/src/types/types';
 import WorkoutCard from './workout-card';
+import AddSelectPopover from '@/src/components/dialogs/add-select-popover';
+import IllnessCard from './illness-card';
 
 export default async function Page({
   params,
@@ -17,12 +22,13 @@ export default async function Page({
   const day = parseInt(params.day);
   const workoutTypes = await getTypes();
   const workouts = await getWorkoutsForDay(year, month, day);
+  const illness = await getIllnessForDay(year, month, day);
 
   return (
     <>
       <div className="flex justify-between items-center">
         <h1 className="text-4xl font-bold mb-4">Overview</h1>
-        <AddWorkoutDialog
+        <AddSelectPopover
           day={day}
           month={month}
           year={year}
@@ -43,6 +49,11 @@ export default async function Page({
         {workouts && workouts.length > 0
           ? workouts.map((workout: WorkoutResponse) => (
               <WorkoutCard key={workout._id} workout={workout} />
+            ))
+          : null}
+        {illness && illness.length > 0
+          ? illness.map((illness: IllnessResponse) => (
+              <IllnessCard key={illness._id} illness={illness} />
             ))
           : null}
       </div>

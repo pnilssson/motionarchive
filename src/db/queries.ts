@@ -1,7 +1,7 @@
 import { cache } from 'react';
 import collections from './db';
 import { getSession } from '../lib/server-utils';
-import { PersonalRecordResponse, WorkoutResponse } from '../types/types';
+import { IllnessResponse, PersonalRecordResponse, WorkoutResponse } from '../types/types';
 
 export const getTypes = cache(async () => {
   const workoutTypes = await collections.workoutType();
@@ -66,6 +66,56 @@ const mapWorkoutData = (data: any[]): WorkoutResponse[] => {
         month: workout.month,
         day: workout.day,
       }) as WorkoutResponse,
+  );
+};
+
+export const getIllnessForMonth = cache(
+  async (year: number, month: number) => {
+    const session = await getSession();
+    const illness = await collections.illness();
+    const data = await illness
+      .find({
+        year: year,
+        month: month,
+        userId: session.user.userId,
+      })
+      .toArray();
+
+    const mappedData: IllnessResponse[] = mapIllnessData(data);
+    return mappedData;
+  },
+);
+
+export const getIllnessForDay = cache(
+  async (year: number, month: number, day: number) => {
+    const session = await getSession();
+    const illness = await collections.illness();
+
+    const data = await illness
+      .find({
+        year: year,
+        month: month,
+        day: day,
+        userId: session.user.userId,
+      })
+      .toArray();
+
+    const mappedData: IllnessResponse[] = mapIllnessData(data);
+
+    return mappedData;
+  },
+);
+
+const mapIllnessData = (data: any[]): IllnessResponse[] => {
+  return data.map(
+    (workout: IllnessResponse) =>
+      ({
+        _id: workout._id.toString(),
+        userId: workout.userId,
+        year: workout.year,
+        month: workout.month,
+        day: workout.day,
+      }) as IllnessResponse,
   );
 };
 

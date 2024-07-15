@@ -1,24 +1,31 @@
 'use client';
 
-import AddWorkoutDialog from '@/src/components/dialogs/add-workout-dialog';
 import { getMonthAndDayLink, getAvatarcolor } from '@/src/lib/utils';
 import { useRouter } from 'next/navigation';
 import { useRef } from 'react';
 import { DayCard } from './day-card';
-import { WorkoutResponse, WorkoutTypeResponse } from '@/src/types/types';
+import {
+  IllnessResponse,
+  WorkoutResponse,
+  WorkoutTypeResponse,
+} from '@/src/types/types';
 import { Avatar, AvatarFallback } from '@/src/components/ui/avatar';
+import AddSelectPopover from '@/src/components/dialogs/add-select-popover';
+import { HeartIcon } from '@radix-ui/react-icons';
 
 export default function Component({
   day,
   month,
   year,
   workouts,
+  illness,
   workoutTypes,
 }: {
   day: number;
   month: number;
   year: number;
   workouts: WorkoutResponse[];
+  illness: IllnessResponse[];
   workoutTypes: WorkoutTypeResponse[];
 }) {
   const router = useRouter();
@@ -48,11 +55,11 @@ export default function Component({
         onClick={handleCardClick}
         className="cursor-pointer"
       >
-        <DayCard day={day} month={month} year={year} classes="min-h-24 h-full">
+        <DayCard day={day} month={month} year={year} illness={illness} classes="min-h-24 h-full">
           <div className="flex justify-between mb-2">
             <p className="font-mediumbold">{day}</p>
             <div ref={addWorkoutButtonRef}>
-              <AddWorkoutDialog
+              <AddSelectPopover
                 day={day}
                 month={month}
                 year={year}
@@ -67,9 +74,20 @@ export default function Component({
                   <div key={workout._id}>
                     <Avatar className="h-8 w-8">
                       <AvatarFallback
-                        className={`${getAvatarcolor(workout.type, workoutTypes)} font-semibold`}
+                        className={`${getAvatarcolor(workout.type, workoutTypes)} `}
                       >
                         {workout.type.substring(0, 1)}
+                      </AvatarFallback>
+                    </Avatar>
+                  </div>
+                ))
+              : null}
+            {illness
+              ? illness.map((illness) => (
+                  <div key={illness._id}>
+                    <Avatar className="h-8 w-8">
+                      <AvatarFallback className="bg-red-100">
+                        <HeartIcon className="h-4 w-4" />
                       </AvatarFallback>
                     </Avatar>
                   </div>

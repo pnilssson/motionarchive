@@ -10,6 +10,10 @@ const collections = {
     const db = await getDb();
     return db.collection('workout');
   },
+  illness: async function () {
+    const db = await getDb();
+    return db.collection('illness');
+  },
   workoutType: async function () {
     const db = await getDb();
     return db.collection('workout_type');

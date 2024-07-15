@@ -34,6 +34,15 @@ export interface ActionResponse {
   errors: ZodIssue[];
 }
 
+export interface IllnessResponse {
+  _id: string;
+  userId: string;
+  description: string;
+  year: number;
+  month: number;
+  day: number;
+}
+
 export interface PersonalRecordResponse {
   _id: string;
   userId: string;

@@ -108,13 +108,14 @@ export const getIllnessForDay = cache(
 
 const mapIllnessData = (data: any[]): IllnessResponse[] => {
   return data.map(
-    (workout: IllnessResponse) =>
+    (illness: IllnessResponse) =>
       ({
-        _id: workout._id.toString(),
-        userId: workout.userId,
-        year: workout.year,
-        month: workout.month,
-        day: workout.day,
+        _id: illness._id.toString(),
+        userId: illness.userId,
+        description: illness.description,
+        year: illness.year,
+        month: illness.month,
+        day: illness.day,
       }) as IllnessResponse,
   );
 };

@@ -17,7 +17,7 @@ export default async function Layout({
       <Sidebar>
         <LoginButton session={session} />
       </Sidebar>
-      <div className="md:mt-12 py-4 px-4 container">{children}</div>
+      <div className="md:mt-4 py-4 px-4 container">{children}</div>
     </div>
   );
 }

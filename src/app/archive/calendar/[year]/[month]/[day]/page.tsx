@@ -45,7 +45,7 @@ export default async function Page({
           })}
         </p>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-4 w-auto gap-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 w-auto gap-2">
         {workouts && workouts.length > 0
           ? workouts.map((workout: WorkoutResponse) => (
               <WorkoutCard key={workout._id} workout={workout} />

@@ -64,11 +64,9 @@ export default function Component({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Avatar className="h-10 w-10 cursor-pointer">
-          <AvatarFallback className="bg-violet-200">
-            <TargetIcon className="h-5 w-5 text-violet-950" />
-          </AvatarFallback>
-        </Avatar>
+        <Button className="bg-violet-200 hover:bg-violet-300 text-violet-950">
+          <TargetIcon className="h-5 w-5 mr-2" /> Workout
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>

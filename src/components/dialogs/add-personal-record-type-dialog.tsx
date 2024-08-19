@@ -19,7 +19,6 @@ import {
 } from '../ui/dialog';
 import { Label } from '../ui/label';
 import { Input } from '../ui/input';
-import { Divide } from 'lucide-react';
 
 export default function Component() {
   const [formState, action] = useFormState(
@@ -44,7 +43,7 @@ export default function Component() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button size="sm">Add record</Button>
+        <Button>Add record</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>

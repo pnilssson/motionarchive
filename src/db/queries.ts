@@ -1,7 +1,11 @@
 import { cache } from 'react';
 import collections from './db';
 import { getSession } from '../lib/server-utils';
-import { IllnessResponse, PersonalRecordResponse, WorkoutResponse } from '../types/types';
+import {
+  IllnessResponse,
+  PersonalRecordResponse,
+  WorkoutResponse,
+} from '../types/types';
 
 export const getTypes = cache(async () => {
   const workoutTypes = await collections.workoutType();
@@ -23,7 +27,7 @@ export const getWorkoutsForMonth = cache(
       .find({
         year: year,
         month: month,
-        userId: session.user.userId,
+        userId: session?.user.userId,
       })
       .toArray();
 
@@ -42,7 +46,7 @@ export const getWorkoutsForDay = cache(
         year: year,
         month: month,
         day: day,
-        userId: session.user.userId,
+        userId: session?.user.userId,
       })
       .toArray();
 
@@ -69,22 +73,20 @@ const mapWorkoutData = (data: any[]): WorkoutResponse[] => {
   );
 };
 
-export const getIllnessForMonth = cache(
-  async (year: number, month: number) => {
-    const session = await getSession();
-    const illness = await collections.illness();
-    const data = await illness
-      .find({
-        year: year,
-        month: month,
-        userId: session.user.userId,
-      })
-      .toArray();
+export const getIllnessForMonth = cache(async (year: number, month: number) => {
+  const session = await getSession();
+  const illness = await collections.illness();
+  const data = await illness
+    .find({
+      year: year,
+      month: month,
+      userId: session?.user.userId,
+    })
+    .toArray();
 
-    const mappedData: IllnessResponse[] = mapIllnessData(data);
-    return mappedData;
-  },
-);
+  const mappedData: IllnessResponse[] = mapIllnessData(data);
+  return mappedData;
+});
 
 export const getIllnessForDay = cache(
   async (year: number, month: number, day: number) => {
@@ -96,7 +98,7 @@ export const getIllnessForDay = cache(
         year: year,
         month: month,
         day: day,
-        userId: session.user.userId,
+        userId: session?.user.userId,
       })
       .toArray();
 
@@ -126,7 +128,7 @@ export const getPersonalRecords = cache(async () => {
 
   const data = await workouts
     .find({
-      userId: session.user.userId,
+      userId: session?.user.userId,
     })
     .sort({ name: 1 })
     .toArray();

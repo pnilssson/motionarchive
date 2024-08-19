@@ -84,7 +84,7 @@ export async function importWorkouts() {
       );
 
       const request: WorkoutRequest = {
-        userId: session?.user?.userId,
+        userId: session?.user?.userId ?? '',
         type: capitalizeFirstLetter(type),
         category: workoutType?.subcategory ?? '',
         time: workout.Time,

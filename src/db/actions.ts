@@ -76,7 +76,7 @@ export async function deleteWorkout(id: string): Promise<ActionResponse> {
   const workouts = await collections.workout();
   await workouts.deleteOne({
     _id: new ObjectId(validated.data),
-    userId: session.user.userId,
+    userId: session?.user.userId,
   });
 
   revalidatePath('/archive/calendar');
@@ -172,7 +172,7 @@ export async function deleteIllness(id: string): Promise<ActionResponse> {
   const illness = await collections.illness();
   await illness.deleteOne({
     _id: new ObjectId(validated.data),
-    userId: session.user.userId,
+    userId: session?.user.userId,
   });
 
   revalidatePath('/archive/calendar');
@@ -281,7 +281,7 @@ export async function deletePersonalRecord(
   const personalRecords = await collections.personalRecord();
   await personalRecords.deleteOne({
     _id: new ObjectId(validated.data),
-    userId: session.user.userId,
+    userId: session?.user.userId,
   });
 
   revalidatePath('/archive/personal-records');

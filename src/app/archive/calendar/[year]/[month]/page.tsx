@@ -2,10 +2,10 @@ import Calendar from '@/src/modules/calendar/calendar';
 import CalendarNavigation from '@/src/modules/calendar/calendar-navigation';
 
 export default async function Page(props: {
-  params: {
+  params: Promise<{
     year: string;
     month: string;
-  };
+  }>;
 }) {
   const params = await props.params;
   const month = parseInt(params.month);

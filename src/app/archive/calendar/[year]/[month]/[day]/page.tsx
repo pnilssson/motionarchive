@@ -8,15 +8,14 @@ import WorkoutCard from './workout-card';
 import AddSelectPopover from '@/src/components/dialogs/add-select-popover';
 import IllnessCard from './illness-card';
 
-export default async function Page({
-  params,
-}: {
-  params: {
+export default async function Page(props: {
+  params: Promise<{
     year: string;
     month: string;
     day: string;
-  };
+  }>;
 }) {
+  const params = await props.params;
   const year = parseInt(params.year);
   const month = parseInt(params.month);
   const day = parseInt(params.day);

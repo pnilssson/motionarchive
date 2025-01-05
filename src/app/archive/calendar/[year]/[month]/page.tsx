@@ -1,14 +1,13 @@
 import Calendar from '@/src/modules/calendar/calendar';
 import CalendarNavigation from '@/src/modules/calendar/calendar-navigation';
 
-export default async function Page({
-  params,
-}: {
+export default async function Page(props: {
   params: {
     year: string;
     month: string;
   };
 }) {
+  const params = await props.params;
   const month = parseInt(params.month);
   const year = parseInt(params.year);
   return (

@@ -101,7 +101,7 @@ export default function Component({
                       mode="single"
                       selected={date}
                       onSelect={setDate}
-                      initialFocus
+                      autoFocus
                     />
                   </PopoverContent>
                 </Popover>
